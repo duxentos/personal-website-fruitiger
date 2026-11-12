@@ -1,3 +1,7 @@
+Colour pallete: 
+<img width="762" height="271" alt="image" src="https://github.com/user-attachments/assets/277ab1e2-8b99-4098-82ef-e56ea2d6a4e6" />
+
+
 UI REFERENCE IMAGES:
 <img width="1470" height="956" alt="image" src="https://github.com/user-attachments/assets/63aa8150-5faa-4fa4-a472-11525b2ade3e" />
 <img width="1594" height="1406" alt="image" src="https://github.com/user-attachments/assets/e2514732-e8ee-407d-88f2-c59c5be4c589" />
