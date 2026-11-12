@@ -26,4 +26,6 @@ The predev/build preparation reads supplied MP3 links from `Music.md`, downloads
 
 Music persists while app windows are closed/minimized. Browser autoplay rejection displays a Play control. Desktop effects only unlock after an interaction and have separate volume/mute settings.
 
+To inspect startup without delaying normal visits, use the desktop menu’s **preview startup** command or append `?startup=preview` to the preview URL. Normal startup reveals the desktop as soon as its critical artwork is ready.
+
 `IMPLEMENTATION_REVIEW.md` records the requirement review, validation and limitations. `CHANGELOG.md` records the implementation history. Work is tracked in PR #1; preview deployment links and verified build/browser results are in that PR.

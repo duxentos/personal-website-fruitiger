@@ -8,7 +8,10 @@
 - Connected actual desktop, menu, bubble, iPod, Mii, success and error actions to configured effects. No synthetic notifications or fake playback indicators were added.
 - Added track three from Music.md, track-aware Mii choreography, wider character presence and original retro social icons.
 - Refreshed README setup/configuration instructions, preserved all author briefs and source assets, and retained the existing iPod/desktop implementation.
-- Local validation: three-track preparation and audio-header checks succeeded; 10 behavior tests pass. Production and browser results are recorded in PR #1.
+- Browser review observed the 3DS preview and desktop transition. Added a direct startup-preview URL, menu command, Escape dismissal, focus restoration and Tab containment for repeatable testing.
+- Fixed supplied-track ordering found during review; the source order now stays track one, track two, track three.
+- Corrected the companion JSX grouping error caught by the first preview build; the next production build passed.
+- Local validation: three-track preparation and audio-header checks succeeded; 11 behavior tests pass. Production and browser results are recorded in PR #1.
 
 
 ## Menu.md improvement pass — 2026-11-12

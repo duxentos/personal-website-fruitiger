@@ -3,3 +3,6 @@ test('repeat all wraps, off stops, one repeats on natural ending',()=>{assert.eq
 test('shuffle avoids repeating current track with multiple tracks',()=>{for(let i=0;i<10;i++)assert.notEqual(nextIndex(1,4,1,'all',true,i/10),1)});
 test('click wheel crosses angle boundary without jumping',()=>{assert.equal(angleDelta(175,-175),10);assert.equal(angleDelta(-175,175),-10);assert.equal(angleDelta(0,150),0)});
 test('time values handle unloaded media',()=>{assert.equal(timeLabel(NaN),'0:00');assert.equal(timeLabel(Infinity),'0:00');assert.equal(timeLabel(125),'2:05')});
+
+import {orderMusicFiles} from './music-order.mjs';
+test('supplied tracks keep source order before naturally sorted local additions',()=>{assert.deepEqual(orderMusicFiles(['track-three.mp3','extra10.mp3','track-two.mp3','track-one.mp3','extra2.mp3'],['track-one.mp3','track-two.mp3','track-three.mp3']),['track-one.mp3','track-two.mp3','track-three.mp3','extra2.mp3','extra10.mp3'])});

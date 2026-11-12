@@ -34,6 +34,9 @@ Music is still the user's provided attachments. Preparation downloads these into
 - Effects: silence before unlock, caching/rate limits, master/category gain, missing-file suppression, and maximum concurrency.
 - Mii: nonrepeating eligible choices, cooldown exclusion, and cooldown expiry.
 - Actual download and media-header checks were run locally.
+- Browser review observed the startup preview with its running Mii and the transition back to the desktop. Reduced-motion and explicit dismissal checks are recorded in PR #1.
+- A browser review exposed alphabetical music ordering (one, three, two); source-order sorting and a regression test now keep one, two, three, followed by naturally sorted local additions.
+- `?startup=preview` and the desktop-menu Preview Startup command provide repeatable explicit previews. Escape dismisses the startup overlay; Tab stays within its two controls.
 - Build and browser results are recorded in PR #1 after each verified deployment; unexecuted checks are not counted as passes.
 
 ## Preserved limitations and content gaps
