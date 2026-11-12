@@ -46,6 +46,7 @@ Include:
 - Skeuomorphic interface details.
 - Windows Vista/7-inspired navigation.
 - A futuristic but nostalgic digital atmosphere.
+- lowercase only.
 
 ### Colour Palette
 
