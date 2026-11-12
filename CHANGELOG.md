@@ -1,5 +1,14 @@
 # Website change log
 
+## Loading-screen revision — 2026-11-12
+
+- User instruction supersedes the original loading-screen brief: removed the 3DS case, screens, hinge and console controls. Replaced them with an open full-screen Aqua scene, Nothing dot-matrix display type, supplied Mii artwork and soft bubbles.
+- Normal startup, Restart and Preview now choose a random 3–7 second interval and fade into the desktop automatically. The fade is included in that interval; slow optional assets cannot extend it. Skip Intro and Escape enter immediately.
+- Added static artwork while the first GIF loads, and preload-before-swap for reactions to prevent a blank first frame. Missing replacement clips are skipped and stale transitions are invalidated.
+- Preserved reduced-motion behavior, focus containment/restoration, preference persistence and the existing desktop/iPod.
+- Added startup duration coverage; all 12 behavior tests pass locally. Previous native Chrome checks verified Tab containment, Enter/Escape dismissal, reduced motion, focus restoration, continued music, and the real sound-playback test result. Final Vercel and browser results are tracked in PR #1.
+
+
 ## Startup, interface sounds and updated subprompts — 2026-11-12
 
 - Reviewed all 11 current Markdown briefs and recorded the requirement mapping in IMPLEMENTATION_REVIEW.md.

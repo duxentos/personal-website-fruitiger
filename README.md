@@ -26,6 +26,6 @@ The predev/build preparation reads supplied MP3 links from `Music.md`, downloads
 
 Music persists while app windows are closed/minimized. Browser autoplay rejection displays a Play control. Desktop effects only unlock after an interaction and have separate volume/mute settings.
 
-To inspect startup without delaying normal visits, use the desktop menu’s **preview startup** command or append `?startup=preview` to the preview URL. Normal startup reveals the desktop as soon as its critical artwork is ready.
+Startup is a full-screen Aqua scene with your supplied Mii artwork, with no 3DS/handheld shell. Each startup randomly lasts 3–7 seconds and then fades into the desktop. Skip Intro or Escape enters immediately. To replay it, use the desktop menu’s **preview startup** command, System Preferences, or `?startup=preview`. Preview follows the same automatic timing. Slow optional assets cannot extend that interval; available static artwork remains visible while GIFs load. System Preferences can disable startup or enable reduced motion.
 
 `IMPLEMENTATION_REVIEW.md` records the requirement review, validation and limitations. `CHANGELOG.md` records the implementation history. Work is tracked in PR #1; preview deployment links and verified build/browser results are in that PR.
