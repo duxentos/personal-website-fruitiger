@@ -1,5 +1,29 @@
 # Website change log
 
+## Menu.md improvement pass — 2026-11-12
+
+- Re-read all Markdown briefs and identified the new improvement list in Menu.md.
+- Added embossed hover treatments, proximity-based Dock magnification, and brushed/raised styling throughout preferences.
+- UI typography uses the platform Apple system font on Apple devices, with Helvetica Neue and Segoe UI fallbacks. NDot remains the display face. No Apple font binaries are redistributed.
+- Added a real desktop-navigation terminal with cd -linkedin, cd -github, cd -instagram, cd -devpost, open-app commands, playback commands, history, completion, and help. It does not execute OS shell commands.
+- Notes now contains a terminal guide with working app launchers and profile links.
+- LinkedIn, GitHub, Devpost, and Instagram share one skeuomorphic pill style and verified profile destinations.
+- Added a résumé app with embedded PDF, open, and download controls using the résumé from the earlier portfolio repository.
+
+
+## iPod music app — 2026-11-12
+
+- Re-read codex prompt.md, Music.md, and ipod-music-player-window.md.
+- Added an iPod Classic application using the existing desktop window manager and a Dock icon.
+- The first supplied MP3 is labeled track one; the second supplied MP3 is labeled track two. No artist/album metadata is invented.
+- Build/dev preparation retrieves the supplied attachments, scans public/music/tracks, and preserves edited manifest metadata and configured playlists. Published audio is served locally from /music/tracks. Additional MP3 files are discovered at the next dev restart or build.
+- Added a single shared audio element, startup/open autoplay attempts, browser-rejection fallback, play/pause, seek, volume/mute, next/previous, shuffle, repeat modes, auto-advance, missing-file handling, and saved settings. Closing/minimizing the iPod preserves playback.
+- Added angular click-wheel navigation, keyboard controls, long-press menu/seek, library group menus, playlists, Now Playing, Cover Flow, and six device finishes.
+- Added contextual iPod/File/View/Controls menus and a real playback indicator in the desktop menu bar.
+- Verified both attachment downloads and prepared the local music manifest. Four logic tests passed for repeat, shuffle, wheel boundary movement, and time formatting. Vercel build verification is recorded in PR #1.
+- Browser audio, gesture, and mobile testing are not claimed until exercised in a browser.
+
+
 ## Desktop-first launch — 2026-11-12
 
 - Re-read the updated Menu.md, including its explicit removal of footer and scroll-down sections.

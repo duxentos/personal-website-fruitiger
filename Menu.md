@@ -477,4 +477,15 @@ Visitors should see a beautiful green landscape, colourful translucent bubbles f
 
 The experience should feel nostalgic, lively and carefully engineered.
 
+Some improvements:
+
+-make the hover over text skeumorphic 
+-fix the zooming in to icons as you hover over it 
+-carry the skeumorphism across settings 
+-use the official apple ios font 
+-add a terminal app with functions e.g cd -linkedin, cd -github, cd -instagram, cd -devpost
+-open the on website notes app with a terminal guide with interactive functions 
+-for want to find me make the github linkedin devpost insta the same as eachother skeumorphic pill
+-add a resume section
+
 **Build a genuinely interactive desktop environment, not a static recreation or a generic AI-generated portfolio.**
