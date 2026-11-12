@@ -26,6 +26,12 @@ The predev/build preparation reads supplied MP3 links from `Music.md`, downloads
 
 Music persists while app windows are closed/minimized. Browser autoplay rejection displays a Play control. Desktop effects only unlock after an interaction and have separate volume/mute settings.
 
-Startup is a full-screen Aqua scene with your supplied Mii artwork, with no 3DS/handheld shell. Each startup randomly lasts 3–7 seconds and then fades into the desktop. Skip Intro or Escape enters immediately. To replay it, use the desktop menu’s **preview startup** command, System Preferences, or `?startup=preview`. Preview follows the same automatic timing. Slow optional assets cannot extend that interval; available static artwork remains visible while GIFs load. System Preferences can disable startup or enable reduced motion.
+Startup is a full-screen Aqua scene with your supplied Mii artwork, with no 3DS/handheld shell. Each startup randomly lasts 1–2 seconds, then reveals the desktop directly with no fade-in or fade-out. Skip Intro or Escape enters immediately. To replay it, use the desktop menu’s **preview startup** command, System Preferences, or `?startup=preview`. Preview follows the same automatic timing. Slow optional assets cannot extend that interval; available static artwork remains visible while GIFs load. System Preferences can disable startup or enable reduced motion.
 
 `IMPLEMENTATION_REVIEW.md` records the requirement review, validation and limitations. `CHANGELOG.md` records the implementation history. Work is tracked in PR #1; preview deployment links and verified build/browser results are in that PR.
+
+## Desktop and touch controls
+
+Only Find Me, Résumé, Project Files and About Me live on the desktop. The Dock contains Home, Terminal, Notes, iPod and Say Hi, so these destinations are not duplicated. Social links remain inside Find Me. Touch layouts (up to 1023px or a coarse primary pointer) start on the home screen, open one full-screen app at a time, and provide a Back to Desktop control and the Dock’s Home button. Buttons use larger tap targets; dragging/resizing and hover magnification are mouse interactions.
+
+A shared trusted-click listener supplies a quiet CC0 click when an action has no dedicated sound. Dedicated feedback takes precedence, avoiding a second generic click; rapid generic clicks retrigger the cached sound. Existing sound mute/volume/category settings still apply. Mii artwork differs by context, while tap reactions vary without immediate repeats; only the iPod Mii dances with music.

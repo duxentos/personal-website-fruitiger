@@ -1,6 +1,5 @@
 .desktop-session{height:100%;overflow:hidden}
-.boot-overlay{position:fixed;inset:0;z-index:20000;display:grid;place-items:center;overflow:hidden;padding:max(24px,env(safe-area-inset-top)) 22px max(36px,env(safe-area-inset-bottom));background:radial-gradient(ellipse at 50% 25%,#f2ffff 0,#b8f1f8 35%,#68cfdf 70%,#248bb4 100%);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;color:#175571;isolation:isolate;opacity:1;transition:opacity .22s ease}
-.boot-overlay.boot-leaving{opacity:0;pointer-events:none}
+.boot-overlay{position:fixed;inset:0;z-index:20000;display:grid;place-items:center;overflow:hidden;padding:max(24px,env(safe-area-inset-top)) 22px max(36px,env(safe-area-inset-bottom));background:radial-gradient(ellipse at 50% 25%,#f2ffff 0,#b8f1f8 35%,#68cfdf 70%,#248bb4 100%);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;color:#175571;isolation:isolate;opacity:1;transition:none}
 .boot-world{position:relative;width:min(900px,100%);text-align:center;z-index:1}
 .boot-logo{font-family:NDot,sans-serif;font-size:clamp(34px,5vw,58px);line-height:1.15;color:#176781;text-shadow:0 1px #fff9}
 .boot-logo span{display:block;margin-top:12px;font:11px -apple-system,BlinkMacSystemFont,sans-serif;letter-spacing:.14em;color:#447e90}

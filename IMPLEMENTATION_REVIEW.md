@@ -6,21 +6,24 @@ Review date: 2026-11-12. Reviewed all 11 Markdown briefs on `main` at `6093c4a5a
 
 | Brief/update | Implementation | Verification |
 |---|---|---|
-| `loading screen.md` | Full-screen Aqua/Mii scene, replacing the original 3DS shell at the user’s later request; random 3–7 second duration, timed fade, Skip/Escape, preview/restart, static fallback and reduced motion; supplied clips and measured animation manifest retained | Downloaded and inspected all three clips; GIF metadata measured at 175 frames / 7000ms each; selection/cooldown tests pass; browser review recorded in PR |
+| `loading screen.md` | Full-screen Aqua/Mii scene, replacing the original 3DS shell at the user’s later request; random 1–2 second duration, direct reveal without fading, Skip/Escape, preview/restart, static fallback and reduced motion; supplied clips and measured animation manifest retained | Downloaded and inspected all three clips; GIF metadata measured at 175 frames / 7000ms each; selection/cooldown tests pass; browser review recorded in PR |
 | `soundfx.md` | One cached effects engine, 21 actual CC0 effects, category/master/event settings, category gains, bounded concurrency, cooldowns, interaction unlock, event wiring independent of iPod | All downloaded files validated as Ogg Vorbis; four sound-engine tests pass; asset origins/licence in `public/sounds/CREDITS.md` |
 | `Music.md` | Third supplied MP3 added as track three; music preparation now discovers source attachments from Music.md and still scans local MP3s | Source downloaded and validated; manifest preparation produces three tracks |
 | iPod improvement | Mii grooves on tracks one/two and uses a more energetic side-step on track three, tied to actual playing state | Original CSS choreography layered over supplied Mii artwork. No bespoke dance GIF was supplied or invented. Reduced motion shows a still |
 | Mobile improvement | Original retro Devpost/LinkedIn/GitHub/Instagram icon treatments, consistent links, and Mii appearances in Notes, projects, About and the iPod | Same configured profile destinations retained; mobile/touch coverage remains part of the browser QA checklist |
 | Existing Codex/design briefs | Kept React/TypeScript/Vite, shared desktop state, actual project routes/filters, NDot display type, Apple system UI font stack, accessibility controls, and no invented project claims | Production build/type checking is required before handoff |
 
-## Startup readiness and animation behavior
+## Current startup and interaction behavior
 
-- The user’s later instruction explicitly replaces the 3DS shell and the original no-delay constraint: every startup now chooses a 3–7 second presentation duration. Both normal startup and preview enter automatically after that duration; Skip/Escape enters earlier.
-- Readiness status still reflects real fonts/artwork, without fake percentages. Slow or missing resources cannot extend the chosen timer. The fade occupies the final 220ms of the interval.
-- The supplied wide clips already contain character traversal, so the controller does not translate the full scene a second time.
-- Normal in-app navigation does not replay startup. Restart respects the startup preference; explicit startup previews use the same timed sequence.
-- GIF durations come from frame metadata, not filenames. Optional reactions are loaded when selected; the current artwork stays visible until the replacement has loaded, and competing transitions are invalidated on dismissal.
-- Interface effects remain silent before a trusted user interaction. The user's earlier explicit music-autoplay request remains implemented independently with a Play fallback when blocked.
+The latest user instruction supersedes the earlier timing and desktop arrangement:
+
+- Startup is a full-screen Aqua scene without a handheld shell. Every normal/restart/preview sequence chooses 1–2 seconds and reveals the desktop directly, without an entry or exit fade. Skip/Escape enters earlier. Network speed does not extend the timer.
+- Status text reflects actual font/artwork readiness; static artwork stays visible while a GIF loads.
+- The four desktop shortcuts are Find Me, Résumé, Project Files and About Me. The Dock contains Home, Terminal, Notes, iPod and Say Hi. Social shortcuts live within Find Me.
+- Touch layouts use the home screen and full-screen app windows, with Back to Desktop, Home, 44px controls and no required dragging, resizing or hovering.
+- One capture listener handles trusted clicks. Action-specific audio takes priority, then a generic CC0 tick fills gaps, including stopped event propagation. Fast ticks reuse the existing audio handle. Mute and volume preferences remain effective.
+- Supplied Mii clips have distinct contextual roles; random tap reactions avoid immediate repeats. Only the iPod companion responds to music playback.
+- In-app navigation does not replay startup; preferences persist.
 
 ## Audio sourcing
 
@@ -30,7 +33,7 @@ Music is still the user's provided attachments. Preparation downloads these into
 
 ## Validation
 
-- Startup: duration selection is checked at 3, 5 and 7 seconds and remains bounded for out-of-range/non-finite inputs. All 12 behavior tests pass locally.
+- Startup: duration selection is checked at 1, 1.5 and 2 seconds and remains bounded for out-of-range/non-finite inputs. All 15 behavior tests pass locally.
 - Music: repeat/stop behavior, shuffle avoids the current track, wheel angle-boundary handling, and unloaded-media time labels.
 - Effects: silence before unlock, caching/rate limits, master/category gain, missing-file suppression, and maximum concurrency.
 - Mii: nonrepeating eligible choices, cooldown exclusion, and cooldown expiry.
@@ -52,4 +55,8 @@ Music is still the user's provided attachments. Preparation downloads these into
 
 The preceding implementation at `1b721e3` was exercised in native Chrome: the running Mii preview rendered; Tab cycled between its two controls; Escape entered the desktop; Reduced Motion produced the static Mii and suppressed desktop bubbles; Enter dismissed the preview and restored focus to its launcher. Normal motion was restored afterward. System Preferences reported “test sound played” after the real playback promise resolved. iPod track one continued playing on the desktop.
 
-A transient blank image on a first reaction led to preloading each replacement before swapping it. The later user instruction removes the handheld framing and changes startup to a random 3–7 second timed presentation; the earlier indefinite-preview/readiness-only behavior is superseded. Final build and visual verification results are recorded in PR #1. Mobile/touch coverage is not claimed by these Chrome checks.
+A transient blank image on a first reaction led to preloading each replacement before swapping it. Later user instructions remove the handheld framing, shorten startup to 1–2 seconds and remove fading; the earlier indefinite-preview/readiness-only behavior is superseded. Final build and visual verification results are recorded in PR #1. Mobile/touch coverage is not claimed by these Chrome checks.
+
+## Touch/feedback follow-up
+
+The current pass adds shared click fallback/deduplication and rapid-click replay tests. The CSS/layout implementation includes phone/tablet/coarse-pointer support; these tests alone do not establish physical touchscreen or screen-reader coverage. Final production build and browser observations are recorded in PR #1.

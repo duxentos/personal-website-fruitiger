@@ -1,4 +1,10 @@
 export const soundManifest = {
+  "desktop.click": {
+    "src": "/sounds/menu/menu-select.ogg",
+    "category": "desktop",
+    "enabled": true,
+    "cooldownMs": 0
+  },
   "desktop.startup": {
     "src": "/sounds/desktop/startup.ogg",
     "category": "desktop",

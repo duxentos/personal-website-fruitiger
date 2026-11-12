@@ -1,5 +1,16 @@
 # Website change log
 
+## Faster startup and touch desktop — 2026-11-12
+
+- Shortened startup to a random 1–2 seconds and removed the fade entirely. Skip/Escape still enters immediately.
+- Kept exactly four desktop launchers: Find Me, Résumé, Project Files and About Me. Removed their Dock copies and the desktop social shortcuts. Social destinations remain inside Find Me.
+- Dock now contains Home, Terminal, Notes, iPod and Say Hi. Added clear Back to Desktop navigation in touch windows.
+- Touch layouts cover tablets up to 1023px and coarse pointers. They start on the home screen, use full-screen app views, larger 44px controls, scrolling iPod menus, expanded wheel targets, safe-area spacing, and no touch dragging/hover magnification.
+- Added a shared click-sound fallback, preserving dedicated action sounds and existing mute/volume preferences. Rapid clicks reuse and restart the cached CC0 tick.
+- Assigned different supplied Mii clips to About, projects, Notes, Terminal, résumé, iPod and Say Hi. Tap reactions now vary; music only drives the iPod companion. Replacements load before swapping.
+- All 15 behavior tests pass locally, including shorter timing, click fallback/deduplication, rapid click replay, and existing music/Mii/effect checks. Production and browser checks are recorded in PR #1.
+
+
 ## Loading-screen revision — 2026-11-12
 
 - User instruction supersedes the original loading-screen brief: removed the 3DS case, screens, hinge and console controls. Replaced them with an open full-screen Aqua scene, Nothing dot-matrix display type, supplied Mii artwork and soft bubbles.

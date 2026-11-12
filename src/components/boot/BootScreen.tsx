@@ -62,7 +62,6 @@ function BootScreen({onDone}: {onDone: () => void}) {
   const [phase, setPhase] = useState<'loading' | 'ready' | 'error'>('loading');
   const [state, setState] = useState<'running' | 'reacting'>('running');
   const [imageReady, setImageReady] = useState(false);
-  const [leaving, setLeaving] = useState(false);
   const [hidden, setHidden] = useState(document.hidden);
   const [cycle, setCycle] = useState(0);
   const dialog = useRef<HTMLDivElement>(null);
@@ -87,12 +86,11 @@ function BootScreen({onDone}: {onDone: () => void}) {
     return () => {mounted.current = false; transition.current += 1;};
   }, []);
 
-  // The requested 3–7 second presentation is independent of network speed.
+  // The requested short 1–2 second presentation is independent of network speed.
   // Slow or missing optional artwork must never hold the desktop behind it.
   useEffect(() => {
-    const fade = setTimeout(() => setLeaving(true), durationMs - 220);
     const close = setTimeout(() => finishRef.current(), durationMs);
-    return () => {clearTimeout(fade); clearTimeout(close);};
+    return () => clearTimeout(close);
   }, [durationMs]);
 
   useEffect(() => {
@@ -134,7 +132,7 @@ function BootScreen({onDone}: {onDone: () => void}) {
   }, []);
 
   useEffect(() => {
-    if (reduced || hidden || leaving || !imageReady || (!p.randomMii && state !== 'reacting')) return;
+    if (reduced || hidden || !imageReady || (!p.randomMii && state !== 'reacting')) return;
     const timer = setTimeout(() => {
       if (pendingReaction.current) {setCycle(n => n + 1); return;}
       const next = selectAnimation(miiAnimations.filter(a => a.category === 'locomotion' && !failed.current.has(a.id)), last.id, seen.current, Date.now());
@@ -142,10 +140,10 @@ function BootScreen({onDone}: {onDone: () => void}) {
       else setState('running');
     }, last.id === 'wave' ? last.durationMs * 5 : last.durationMs);
     return () => clearTimeout(timer);
-  }, [last, state, hidden, reduced, leaving, imageReady, p.randomMii, cycle, showAnimation]);
+  }, [last, state, hidden, reduced, imageReady, p.randomMii, cycle, showAnimation]);
 
   async function react() {
-    if (reduced || leaving || !p.miiInteractions || state === 'reacting' || pendingReaction.current) return;
+    if (reduced || !p.miiInteractions || state === 'reacting' || pendingReaction.current) return;
     const reaction = selectAnimation(miiAnimations.filter(a => (a.category === 'greeting' || a.category === 'playful') && !failed.current.has(a.id)), last.id, seen.current, Date.now());
     if (!reaction) return;
     pendingReaction.current = true;
@@ -156,7 +154,7 @@ function BootScreen({onDone}: {onDone: () => void}) {
   }
 
   const animated = !reduced && !hidden && imageReady;
-  return <div ref={dialog} className={`boot-overlay ${reduced ? 'boot-reduced' : ''} ${leaving ? 'boot-leaving' : ''}`}
+  return <div ref={dialog} className={`boot-overlay ${reduced ? 'boot-reduced' : ''}`}
     role="dialog" aria-modal="true" aria-label="starting desktop" onKeyDown={event => {
       if (event.key === 'Escape') {event.preventDefault(); finish();}
       if (event.key !== 'Tab') return;
