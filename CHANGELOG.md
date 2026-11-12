@@ -9,6 +9,9 @@
 - Mobile uses stacked windows and touch-sized controls rather than desktop dragging.
 - Reduced the Mii render to fit its stage and show the waving character in full.
 - Added original local Vista-inspired aurora and XP-inspired meadow vector wallpapers; these are new illustrations rather than Microsoft wallpaper files.
+- Integrated the newly added Menu.md brief with Spotlight (Cmd/Ctrl+K), searchable project/app results, saved theme/wallpaper and bubble preferences, desktop icon/widget visibility, project list/grid/icon views, and an application/window centre.
+- Added iridescent bubbles with pointer repulsion, tap-to-pop, soft collisions, lower mobile counts, visibility pausing, and reduced-motion suppression. Only bubble surfaces receive pointer events; app controls remain above them.
+- Disabled sorting by status because verified project statuses have not been supplied.
 - Kept NDot typography and the existing character asset references.
 - Validation: Vercel preview build result recorded in PR #1. Browser interaction verification is reported separately.
 
