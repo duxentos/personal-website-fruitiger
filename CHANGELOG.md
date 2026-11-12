@@ -1,5 +1,16 @@
 # Website change log
 
+## Desktop-first launch — 2026-11-12
+
+- Re-read the updated Menu.md, including its explicit removal of footer and scroll-down sections.
+- Removed the footer-like signature and automatic introduction/notes windows at launch. The OS desktop is the starting view.
+- Introduction remains available as the About app in the menu and Dock.
+- Only the native-style system menu bar remains at the top; there is no separate website header/navigation.
+- Mobile now has a fixed desktop viewport, with the active application filling the available area and scrolling only inside application windows.
+- Added show-desktop and restart commands; saved preferences survive restart.
+- Uses the Bliss image supplied in Menu.md as the default landscape, with the original vector meadow as an asset-load fallback and Vista-inspired aurora as an alternate.
+
+
 ## Cohesive Aqua desktop — 2026-11-12
 
 - Converted the scrolling page into a desktop while retaining welcome copy, notes, Mii, project search/filtering, project routes, and LinkedIn content.
