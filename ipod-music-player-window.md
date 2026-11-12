@@ -676,5 +676,8 @@ Visitors should be able to rotate the click wheel, navigate songs, browse albums
 <img width="591" height="805" alt="image" src="https://github.com/user-attachments/assets/4e958cde-4fe3-456c-83d2-3f10055772ed" />
 <img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/5b52d7a6-f030-4632-93a2-14536eff2d3c" />
 
+feedback: add the mi character dancing and the new tracks and make it borderless but the user can still close it 
+
+
 
 
