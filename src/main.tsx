@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import { Home, FolderOpen, UserRound, BriefcaseBusiness, Sparkles, Github, Mail, ArrowRight, ArrowLeft, ExternalLink, X, Monitor, Search, CircleHelp } from 'lucide-react';
+import { Home, FolderOpen, UserRound, BriefcaseBusiness, Sparkles, Code2, Mail, ArrowRight, ArrowLeft, ExternalLink, X, Monitor, Search, CircleHelp } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 import './style.css';
 
 import { projects, type Category } from './projects';
 const categories:('all projects'|Category)[]=['all projects','software engineering','ai / machine learning','biomedical engineering','embedded systems','hardware','hackathons'];
-const icons=[{label:'home',icon:Home,path:'/'},{label:'projects',icon:FolderOpen,path:'/projects'},{label:'about',icon:UserRound,path:'/about'},{label:'experience',icon:BriefcaseBusiness,path:'/experience'},{label:'skills',icon:Sparkles,path:'/skills'},{label:'github',icon:Github,path:'https://github.com/duxentos'},{label:'contact',icon:Mail,path:'/contact'}];
+const icons=[{label:'home',icon:Home,path:'/'},{label:'projects',icon:FolderOpen,path:'/projects'},{label:'about',icon:UserRound,path:'/about'},{label:'experience',icon:BriefcaseBusiness,path:'/experience'},{label:'skills',icon:Sparkles,path:'/skills'},{label:'github',icon:Code2,path:'https://github.com/duxentos'},{label:'contact',icon:Mail,path:'/contact'}];
 function App(){
  const [path,setPath]=useState(location.pathname); const [filter,setFilter]=useState('all projects'); const [query,setQuery]=useState(''); const [hello,setHello]=useState(false); const reduced=useReducedMotion();
  useEffect(()=>{const f=()=>setPath(location.pathname);window.addEventListener('popstate',f);return()=>window.removeEventListener('popstate',f)},[]);
