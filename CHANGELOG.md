@@ -1,5 +1,14 @@
 # Website change log
 
+## Draggable mobile and tablet windows — 2026-11-12
+
+- The latest instruction supersedes the earlier full-screen-only touch layout: windows now float and their title bars accept touch, pen and mouse dragging. Multiple open windows retain their stacking order and bring forward on interaction.
+- Touch frames leave room for movement, clamp the complete window inside the usable workspace, and refit on rotation or viewport changes. The green control expands/restores; tablets also expose minimize. Back to Desktop and close retain large tap targets.
+- Content scrolling stays separate from title-bar movement. Pointer capture, cancellation, drag thresholds and button exclusion prevent accidental scrolling/window moves. Transient movement uses a compositor transform; window position commits on release.
+- Preserved draggable desktop icons, all `cd -something` Terminal commands and the welcome-to-utopia note.
+- All 19 behavior tests pass locally, including touch bounds, rotation/short viewport fitting, expand sizing and the existing command/order/music/Mii/sound checks. Production and browser observations are recorded in PR #1.
+
+
 ## Draggable touch icons, cd commands and welcome note — 2026-11-12
 
 - Added direct pointer dragging for desktop shortcuts in phone/tablet/coarse-pointer layouts. Icons snap to grid positions and save their order locally, remaining on-screen across orientation changes. An 8px movement threshold separates taps from dragging; cancelled gestures restore the icon, and dropping does not open its app. Alt + arrows provides keyboard rearrangement.

@@ -46,3 +46,16 @@ html,body,#root{height:100%;overflow:hidden}.os-desktop.wallpaper-meadow{backgro
 .desktop-icon-hint{display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .terminal-commands{clear:both;margin:12px 0 16px;color:#a0d7cd;font-size:11px}.terminal-commands summary{cursor:pointer;padding:8px 0;min-height:36px}.terminal-commands>div{display:flex;flex-wrap:wrap;gap:7px;padding:8px 0}.terminal-commands button{min-height:36px;padding:6px 10px;border:1px solid #416879;border-radius:5px;background:linear-gradient(#2e4959,#182d38);color:#bdeee1;font-family:inherit;font-size:11px}.terminal-commands button:hover{background:#355a64}.welcome-note{display:flex;flex-direction:column;justify-content:center;min-height:100%;gap:7px}.welcome-note>.mii-presence{float:none;align-self:flex-end}.welcome-note h2{font-size:28px;line-height:1.25;margin:10px 0}.welcome-note p{font-size:12px;line-height:1.8;margin:0}
 @media(max-width:1023px),(pointer:coarse){.desktop-shortcuts>button{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;will-change:transform}.desktop-shortcuts>button.icon-dragging{position:relative;z-index:20;background:#cff4ff8c;box-shadow:0 12px 22px #123a7055;border-color:#f4ffffb0}.desktop-shortcuts>button.icon-dragging .app-icon{transform:none;filter:brightness(1.08)}.desktop-icon-hint{display:block;grid-column:1/-1;text-align:center;font-size:10px;line-height:1.5;color:#f1fbff;text-shadow:0 1px 3px #173c69;padding:1px 7px;pointer-events:none}.terminal-commands summary,.terminal-commands button{min-height:44px}.welcome-note{padding:26px 24px}.welcome-note h2{font-size:32px;max-width:350px}.welcome-note p{max-width:340px}}
+
+/* A shared floating frame makes title-bar dragging work on touch as well. */
+.aqua-window{transform:translate3d(var(--drag-x,0px),var(--drag-y,0px),0)}
+@media(max-width:1023px),(pointer:coarse){
+ .aqua-window,.aqua-window.window-zoomed{position:absolute!important;inset:auto!important;left:var(--window-x)!important;top:var(--window-y)!important;width:var(--window-w)!important;height:var(--window-h)!important;z-index:var(--window-layer)!important;min-width:0;max-width:none;max-height:none}
+ .aqua-window:not(.is-active){display:flex}
+ .window-bar{touch-action:none;cursor:grab}.window-bar:active{cursor:grabbing}
+ .window-name{left:164px;right:8px;font-size:11px}
+ .lights{gap:6px}.lights .zoom-control{display:grid}.lights .minimize-control{display:none}
+ .aqua-window .window-content{touch-action:pan-y;overscroll-behavior:contain}
+}
+@media(min-width:600px) and (max-width:1023px){.lights .minimize-control{display:grid}.window-name{left:214px}}
+@media(min-width:600px) and (pointer:coarse){.lights .minimize-control{display:grid}.window-name{left:214px}}

@@ -32,7 +32,7 @@ Startup is a full-screen Aqua scene with your supplied Mii artwork, with no 3DS/
 
 ## Desktop and touch controls
 
-Only Find Me, Résumé, Project Files and About Me live on the desktop. The Dock contains Home, Terminal, Notes, iPod and Say Hi, so these destinations are not duplicated. Social links remain inside Find Me. Touch layouts (up to 1023px or a coarse primary pointer) start on the home screen, open one full-screen app at a time, and provide a Back to Desktop control and the Dock’s Home button. Buttons use larger tap targets; dragging/resizing and hover magnification are mouse interactions.
+Only Find Me, Résumé, Project Files and About Me live on the desktop. The Dock contains Home, Terminal, Notes, iPod and Say Hi, so these destinations are not duplicated. Social links remain inside Find Me. Touch layouts (up to 1023px or a coarse primary pointer) start on the home screen, open floating windows that can be dragged by their title bars, and provide a Back to Desktop control and the Dock’s Home button. Buttons use larger tap targets; title-bar dragging works with touch, pen and mouse. Touch windows can expand/restore; corner resizing and Dock hover magnification remain mouse interactions.
 
 A shared trusted-click listener supplies a quiet CC0 click when an action has no dedicated sound. Dedicated feedback takes precedence, avoiding a second generic click; rapid generic clicks retrigger the cached sound. Existing sound mute/volume/category settings still apply. Mii artwork differs by context, while tap reactions vary without immediate repeats; only the iPod Mii dances with music.
 
@@ -43,3 +43,5 @@ On phones and tablets, drag a desktop icon onto another grid position to rearran
 All Terminal commands now use `cd -something`. Use `cd -help` or expand the command list to see and tap every available command. App commands include `cd -projects`, `cd -resume`, `cd -about`, `cd -findme`, `cd -notes`, `cd -ipod`, `cd -settings`, and `cd -sayhi`. Profiles use `cd -linkedin`, `cd -github`, `cd -instagram`, and `cd -devpost`; music uses `cd -play`, `cd -pause`, `cd -next`, and `cd -previous`. Utilities include `cd -apps`, `cd -home`, and `cd -clear`. History and Tab completion remain available.
 
 Notes is now a simple welcome to Azaan’s personal utopia, without the old terminal guide.
+
+Touch windows stay within the usable workspace while moving. Multiple windows can stay open; touching a window brings it forward. Drag the title bar, scroll inside the content, and use the green control to expand or restore. Rotation/viewport changes refit windows so title-bar controls remain reachable.

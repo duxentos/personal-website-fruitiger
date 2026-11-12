@@ -20,7 +20,7 @@ The latest user instruction supersedes the earlier timing and desktop arrangemen
 - Startup is a full-screen Aqua scene without a handheld shell. Every normal/restart/preview sequence chooses 1–2 seconds and reveals the desktop directly, without an entry or exit fade. Skip/Escape enters earlier. Network speed does not extend the timer.
 - Status text reflects actual font/artwork readiness; static artwork stays visible while a GIF loads.
 - The four desktop shortcuts are Find Me, Résumé, Project Files and About Me. The Dock contains Home, Terminal, Notes, iPod and Say Hi. Social shortcuts live within Find Me.
-- Touch layouts use the home screen and full-screen app windows, with Back to Desktop, Home, 44px controls and no required dragging, resizing or hovering.
+- Touch layouts use the home screen and floating windows with draggable title bars, expand/restore, Back to Desktop, Home and 44px controls. Content scrolling is separate from title-bar movement; no hover is required.
 - One capture listener handles trusted clicks. Action-specific audio takes priority, then a generic CC0 tick fills gaps, including stopped event propagation. Fast ticks reuse the existing audio handle. Mute and volume preferences remain effective.
 - Supplied Mii clips have distinct contextual roles; random tap reactions avoid immediate repeats. Only the iPod companion responds to music playback.
 - In-app navigation does not replay startup; preferences persist.
@@ -63,8 +63,12 @@ The current pass adds shared click fallback/deduplication and rapid-click replay
 
 ## Latest user override: icon dragging, CLI syntax and Notes
 
-Phone/tablet desktop shortcuts now support dragging into persistent grid order, while app windows remain full-screen on touch layouts. Dragging does not launch an app; tapping does. Icon order is validated before restoring and positions adapt to viewport changes. Keyboard rearrangement uses Alt + arrows.
+Phone/tablet desktop shortcuts now support dragging into persistent grid order, and touch app windows now support title-bar dragging under the latest user instruction. Dragging does not launch an app; tapping does. Icon order is validated before restoring and positions adapt to viewport changes. Keyboard rearrangement uses Alt + arrows.
 
 Every Terminal command now uses `cd -something`, including help, apps, profiles, playback and utilities. The command list lives inside Terminal. Notes no longer contains that guide; it is a simple welcome to Azaan’s personal utopia with the supplied Mii.
 
 All 17 behavior tests pass locally, including saved-order recovery and command parsing/routing. Final production/browser observations are recorded in PR #1; logic tests are not a physical-touch pass.
+
+## Latest override: mobile/tablet window dragging
+
+Touch windows now float instead of being forced full-screen. Pointer capture and a movement threshold apply only to the title bar; controls are excluded and content retains scrolling. Temporary movement uses transforms, commits on release and reverts on cancellation. Window geometry clamps to the actual workspace and adapts to viewport changes, with explicit expand/restore. All 19 behavior tests pass locally, including boundary, short-screen and rotation sizing checks. CLI `cd -something` syntax and the utopia welcome note remain unchanged. Browser/device results are recorded in PR #1.
