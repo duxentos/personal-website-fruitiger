@@ -1,3 +1,6 @@
+This is the main character for my website.
+
+
 Pictures
 <img width="560" height="618" alt="image" src="https://github.com/user-attachments/assets/843705ed-d9bb-4998-b9c2-b99da368d762" />
 <img width="560" height="618" alt="image" src="https://github.com/user-attachments/assets/0691b3c9-3925-4afd-841d-0ad9a7e4a432" />
