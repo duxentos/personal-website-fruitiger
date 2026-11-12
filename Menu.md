@@ -9,6 +9,7 @@ Transform the existing portfolio's desktop environment into a functional operati
 - Mac OS X Leopard / Snow Leopard interactive menu bar.
 - Windows Aero-style project windows.
 - Existing Mii-inspired desktop companion.
+- Remove the footer and scroll down section and go straight to the OS menu, it should feel like an OS rather then a standard website where you have to scroll.
 
 This is a functional portfolio interface, not a static OS mock-up.
 
@@ -470,6 +471,9 @@ Implement in this order:
 The website should feel like **Windows XP Bliss meets Windows Vista Aero meets Mac OS X Leopard**.
 
 Visitors should see a beautiful green landscape, colourful translucent bubbles floating naturally across the screen, a functional macOS-inspired menu bar and interactive project windows.
+<img width="533" height="308" alt="image" src="https://github.com/user-attachments/assets/35f802e5-9ba3-4e70-b171-0feb257a44af" />
+<img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/c879a033-99eb-4dd1-acda-c36fa5b9bf3e" />
+<img width="1024" height="768" alt="image" src="https://github.com/user-attachments/assets/f75856a1-0d4a-4e7d-8057-9b769b3d396c" />
 
 The experience should feel nostalgic, lively and carefully engineered.
 
