@@ -6,7 +6,7 @@ Review date: 2026-11-12. Reviewed all 11 Markdown briefs on `main` at `6093c4a5a
 
 | Brief/update | Implementation | Verification |
 |---|---|---|
-| `loading screen.md` | Full-screen Aqua/Mii scene, replacing the original 3DS shell at the user’s later request; random 1–2 second duration, direct reveal without fading, Skip/Escape, preview/restart, static fallback and reduced motion; supplied clips and measured animation manifest retained | Downloaded and inspected all three clips; GIF metadata measured at 175 frames / 7000ms each; selection/cooldown tests pass; browser review recorded in PR |
+| `loading screen.md` | Full-screen Aqua/Mii scene, replacing the original 3DS shell at the user’s later request; fixed 5-second duration, direct reveal without fading, Skip/Escape, preview/restart, static fallback and reduced motion; supplied clips and measured animation manifest retained | Downloaded and inspected all three clips; GIF metadata measured at 175 frames / 7000ms each; selection/cooldown tests pass; browser review recorded in PR |
 | `soundfx.md` | One cached effects engine, 21 actual CC0 effects, category/master/event settings, category gains, bounded concurrency, cooldowns, interaction unlock, event wiring independent of iPod | All downloaded files validated as Ogg Vorbis; four sound-engine tests pass; asset origins/licence in `public/sounds/CREDITS.md` |
 | `Music.md` | Third supplied MP3 added as track three; music preparation now discovers source attachments from Music.md and still scans local MP3s | Source downloaded and validated; manifest preparation produces three tracks |
 | iPod improvement | Mii grooves on tracks one/two and uses a more energetic side-step on track three, tied to actual playing state | Original CSS choreography layered over supplied Mii artwork. No bespoke dance GIF was supplied or invented. Reduced motion shows a still |
@@ -17,7 +17,7 @@ Review date: 2026-11-12. Reviewed all 11 Markdown briefs on `main` at `6093c4a5a
 
 The latest user instruction supersedes the earlier timing and desktop arrangement:
 
-- Startup is a full-screen Aqua scene without a handheld shell. Every normal/restart/preview sequence chooses 1–2 seconds and reveals the desktop directly, without an entry or exit fade. Skip/Escape enters earlier. Network speed does not extend the timer.
+- Startup is a full-screen Aqua scene without a handheld shell. Every normal/restart/preview sequence lasts a fixed 5 seconds and reveals the desktop directly, without an entry or exit fade. Skip/Escape enters earlier. Network speed does not extend the timer.
 - Status text reflects actual font/artwork readiness; static artwork stays visible while a GIF loads.
 - The four desktop shortcuts are Find Me, Résumé, Project Files and About Me. The Dock contains Home, Terminal, Notes and iPod. Social shortcuts live within Find Me.
 - Touch layouts use the home screen and floating windows with draggable title bars, expand/restore, Back to Desktop, Home and 44px controls. Content scrolling is separate from title-bar movement; no hover is required.
@@ -80,3 +80,7 @@ Notes is now the only open/focused app on initial launch and Restart, independen
 Résumé inspected: `public/azaan-khan-resume.pdf`, SHA-256 `ffed325d52a1d2340a183151371da31a7b29932a8a1ddd9ca7a5228cea13ed9a`. The earlier portfolio’s local copy has the same hash. The unrelated ModernCV sample outside the portfolio was not used. No private contact data was copied into the introduction.
 
 “Wii section” was treated as the standalone Say Hi/Mii app after an optional clarification question. That app and all its launch entries were removed; other contextual Mii artwork remains. The unused desktop-widget setting was removed with it. All 19 existing tests pass locally; build and browser outcomes are recorded in PR #1.
+
+## Latest startup timing override
+
+The user set startup to a fixed five seconds. The central `BOOT_DURATION_MS` constant is 5000ms; normal startup, preview and Restart share that timer. No fade is added, Skip/Escape still enters immediately, and slow optional assets cannot lengthen the timer. The timing test is updated; all 19 behavior tests pass locally.

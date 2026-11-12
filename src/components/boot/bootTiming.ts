@@ -1,5 +1,2 @@
-/** A per-startup presentation duration; independent of network readiness. */
-export function pickBootDurationMs(random = Math.random()): number {
-  const value = Number.isFinite(random) ? Math.max(0, Math.min(1, random)) : 0;
-  return 1000 + Math.round(value * 1000);
-}
+/** Fixed startup presentation time; optional artwork cannot extend it. */
+export const BOOT_DURATION_MS = 5000;

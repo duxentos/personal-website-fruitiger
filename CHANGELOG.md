@@ -1,5 +1,12 @@
 # Website change log
 
+## Fixed five-second startup — 2026-11-12
+
+- Replaced random 1–2 second startup with a fixed 5000ms presentation, as requested.
+- Normal startup, preview and Restart share the same timer; no fade is added. Skip/Escape still enters immediately and optional artwork cannot extend the timer.
+- Updated the existing timing regression check. All 19 behavior tests pass locally. Production build results are recorded in PR #1.
+
+
 ## Welcome notes on launch — 2026-11-12
 
 - Notes (`welcome.txt`) is the only app window opened and focused on initial launch and Restart. All other windows start closed on desktop, phone and tablet.

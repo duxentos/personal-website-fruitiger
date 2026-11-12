@@ -3,7 +3,7 @@ import {useReducedMotion} from 'motion/react';
 import {useDesktop} from '../Desktop';
 import {miiAnimations, selectAnimation, type MiiAnimation} from '../../data/miiAnimations';
 import {playSound} from '../../audio/SoundEngine';
-import {pickBootDurationMs} from './bootTiming.ts';
+import {BOOT_DURATION_MS} from './bootTiming.ts';
 
 export function BootProvider({children}: {children: ReactNode}) {
   const {preferences} = useDesktop();
@@ -53,7 +53,6 @@ function BootScreen({onDone}: {onDone: () => void}) {
   const {preferences: p} = useDesktop();
   const systemReduce = useReducedMotion();
   const reduced = Boolean(systemReduce || p.reducedMotion);
-  const [durationMs] = useState(() => pickBootDurationMs());
   const [last, setLast] = useState(() => {
     let previous = '';
     try {previous = sessionStorage.getItem('mii-last-boot') || '';} catch {}
@@ -86,12 +85,12 @@ function BootScreen({onDone}: {onDone: () => void}) {
     return () => {mounted.current = false; transition.current += 1;};
   }, []);
 
-  // The requested short 1–2 second presentation is independent of network speed.
+  // The requested five-second presentation is independent of network speed.
   // Slow or missing optional artwork must never hold the desktop behind it.
   useEffect(() => {
-    const close = setTimeout(() => finishRef.current(), durationMs);
+    const close = setTimeout(() => finishRef.current(), BOOT_DURATION_MS);
     return () => clearTimeout(close);
-  }, [durationMs]);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
