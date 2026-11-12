@@ -669,4 +669,10 @@ Visitors should be able to rotate the click wheel, navigate songs, browse albums
 
 **The experience should feel like a real 2007 iPod Classic running inside a nostalgic Windows XP / macOS Leopard desktop environment.**
 
+**IPOD UI**
+<img width="1200" height="1124" alt="image" src="https://github.com/user-attachments/assets/2afcdb15-7143-4fa7-bc31-f8b204c0f388" />
+<img width="591" height="805" alt="image" src="https://github.com/user-attachments/assets/4e958cde-4fe3-456c-83d2-3f10055772ed" />
+<img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/5b52d7a6-f030-4632-93a2-14536eff2d3c" />
+
+
 
