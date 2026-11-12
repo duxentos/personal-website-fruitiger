@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "node scripts/prepare-music.mjs && node --experimental-strip-types --test scripts/music-behavior.test.ts && tsc -b && vite build",
+    "build": "node scripts/prepare-music.mjs && node --experimental-strip-types --test scripts/*-behavior.test.ts && tsc -b && vite build",
     "lint": "tsc --noEmit",
     "predev": "node scripts/prepare-music.mjs"
   },

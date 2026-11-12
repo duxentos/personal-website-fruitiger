@@ -1,5 +1,16 @@
 # Website change log
 
+## Startup, interface sounds and updated subprompts — 2026-11-12
+
+- Reviewed all 11 current Markdown briefs and recorded the requirement mapping in IMPLEMENTATION_REVIEW.md.
+- Added the supplied 3DS-style startup clips, measured timing metadata, weighted/cooldown selection, real readiness, Skip, restart/preview, and persisted startup/Mii/reduced-motion preferences.
+- Downloaded and committed 21 CC0 Kenney interface effects with per-file credits; added one cached, user-unlocked sound manager with rate limits, four-effect concurrency, graceful failures and independent preferences.
+- Connected actual desktop, menu, bubble, iPod, Mii, success and error actions to configured effects. No synthetic notifications or fake playback indicators were added.
+- Added track three from Music.md, track-aware Mii choreography, wider character presence and original retro social icons.
+- Refreshed README setup/configuration instructions, preserved all author briefs and source assets, and retained the existing iPod/desktop implementation.
+- Local validation: three-track preparation and audio-header checks succeeded; 10 behavior tests pass. Production and browser results are recorded in PR #1.
+
+
 ## Menu.md improvement pass — 2026-11-12
 
 - Re-read all Markdown briefs and identified the new improvement list in Menu.md.

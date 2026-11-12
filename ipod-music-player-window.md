@@ -659,6 +659,8 @@ The implementation is complete only when:
 - Mobile interactions work.
 - The application builds without TypeScript errors.
 
+  IMPROVEMENT: for track 1 and track 2 make the mii do a normal dance and track three make it do a jazzy rick astley dance 
+
 ## Final Objective
 
 Create a beautifully detailed, fully interactive iPod Classic that functions as the music player for my Frutiger Aero desktop portfolio.
@@ -673,6 +675,7 @@ Visitors should be able to rotate the click wheel, navigate songs, browse albums
 <img width="1200" height="1124" alt="image" src="https://github.com/user-attachments/assets/2afcdb15-7143-4fa7-bc31-f8b204c0f388" />
 <img width="591" height="805" alt="image" src="https://github.com/user-attachments/assets/4e958cde-4fe3-456c-83d2-3f10055772ed" />
 <img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/5b52d7a6-f030-4632-93a2-14536eff2d3c" />
+
 
 
 

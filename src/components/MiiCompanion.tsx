@@ -1,0 +1,13 @@
+import {useEffect,useRef,useState} from 'react';
+import {useReducedMotion} from 'motion/react';
+import {useMusic} from '../apps/ipod/MusicProvider';
+import {useDesktop} from './Desktop';
+import {miiAnimations,selectAnimation} from '../data/miiAnimations';
+import {playSound} from '../audio/SoundEngine';
+export function MiiCompanion({compact=false,context='desktop'}:{compact?:boolean;context?:'desktop'|'projects'|'notes'|'terminal'}){const music=useMusic();const{preferences:p}=useDesktop();const systemReduce=useReducedMotion();const reduced=systemReduce||p.reducedMotion;const[reaction,setReaction]=useState<string|null>(null);const[hidden,setHidden]=useState(document.hidden);const last=useRef<Record<string,number>>({});const previous=useRef<string|undefined>(undefined);const selected=miiAnimations.find(a=>a.id===reaction);const dancing=music.playing&&!reduced&&!reaction;const rick=music.track?.id==='track-three';const src=reduced||hidden?'/mii-still.png':selected?.src||(dancing?miiAnimations.find(a=>a.id==='happy')!.src:context==='projects'?miiAnimations.find(a=>a.id==='curious')!.src:'/mii-still.png');
+ useEffect(()=>{const visibility=()=>setHidden(document.hidden);document.addEventListener('visibilitychange',visibility);return()=>document.removeEventListener('visibilitychange',visibility)},[]);
+ useEffect(()=>{if(!reaction||!selected)return;const timer=setTimeout(()=>setReaction(null),Math.max(selected.durationMs,selected.id==='wave'?selected.durationMs*5:0));return()=>clearTimeout(timer)},[reaction]);
+ useEffect(()=>{if(!p.randomMii||reduced||hidden||music.playing||reaction)return;const timer=setTimeout(()=>{const next=selectAnimation(miiAnimations.filter(a=>!a.fullStage),previous.current,last.current,Date.now());if(next){previous.current=next.id;last.current[next.id]=Date.now();setReaction(next.id)}},p.miiFrequency*1000);return()=>clearTimeout(timer)},[p.randomMii,p.miiFrequency,reduced,hidden,music.playing,reaction]);
+ function greet(){if(!p.miiInteractions)return;previous.current='wave';setReaction('wave');if(p.miiSounds)playSound('mii.greeting')}
+ return <div className={`${compact?'mii-presence':'mii-companion'} ${hidden?'animation-paused':''}`}><button className={`mii-figure ${dancing?(rick?'dance-rick':'dance-normal'):''}`} onClick={greet} disabled={!p.miiInteractions} aria-label="greet azaan's Mii"><img src={src} alt="azaan's Mii companion" onError={e=>{if(!e.currentTarget.src.endsWith('/mii-still.png'))e.currentTarget.src='/mii-still.png'}}/></button>{!compact&&<div className="mii-caption"><span>{reaction==='wave'?'hey, nice to meet you!':dancing?(rick?'a little jazzy side-step':'dancing along'):'your desktop companion'}</span><button onClick={greet} disabled={!p.miiInteractions}>say hi ↗</button></div>}</div>
+}

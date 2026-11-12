@@ -6,6 +6,11 @@
       "src": "/music/tracks/track-one.mp3"
     },
     {
+      "id": "track-three",
+      "title": "track three",
+      "src": "/music/tracks/track-three.mp3"
+    },
+    {
       "id": "track-two",
       "title": "track two",
       "src": "/music/tracks/track-two.mp3"
@@ -16,6 +21,7 @@
       "name": "all tracks",
       "trackIds": [
         "track-one",
+        "track-three",
         "track-two"
       ]
     }

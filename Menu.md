@@ -489,3 +489,4 @@ Some improvements:
 -add a resume section
 
 **Build a genuinely interactive desktop environment, not a static recreation or a generic AI-generated portfolio.**
+

@@ -21,3 +21,4 @@ ADD TRANSPARENT ELEMENTS LIKE THIS:
 UI FONT:
 <img width="2408" height="1052" alt="image" src="https://github.com/user-attachments/assets/5359f4a8-d67d-444e-960d-649c87b7845b" />
 <img width="1920" height="2779" alt="image" src="https://github.com/user-attachments/assets/93ea3b57-28b9-4853-9c73-58cf60fc6362" />
+
