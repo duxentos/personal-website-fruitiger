@@ -8,4 +8,4 @@ export const desktopShortcuts = [
   {id: 'projects', label: 'project files'},
   {id: 'welcome', label: 'about me'},
 ] as const;
-export const dockApps = ['terminal', 'notes', 'ipod', 'mii'] as const;
+export const dockApps = ['terminal', 'notes', 'ipod'] as const;

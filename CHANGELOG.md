@@ -1,5 +1,14 @@
 # Website change log
 
+## Welcome notes on launch — 2026-11-12
+
+- Notes (`welcome.txt`) is the only app window opened and focused on initial launch and Restart. All other windows start closed on desktop, phone and tablet.
+- Added the exact title “Welcome to my personal website”, the requested first-year computer engineering introduction, cricket as the favourite hobby, and a second paper note about wanting to do engineering.
+- Read and visually inspected the included résumé. Both local portfolio copies are identical (SHA-256 `ffed325d52a1d2340a183151371da31a7b29932a8a1ddd9ca7a5228cea13ed9a`). Summary facts come from Waterloo Computer Engineering, Biomechatronics/exoskeleton work, rehabilitation-device work and ClinTempo. No contact details, unverified metrics or invented achievements were added. Motivation is drafted from those project themes.
+- Interpreted “Wii section” as the standalone Say Hi/Mii app after requesting clarification. Removed that window, its Dock/menu/CLI entries and its obsolete widget toggle. Contextual/startup Mii artwork remains in the other apps.
+- Preserved dragging, the four desktop shortcuts, 1–2 second startup, click feedback, music and `cd -something` syntax. All 19 existing behavior tests pass locally; production and browser observations are recorded in PR #1.
+
+
 ## Draggable mobile and tablet windows — 2026-11-12
 
 - The latest instruction supersedes the earlier full-screen-only touch layout: windows now float and their title bars accept touch, pen and mouse dragging. Multiple open windows retain their stacking order and bring forward on interaction.

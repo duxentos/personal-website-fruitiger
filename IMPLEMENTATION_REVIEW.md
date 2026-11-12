@@ -19,7 +19,7 @@ The latest user instruction supersedes the earlier timing and desktop arrangemen
 
 - Startup is a full-screen Aqua scene without a handheld shell. Every normal/restart/preview sequence chooses 1–2 seconds and reveals the desktop directly, without an entry or exit fade. Skip/Escape enters earlier. Network speed does not extend the timer.
 - Status text reflects actual font/artwork readiness; static artwork stays visible while a GIF loads.
-- The four desktop shortcuts are Find Me, Résumé, Project Files and About Me. The Dock contains Home, Terminal, Notes, iPod and Say Hi. Social shortcuts live within Find Me.
+- The four desktop shortcuts are Find Me, Résumé, Project Files and About Me. The Dock contains Home, Terminal, Notes and iPod. Social shortcuts live within Find Me.
 - Touch layouts use the home screen and floating windows with draggable title bars, expand/restore, Back to Desktop, Home and 44px controls. Content scrolling is separate from title-bar movement; no hover is required.
 - One capture listener handles trusted clicks. Action-specific audio takes priority, then a generic CC0 tick fills gaps, including stopped event propagation. Fast ticks reuse the existing audio handle. Mute and volume preferences remain effective.
 - Supplied Mii clips have distinct contextual roles; random tap reactions avoid immediate repeats. Only the iPod companion responds to music playback.
@@ -72,3 +72,11 @@ All 17 behavior tests pass locally, including saved-order recovery and command p
 ## Latest override: mobile/tablet window dragging
 
 Touch windows now float instead of being forced full-screen. Pointer capture and a movement threshold apply only to the title bar; controls are excluded and content retains scrolling. Temporary movement uses transforms, commits on release and reverts on cancellation. Window geometry clamps to the actual workspace and adapts to viewport changes, with explicit expand/restore. All 19 behavior tests pass locally, including boundary, short-screen and rotation sizing checks. CLI `cd -something` syntax and the utopia welcome note remain unchanged. Browser/device results are recorded in PR #1.
+
+## Latest user override: personal welcome and startup state
+
+Notes is now the only open/focused app on initial launch and Restart, independent of screen type. Its larger `welcome.txt` window contains two paper notes: an introduction titled “Welcome to my personal website”, and “Why I want to do engineering”. First-year status and cricket are user-provided. The factual summary is based on the included résumé’s Waterloo Computer Engineering, Biomechatronics exoskeleton, rehabilitation-device and ClinTempo experience. The engineering motivation is an authored first-person draft using those themes; it is not a quoted statement.
+
+Résumé inspected: `public/azaan-khan-resume.pdf`, SHA-256 `ffed325d52a1d2340a183151371da31a7b29932a8a1ddd9ca7a5228cea13ed9a`. The earlier portfolio’s local copy has the same hash. The unrelated ModernCV sample outside the portfolio was not used. No private contact data was copied into the introduction.
+
+“Wii section” was treated as the standalone Say Hi/Mii app after an optional clarification question. That app and all its launch entries were removed; other contextual Mii artwork remains. The unused desktop-widget setting was removed with it. All 19 existing tests pass locally; build and browser outcomes are recorded in PR #1.

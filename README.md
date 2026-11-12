@@ -32,7 +32,7 @@ Startup is a full-screen Aqua scene with your supplied Mii artwork, with no 3DS/
 
 ## Desktop and touch controls
 
-Only Find Me, Résumé, Project Files and About Me live on the desktop. The Dock contains Home, Terminal, Notes, iPod and Say Hi, so these destinations are not duplicated. Social links remain inside Find Me. Touch layouts (up to 1023px or a coarse primary pointer) start on the home screen, open floating windows that can be dragged by their title bars, and provide a Back to Desktop control and the Dock’s Home button. Buttons use larger tap targets; title-bar dragging works with touch, pen and mouse. Touch windows can expand/restore; corner resizing and Dock hover magnification remain mouse interactions.
+Only Find Me, Résumé, Project Files and About Me live on the desktop. The Dock contains Home, Terminal, Notes and iPod, so these destinations are not duplicated. Social links remain inside Find Me. Touch layouts (up to 1023px or a coarse primary pointer) start on the home screen, open floating windows that can be dragged by their title bars, and provide a Back to Desktop control and the Dock’s Home button. Buttons use larger tap targets; title-bar dragging works with touch, pen and mouse. Touch windows can expand/restore; corner resizing and Dock hover magnification remain mouse interactions.
 
 A shared trusted-click listener supplies a quiet CC0 click when an action has no dedicated sound. Dedicated feedback takes precedence, avoiding a second generic click; rapid generic clicks retrigger the cached sound. Existing sound mute/volume/category settings still apply. Mii artwork differs by context, while tap reactions vary without immediate repeats; only the iPod Mii dances with music.
 
@@ -40,8 +40,10 @@ A shared trusted-click listener supplies a quiet CC0 click when an action has no
 
 On phones and tablets, drag a desktop icon onto another grid position to rearrange the four shortcuts. A tap still opens the app; dragging does not. The order is saved locally and the grid adapts to rotation. Alt + arrow keys also rearrange a focused icon.
 
-All Terminal commands now use `cd -something`. Use `cd -help` or expand the command list to see and tap every available command. App commands include `cd -projects`, `cd -resume`, `cd -about`, `cd -findme`, `cd -notes`, `cd -ipod`, `cd -settings`, and `cd -sayhi`. Profiles use `cd -linkedin`, `cd -github`, `cd -instagram`, and `cd -devpost`; music uses `cd -play`, `cd -pause`, `cd -next`, and `cd -previous`. Utilities include `cd -apps`, `cd -home`, and `cd -clear`. History and Tab completion remain available.
+All Terminal commands now use `cd -something`. Use `cd -help` or expand the command list to see and tap every available command. App commands include `cd -projects`, `cd -resume`, `cd -about`, `cd -findme`, `cd -notes`, `cd -ipod`, `cd -settings`. Profiles use `cd -linkedin`, `cd -github`, `cd -instagram`, and `cd -devpost`; music uses `cd -play`, `cd -pause`, `cd -next`, and `cd -previous`. Utilities include `cd -apps`, `cd -home`, and `cd -clear`. History and Tab completion remain available.
 
-Notes is now a simple welcome to Azaan’s personal utopia, without the old terminal guide.
+Notes opens by itself on launch and Restart, with every other app window closed. It contains “Welcome to my personal website”, a short résumé-informed introduction, cricket as the favourite hobby, and a separate note about engineering. The old command guide stays inside Terminal.
 
 Touch windows stay within the usable workspace while moving. Multiple windows can stay open; touching a window brings it forward. Drag the title bar, scroll inside the content, and use the green control to expand or restore. Rotation/viewport changes refit windows so title-bar controls remain reachable.
+
+The former Wii-inspired Say Hi/Mii app and its Dock/menu/CLI entries have been removed. The intro uses the résumé already included at `public/azaan-khan-resume.pdf`; first-year status and cricket come from the user’s instructions. The engineering motivation is a first-person editorial draft grounded in the listed projects, not a quotation from the résumé.

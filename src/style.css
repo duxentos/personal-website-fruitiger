@@ -59,3 +59,11 @@ html,body,#root{height:100%;overflow:hidden}.os-desktop.wallpaper-meadow{backgro
 }
 @media(min-width:600px) and (max-width:1023px){.lights .minimize-control{display:grid}.window-name{left:214px}}
 @media(min-width:600px) and (pointer:coarse){.lights .minimize-control{display:grid}.window-name{left:214px}}
+
+/* Two paper notes form the welcome window shown on launch. */
+.notes-desk{min-height:100%;padding:22px;background:repeating-linear-gradient(90deg,#d8e2e7 0 1px,#e5edf0 1px 5px);display:grid;gap:20px;align-content:start}
+.notes-desk .notes-guide{min-height:0;border:1px solid #d2c79c;border-radius:3px;box-shadow:0 3px 7px #5b686830,inset 0 1px #fff9;padding:24px 27px;display:block;position:relative}
+.notes-desk .note-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px}.notes-desk .note-heading .mii-presence{float:none;width:110px;height:58px;margin:-10px 0 0;flex:none}
+.notes-desk .welcome-note h1{font-size:34px;line-height:1.15;margin:12px 0 20px;color:#335f6b}.notes-desk p{font-size:13px;line-height:1.85;margin:0 0 15px;color:#4d6868}.notes-desk p:last-child{margin-bottom:0}.notes-desk .note-hobby{padding-top:12px;border-top:1px dashed #baaf84}
+.notes-desk .engineering-note{background:repeating-linear-gradient(#e9f6e4 0 27px,#d5e5cf 28px);border-color:#b7cbb2}.notes-desk .engineering-note h2{font-size:29px;line-height:1.2;margin:13px 0 18px;color:#3b6e62}
+@media(max-width:1023px),(pointer:coarse){.notes-desk{padding:13px;gap:16px}.notes-desk .notes-guide{padding:20px 19px}.notes-desk .welcome-note h1{font-size:29px}.notes-desk .engineering-note h2{font-size:25px}.notes-desk p{font-size:13px;line-height:1.8}.notes-desk .note-heading{align-items:flex-start;gap:4px}.notes-desk .note-heading .micro{font-size:10px;max-width:110px}.notes-desk .note-heading .mii-presence{width:85px;height:45px}}

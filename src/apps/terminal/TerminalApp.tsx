@@ -74,8 +74,19 @@ export function TerminalApp() {
 }
 
 export function NotesApp() {
-  return <div className="notes-guide welcome-note"><MiiCompanion compact context="notes"/>
-    <h2>welcome to azaan’s personal utopia.</h2>
-    <p>a little corner of the internet to explore, listen, and make yourself at home.</p>
+  return <div className="notes-desk">
+    <article className="notes-guide welcome-note">
+      <div className="note-heading"><span className="micro">a note from azaan</span><MiiCompanion compact context="notes"/></div>
+      <h1>Welcome to my personal website</h1>
+      <p>hey my name is azaan, a first year comp eng student at the University of Waterloo.</p>
+      <p>I enjoy bringing hardware and software together. I’m part of Waterloo’s Biomechatronics design team, working on an assistive exoskeleton, and I’ve been building a rehabilitation device and clinical software through ClinTempo.</p>
+      <p className="note-hobby">Outside engineering, my favourite hobby is cricket.</p>
+    </article>
+    <article className="notes-guide engineering-note">
+      <span className="micro">another little note</span>
+      <h2>Why I want to do engineering</h2>
+      <p>I’d love to use engineering to make things that are useful to people. My work on assistive technology, rehabilitation devices and clinical software brings together the parts I enjoy most: code, circuits, and solving practical problems.</p>
+      <p>I want to keep learning how things work, testing ideas, and turning them into something real — especially where hardware and software meet.</p>
+    </article>
   </div>;
 }

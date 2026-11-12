@@ -14,7 +14,6 @@ export const commands: Command[] = [
   {name: 'notes', description: 'a welcome note', kind: 'app', app: 'notes'},
   {name: 'ipod', description: 'music player', kind: 'app', app: 'ipod'},
   {name: 'settings', description: 'system preferences', kind: 'app', app: 'settings'},
-  {name: 'sayhi', description: 'Mii companion', kind: 'app', app: 'mii'},
   {name: 'linkedin', description: 'LinkedIn profile', kind: 'profile', profile: 'linkedin'},
   {name: 'github', description: 'GitHub profile', kind: 'profile', profile: 'github'},
   {name: 'instagram', description: 'Instagram profile', kind: 'profile', profile: 'instagram'},
