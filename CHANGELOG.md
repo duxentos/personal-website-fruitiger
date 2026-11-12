@@ -21,7 +21,8 @@
 - Added angular click-wheel navigation, keyboard controls, long-press menu/seek, library group menus, playlists, Now Playing, Cover Flow, and six device finishes.
 - Added contextual iPod/File/View/Controls menus and a real playback indicator in the desktop menu bar.
 - Verified both attachment downloads and prepared the local music manifest. Four logic tests passed for repeat, shuffle, wheel boundary movement, and time formatting. Vercel build verification is recorded in PR #1.
-- Browser audio, gesture, and mobile testing are not claimed until exercised in a browser.
+- Browser verification: observed the autoplay-blocked state, activated playback, and observed track one progress advance to 0:31 with the browser reporting audio playing. The terminal also showed a real LinkedIn navigation result during review. Full click-wheel, mobile, and repeat-at-track-end interaction tests remain unverified.
+- Fixed native Enter/Space activation of focused player buttons, auto-scrolling selected menu items, and accurate blocked-play labels for the current track.
 
 
 ## Desktop-first launch — 2026-11-12

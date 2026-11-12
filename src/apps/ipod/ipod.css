@@ -3,3 +3,5 @@
 @media(max-width:370px){.desktop-dock{gap:5px}.desktop-dock .app-icon{width:32px;height:32px}.desktop-dock .dock-app{min-width:32px}.menu-status button[aria-label="appearance preferences"]{display:none}}
 @media(max-height:650px) and (max-width:760px){.ipod-device{width:218px;height:345px;padding:12px}.ipod-screen{height:154px}.now-playing{padding:6px}.now-track{min-height:65px}.click-wheel{width:135px;height:135px;margin-top:14px}.click-wheel .wheel-select{width:49px;height:49px}.wheel-menu{top:5px}.wheel-play{bottom:4px}.ipod-wordmark{margin-top:6px;font-size:8px}.ipod-volume{margin-top:0}.ipod-app{gap:5px}}
 @media(prefers-reduced-motion:reduce){.cover-flow>button{transition:none}}
+
+@keyframes ipod-appear{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}.ipod-device{animation:ipod-appear .18s ease-out}
