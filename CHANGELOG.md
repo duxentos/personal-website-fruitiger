@@ -1,5 +1,13 @@
 # Website change log
 
+## Draggable touch icons, cd commands and welcome note — 2026-11-12
+
+- Added direct pointer dragging for desktop shortcuts in phone/tablet/coarse-pointer layouts. Icons snap to grid positions and save their order locally, remaining on-screen across orientation changes. An 8px movement threshold separates taps from dragging; cancelled gestures restore the icon, and dropping does not open its app. Alt + arrows provides keyboard rearrangement.
+- All Terminal commands now require the `cd -something` syntax. Added a visible/tappable command list for apps, profiles, music and utilities, retaining command history and completion without trapping normal Tab navigation.
+- Replaced the Notes terminal guide with “welcome to azaan’s personal utopia” and a short invitation to explore and listen. Kept its contextual Mii.
+- Added regression coverage for invalid saved icon orders, moving icons without duplication/loss, command prefixes and app/profile routing. All 17 behavior tests pass locally. Production/browser results are recorded in PR #1.
+
+
 ## Faster startup and touch desktop — 2026-11-12
 
 - Shortened startup to a random 1–2 seconds and removed the fade entirely. Skip/Escape still enters immediately.

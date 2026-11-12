@@ -35,3 +35,11 @@ Startup is a full-screen Aqua scene with your supplied Mii artwork, with no 3DS/
 Only Find Me, Résumé, Project Files and About Me live on the desktop. The Dock contains Home, Terminal, Notes, iPod and Say Hi, so these destinations are not duplicated. Social links remain inside Find Me. Touch layouts (up to 1023px or a coarse primary pointer) start on the home screen, open one full-screen app at a time, and provide a Back to Desktop control and the Dock’s Home button. Buttons use larger tap targets; dragging/resizing and hover magnification are mouse interactions.
 
 A shared trusted-click listener supplies a quiet CC0 click when an action has no dedicated sound. Dedicated feedback takes precedence, avoiding a second generic click; rapid generic clicks retrigger the cached sound. Existing sound mute/volume/category settings still apply. Mii artwork differs by context, while tap reactions vary without immediate repeats; only the iPod Mii dances with music.
+
+## Icon arrangement, Terminal and Notes
+
+On phones and tablets, drag a desktop icon onto another grid position to rearrange the four shortcuts. A tap still opens the app; dragging does not. The order is saved locally and the grid adapts to rotation. Alt + arrow keys also rearrange a focused icon.
+
+All Terminal commands now use `cd -something`. Use `cd -help` or expand the command list to see and tap every available command. App commands include `cd -projects`, `cd -resume`, `cd -about`, `cd -findme`, `cd -notes`, `cd -ipod`, `cd -settings`, and `cd -sayhi`. Profiles use `cd -linkedin`, `cd -github`, `cd -instagram`, and `cd -devpost`; music uses `cd -play`, `cd -pause`, `cd -next`, and `cd -previous`. Utilities include `cd -apps`, `cd -home`, and `cd -clear`. History and Tab completion remain available.
+
+Notes is now a simple welcome to Azaan’s personal utopia, without the old terminal guide.

@@ -60,3 +60,11 @@ A transient blank image on a first reaction led to preloading each replacement b
 ## Touch/feedback follow-up
 
 The current pass adds shared click fallback/deduplication and rapid-click replay tests. The CSS/layout implementation includes phone/tablet/coarse-pointer support; these tests alone do not establish physical touchscreen or screen-reader coverage. Final production build and browser observations are recorded in PR #1.
+
+## Latest user override: icon dragging, CLI syntax and Notes
+
+Phone/tablet desktop shortcuts now support dragging into persistent grid order, while app windows remain full-screen on touch layouts. Dragging does not launch an app; tapping does. Icon order is validated before restoring and positions adapt to viewport changes. Keyboard rearrangement uses Alt + arrows.
+
+Every Terminal command now uses `cd -something`, including help, apps, profiles, playback and utilities. The command list lives inside Terminal. Notes no longer contains that guide; it is a simple welcome to Azaan’s personal utopia with the supplied Mii.
+
+All 17 behavior tests pass locally, including saved-order recovery and command parsing/routing. Final production/browser observations are recorded in PR #1; logic tests are not a physical-touch pass.
