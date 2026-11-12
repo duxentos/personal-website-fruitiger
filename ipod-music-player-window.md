@@ -659,6 +659,8 @@ The implementation is complete only when:
 - Mobile interactions work.
 - The application builds without TypeScript errors.
 
+  IMPROVEMENT: for track 1 and track 2 make the mii do a normal dance and track three make it do a jazzy rick astley dance 
+
 ## Final Objective
 
 Create a beautifully detailed, fully interactive iPod Classic that functions as the music player for my Frutiger Aero desktop portfolio.
