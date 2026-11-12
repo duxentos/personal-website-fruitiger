@@ -301,3 +301,86 @@ Do not introduce a backend unless there is a clear functional requirement.
 The final website should feel like **opening a beautifully designed Windows Vista-era computer from an optimistic vision of the future**, while presenting serious, technically credible engineering work.
 
 Prioritise functionality, technical credibility, visual consistency, accessibility, and performance equally.
+## 13. Expanded Colour System & Creative Freedom
+
+Do NOT restrict the website to blue, cyan, and green. Frutiger Aero embraces vibrant, optimistic, glossy colours.
+
+Use a diverse, cohesive palette inspired by Windows Vista, Windows Media Player, Apple Aqua, early iPod interfaces, and 2000s digital futurism.
+
+### Primary Colours — Aqua & Sky
+
+- Sky Blue: `#49BFFF`
+- Electric Cyan: `#00D9FF`
+- Ocean Blue: `#087CBF`
+- Ice Blue: `#C7F4FF`
+- Turquoise: `#00CDB8`
+- Deep Teal: `#008E9B`
+
+### Secondary Colours — Nature & Optimism
+
+- Lime Green: `#A8F542`
+- Fresh Grass: `#72CF65`
+- Emerald: `#22C982`
+- Mint: `#A5FFE1`
+- Sunshine Yellow: `#FFE45C`
+- Golden Yellow: `#FFCA28`
+
+### Accent Colours — Playful Y2K
+
+- Bubblegum Pink: `#FF85C8`
+- Hot Pink: `#FF4FA3`
+- Lavender: `#B49CFF`
+- Electric Purple: `#956BFF`
+- Coral: `#FF796B`
+- Tangerine: `#FF9B42`
+- Cherry Red: `#F44965`
+
+### Atmospheric Colours
+
+- Pearl White: `#F6FDFF`
+- Frosted Silver: `#DCECF5`
+- Cloud Grey: `#B6D2E0`
+- Midnight Navy: `#163A65`
+- Deep Indigo: `#303878`
+
+### Creative Colour Rules
+
+1. Experiment with multicoloured gradients rather than relying on blue everywhere.
+2. Give different projects their own accent colours.
+3. Use iridescent gradients that transition between cyan, pink, violet, and green.
+4. Allow glossy buttons to feature colourful highlights and reflections.
+5. Incorporate rainbow-like light refractions into glass panels.
+6. Use warm colours to balance predominantly cool backgrounds.
+7. Use luminous green, yellow, and orange for small UI indicators.
+8. Experiment with translucent coloured window borders.
+9. Use saturated colours selectively to maintain visual hierarchy.
+10. Make the interface feel cheerful and futuristic, never flat or corporate.
+
+### Suggested Gradient Combinations
+
+- Aqua Dream: `#00D9FF → #A5FFE1 → #49BFFF`
+- Digital Sunset: `#FF85C8 → #FFCA28 → #FF9B42`
+- Holographic Glass: `#B49CFF → #00D9FF → #FF85C8`
+- Nature OS: `#A8F542 → #72CF65 → #00CDB8`
+- Candy Chrome: `#FF4FA3 → #956BFF → #49BFFF`
+- Aurora: `#22C982 → #00D9FF → #956BFF`
+
+### Dynamic Colour System
+
+Implement a theme system using CSS custom properties so colours can be changed without modifying individual components.
+
+Allow different pages or project windows to have distinct accent colours while maintaining a consistent overall design.
+
+Optional: Add a small desktop-style theme selector with Aqua, Sunset, Aurora, Candy, and Nature themes.
+
+Theme selection should persist between visits using localStorage.
+
+### Important Design Principle
+
+**The palette is a creative toolkit, not a rigid specification.**
+
+Codex may introduce additional complementary colours and experiment with gradients, reflections, iridescence, and glass effects.
+
+Do not use every colour simultaneously. Balance vivid accents with calm surfaces, clear typography, and readable content.
+
+The objective is a colourful, nostalgic digital environment that feels like an optimistic vision of the internet in 2007–2012, not a conventional modern portfolio.
