@@ -1,5 +1,18 @@
 # Website change log
 
+## Cohesive Aqua desktop — 2026-11-12
+
+- Converted the scrolling page into a desktop while retaining welcome copy, notes, Mii, project search/filtering, project routes, and LinkedIn content.
+- Added File, Edit, View, Window, Help, and desktop menus with working application launch, active-window controls, search, clipboard, wallpaper selection, arrangement, and help commands.
+- Added a magnifying Dock with original skeuomorphic application icons and running/minimized indicators.
+- Centralized window state; added pointer and keyboard moving/resizing, active-window stacking, expand/restore, minimize, close, and Dock relaunch.
+- Mobile uses stacked windows and touch-sized controls rather than desktop dragging.
+- Reduced the Mii render to fit its stage and show the waving character in full.
+- Added original local Vista-inspired aurora and XP-inspired meadow vector wallpapers; these are new illustrations rather than Microsoft wallpaper files.
+- Kept NDot typography and the existing character asset references.
+- Validation: Vercel preview build result recorded in PR #1. Browser interaction verification is reported separately.
+
+
 ## Aqua window and character update — 2026-11-12
 
 Requested changes:
