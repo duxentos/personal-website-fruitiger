@@ -1,0 +1,29 @@
+{
+  "tracks": [
+    {
+      "id": "track-one",
+      "title": "track one",
+      "src": "/music/tracks/track-one.mp3"
+    },
+    {
+      "id": "track-two",
+      "title": "track two",
+      "src": "/music/tracks/track-two.mp3"
+    },
+    {
+      "id": "track-three",
+      "title": "track three",
+      "src": "/music/tracks/track-three.mp3"
+    }
+  ],
+  "playlists": [
+    {
+      "name": "all tracks",
+      "trackIds": [
+        "track-one",
+        "track-two",
+        "track-three"
+      ]
+    }
+  ]
+}

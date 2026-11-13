@@ -1,0 +1,86 @@
+[
+  {
+    "dest": "public/sounds/desktop/startup.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/confirmation_004.ogg"
+  },
+  {
+    "dest": "public/sounds/desktop/shutdown.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/close_004.ogg"
+  },
+  {
+    "dest": "public/sounds/desktop/icon-click.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/click_002.ogg"
+  },
+  {
+    "dest": "public/sounds/desktop/window-open.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/open_001.ogg"
+  },
+  {
+    "dest": "public/sounds/desktop/window-close.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/close_001.ogg"
+  },
+  {
+    "dest": "public/sounds/desktop/window-minimize.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/minimize_007.ogg"
+  },
+  {
+    "dest": "public/sounds/desktop/window-maximize.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/maximize_007.ogg"
+  },
+  {
+    "dest": "public/sounds/desktop/error.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/error_004.ogg"
+  },
+  {
+    "dest": "public/sounds/menu/menu-open.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/click_001.ogg"
+  },
+  {
+    "dest": "public/sounds/menu/menu-select.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/select_002.ogg"
+  },
+  {
+    "dest": "public/sounds/menu/menu-back.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/back_002.ogg"
+  },
+  {
+    "dest": "public/sounds/bubbles/bubble-pop.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/drop_001.ogg"
+  },
+  {
+    "dest": "public/sounds/bubbles/bubble-bounce.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/glass_002.ogg"
+  },
+  {
+    "dest": "public/sounds/ipod/wheel-click.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/tick_001.ogg"
+  },
+  {
+    "dest": "public/sounds/ipod/select.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/select_001.ogg"
+  },
+  {
+    "dest": "public/sounds/ipod/menu-back.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/back_001.ogg"
+  },
+  {
+    "dest": "public/sounds/ipod/track-change.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/switch_001.ogg"
+  },
+  {
+    "dest": "public/sounds/mii/greeting.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/confirmation_001.ogg"
+  },
+  {
+    "dest": "public/sounds/mii/interaction.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/question_003.ogg"
+  },
+  {
+    "dest": "public/sounds/notifications/notification.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/confirmation_002.ogg"
+  },
+  {
+    "dest": "public/sounds/notifications/success.ogg",
+    "url": "https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/confirmation_003.ogg"
+  }
+]
