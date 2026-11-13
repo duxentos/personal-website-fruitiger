@@ -33,3 +33,9 @@ Source: `Improvements #4`, blob `86ee27fbe4a77e7fa9428f72f7974103575b2ac4`. This
 Local TypeScript and production build pass, including all 39 behavior tests. New tests cover release without a final move, repeated placement, boundary clamping, maximized/touch drag-to-restore, scaled/offset pointer coordinates and edge resize anchors. Browser and Vercel results are recorded in PR #1 after deployment; model checks alone do not establish a complete native pointer pass.
 
 No new dependencies or required assets. Existing two-app entry, crossing-based startup, blog/media placeholders, fonts/casing, Notes, music and sound effects remain integrated. Run on Node.js 22.18+: `npm install`, `npm run dev`; verify with `npm run lint` and `npm run build`. Production/DNS publication is separate from this preview work.
+
+## Deployed preview evidence
+
+Code commit `f635a7e502fe9467b5ba0e6db6c567d9374d04e3` deployed READY as `dpl_YhmRJANEKVsJJBn7euoHEtRokJdd`. Vercel independently passed all 39 tests, TypeScript and Vite. Authenticated homepage returned HTTP 200 with current bundle references.
+
+Native Chrome showed the new Aqua Dock, app launching, enlarged/floating Notes icon, hover/focus label and running indicator. Notes opened through the Dock and its title bar accepted focus. Window position changes were visible during subsequent interaction. Concurrent user activity changed Chrome between actions, so these observations are not presented as an isolated pointer-drag or complete touch/console pass. The six gesture-model tests provide repeatable coverage for release placement, repeated drags, restore, bounds, scaling and resize anchors.
