@@ -1,5 +1,12 @@
 # Website change log
 
+## Improvements #4 — 2026-11-13
+
+- Adapted the supplied magnetic Dock with existing Motion, Aqua colours/icons, spring sizing/lift, labels, running state, touch and reduced-motion support.
+- Reworked dragging with global pointer tracking, drag-to-restore for maximized windows, scaled coordinate conversion, final-release placement and geometry acknowledgment before preview cleanup.
+- Added six gesture-model regressions. All 39 tests, TypeScript and Vite pass locally. No new dependencies or assets.
+- See `IMPROVEMENTS_4_REVIEW.md` for the file map, validation and browser limits.
+
 ## Improvements #3 — 2026-11-13
 
 - Applied the nine-item brief: smaller about/projects-only entry and reboot, wider Mii waving framing, startup tied to 1.25 measured crossings, compact icon spacing, corrected gesture completion, blog/photo/MP4 placeholders, two type roles and lowercase small UI.

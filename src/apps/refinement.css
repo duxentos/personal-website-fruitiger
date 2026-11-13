@@ -80,3 +80,26 @@ h1,h2,.boot-logo,.menu-group>.desktop-logo,.terminal-icon,.book-icon{font-family
 .finder-app,.ipod-status,.ipod-menu,.ipod-wordmark,.ipod-home,.terminal-app,.technology-list,.blog-index,.media-print figcaption{text-transform:lowercase}
 /* Native form controls reset inherited casing, so apply the UI rule directly. */
 .os-desktop *{text-transform:lowercase!important}
+/* Geometry uses one absolute preview frame; it is acknowledged only after state commits. */
+.aqua-window,.aqua-window.window-zoomed{left:var(--gesture-x,var(--window-x))!important;top:var(--gesture-y,var(--window-y))!important;width:var(--gesture-w,var(--window-w))!important;height:var(--gesture-h,var(--window-h))!important;transform:none!important}
+.window-bar{touch-action:none;user-select:none;-webkit-user-select:none}.window-gesturing .window-bar{cursor:grabbing}
+/* Improvements #4 spring magnetic Dock, retaining the established Aqua palette and icons. */
+.desktop-dock.magnetic-dock{position:absolute;bottom:11px;left:50%;right:auto;top:auto;transform:translateX(-50%);display:inline-flex;align-items:flex-end;justify-content:center;gap:8px;padding:12px 16px 16px;max-width:calc(100% - 16px);overflow:visible;border-radius:20px;isolation:isolate}
+.magnetic-dock:before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(#ffffff48,#e2f7ff16 45%,#8dbfd62e);pointer-events:none;z-index:-1}
+.magnetic-dock-item{position:relative;display:flex;align-items:center;justify-content:center;flex:none;min-width:40px;min-height:40px;padding:0;border:0;border-radius:14px;background:none;cursor:pointer;touch-action:manipulation;transform-origin:center bottom;outline-offset:5px}
+.magnetic-dock-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:14px;box-shadow:0 3px 6px #1e52624a,inset 0 1px #ffffffa6}
+.magnetic-dock-item .app-icon{width:100%!important;height:100%!important;position:relative;transform:none!important;transition:none;will-change:auto;margin:0}
+.magnetic-dock-item.is-active .magnetic-dock-art{outline:1px solid #edffffaa;box-shadow:0 4px 10px #195a7c4d,inset 0 1px #fff}
+.magnetic-shine,.magnetic-glow{position:absolute;inset:0;pointer-events:none;border-radius:inherit}.magnetic-shine{background:linear-gradient(135deg,#ffffff70,transparent 52%)}.magnetic-glow{box-shadow:inset 0 0 12px #d7ffff8c}
+.magnetic-label{position:absolute;bottom:calc(100% + 14px);left:50%;translate:-50% 0;padding:6px 10px;border:1px solid #b8deed;border-radius:7px;background:linear-gradient(#f8fffff5,#d4eff9ee);box-shadow:0 4px 12px #164c6c33,inset 0 1px #fff;color:#315f77;font-size:11px;line-height:1.2;white-space:nowrap;pointer-events:none;z-index:2}
+.magnetic-label:not(.touch-label):after{content:'';position:absolute;left:calc(50% - 4px);bottom:-5px;width:7px;height:7px;rotate:45deg;background:#d4eff9;border-right:1px solid #b8deed;border-bottom:1px solid #b8deed}
+.magnetic-running-dot{position:absolute;bottom:-9px;left:calc(50% - 2.5px);width:5px;height:5px;border-radius:50%;background:#dbfdff;box-shadow:0 0 5px #c1fdffa6;pointer-events:none}.magnetic-running-dot.active{background:#fff;box-shadow:0 0 6px #fff}
+.magnetic-badge{position:absolute;right:-4px;top:-5px;min-width:18px;padding:2px 4px;border:1px solid #fff;border-radius:12px;background:linear-gradient(#ffb2a2,#da554d);box-shadow:0 1px 3px #294c6666;color:white;font-size:10px;line-height:1.2;z-index:3}
+.magnetic-dock.magnetic-solid{background:linear-gradient(#e9f8ff,#9fc7db);backdrop-filter:none}.magnetic-dock.magnetic-transparent{background:none;border:0;box-shadow:none;backdrop-filter:none}.magnetic-transparent:before{display:none}
+.magnetic-dock[data-position=top]{top:42px;bottom:auto}.magnetic-dock[data-position=left],.magnetic-dock[data-position=right]{flex-direction:column;top:50%;bottom:auto;left:12px;transform:translateY(-50%)}.magnetic-dock[data-position=right]{left:auto;right:12px}
+.magnetic-dock[data-position=left] .magnetic-label{left:calc(100% + 14px);bottom:50%;translate:0 50%}.magnetic-dock[data-position=right] .magnetic-label{right:calc(100% + 14px);left:auto;bottom:50%;translate:0 50%}
+.magnetic-dock[data-touch=true]{position:fixed;bottom:calc(8px + env(safe-area-inset-bottom));gap:8px;padding:10px 10px 26px;border-radius:16px}.magnetic-dock[data-touch=true] .magnetic-dock-item{min-width:44px;min-height:44px}.magnetic-label.touch-label{top:calc(100% + 7px);bottom:auto;padding:0;border:0;background:none;box-shadow:none;color:#ecfcff;text-shadow:0 1px 2px #244e66;font-size:8px}.magnetic-dock[data-touch=true] .magnetic-running-dot{bottom:-19px;width:4px;height:4px}
+@media(max-width:350px){.magnetic-dock[data-touch=true]{gap:6px;padding-inline:8px}}
+@media(prefers-reduced-motion:reduce){.magnetic-dock *{transition:none!important}}
+
+.magnetic-dock-art{position:relative;inset:auto;flex:none;transform-origin:center}
