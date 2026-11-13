@@ -1,4 +1,4 @@
-export type Story={id:string;title:string;subtitle:string;year:string;cover:'circuits'|'care'|'software'|'journey';draft:boolean;paragraphs:string[];prompt?:string};
+export type Story={id:string;title:string;subtitle:string;year:string;cover:'circuits'|'care'|'software'|'journey';draft:boolean;image?:{src:string;alt:string};paragraphs:string[];prompt?:string};
 // Edit chapters here. Facts are from the supplied résumé; reflections remain marked drafts.
 export const stories:Story[]=[
  {id:'why-engineering',title:'Why engineering?',subtitle:'Making ideas useful',year:'A beginning',cover:'circuits',draft:true,paragraphs:[

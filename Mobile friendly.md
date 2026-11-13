@@ -80,3 +80,4 @@ Navigation should support:
 - Experience
 - Contact
 
+add icons for devpost linkedin github insta retro style and then also make the mii appear in more things provided in the gif.

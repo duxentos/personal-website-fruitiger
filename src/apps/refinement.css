@@ -19,3 +19,7 @@
 .motion-reduced .boot-refined,.boot-reduced.boot-refined{animation:none!important;transition:none!important}
 
 .plaza-character-facing{inset:0;width:100%;height:100%;transform:scaleX(var(--facing,1));aspect-ratio:auto}.plaza-character svg{width:100%;height:100%}.plaza-eyes{transform-box:fill-box;transform-origin:center}
+
+.story-photo{display:block;width:100%;max-height:300px;object-fit:cover}.motion-reduced .story-page{animation:none;transition:none}
+/* The iPod floats without an outer panel; window controls remain reachable. */
+.ipod-window.aqua-window{background:transparent;border:0;box-shadow:none;border-radius:0}.ipod-window .window-bar{background:transparent;border:0;box-shadow:none}.ipod-window .window-content{background:transparent}.ipod-window .window-name{color:#eafaff;text-shadow:0 1px 3px #254a68}.ipod-window .ipod-app{background:transparent}

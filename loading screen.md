@@ -592,4 +592,3 @@ here are the gifs provided <img width="1000" height="480" alt="the-scenic-route"
 <img width="1000" height="480" alt="a-little-hop" src="https://github.com/user-attachments/assets/1011e8a3-93bb-44be-97e6-ae993bc75366" />
 
 
-

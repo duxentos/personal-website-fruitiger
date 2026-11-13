@@ -253,4 +253,3 @@ If a component looks generic, redesign it rather than applying more gradients or
 The final result should feel like a distinctive, handcrafted Frutiger Aero portfolio created by an engineer with a strong interest in both software and interface design.
 
 <img width="762" height="390" alt="image" src="https://github.com/user-attachments/assets/3e304454-23d7-4679-bc13-4036937afe74" />
-

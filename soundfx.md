@@ -509,4 +509,3 @@ Create a polished, nostalgic desktop sound system that makes my Frutiger Aero po
 Every click, window interaction, bubble pop and iPod navigation action should have deliberate, subtle audio feedback.
 
 **The sound design must enhance the experience without becoming distracting.**
-

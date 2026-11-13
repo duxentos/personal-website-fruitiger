@@ -385,4 +385,3 @@ Codex may introduce additional complementary colours and experiment with gradien
 Do not use every colour simultaneously. Balance vivid accents with calm surfaces, clear typography, and readable content.
 
 The objective is a colourful, nostalgic digital environment that feels like an optimistic vision of the internet in 2007–2012, not a conventional modern portfolio.
-

@@ -44,3 +44,12 @@ Story: open the portfolio → boot/readiness → restored desktop → independen
 - Production publication and external DNS changes have not been performed. The prior custom-domain/Vercel production diagnosis remains in PR #1.
 
 Run with `npm install` then `npm run dev` on Node.js 22.18+; run checks with `npm run lint` and `npm run build`.
+
+## Preview verification — completed
+
+- Implementation commit `71fb93d791cc5de69177571d65598619fccd609e` deployed READY as `dpl_jNerKfRFQyB8ooX2VLVVFZP9Zr5L`. Vercel independently installed dependencies and passed all 27 tests, TypeScript and the Vite build.
+- Authenticated HTTP requests returned 200 for the homepage, `/projects/clintempo` deep route, three-track music library and the new plaza PNG. PNG content type and length match the supplied 2,430,355-byte asset.
+- Browser interaction and console review could not run: CUA reports the browser access host unavailable; both Chrome app attempts returned `cgWindowNotFound`. No visual or pointer-interaction pass is claimed. Automated model checks do not replace that missing browser coverage.
+- Final small follow-up adds optional chapter photos and honors the explicit reduced-motion setting for story transitions.
+
+Synced author markdown from main `26b735b7e102a69d801684fdad41cd0ef69117be` into the implementation branch while retaining the implementation README. The latest iPod feedback now removes its outer panel while preserving draggable title controls and close/minimize/expand. Existing dance and three tracks remain. This merge is into the working branch only.
