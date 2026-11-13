@@ -78,3 +78,5 @@ h1,h2,.boot-logo,.menu-group>.desktop-logo,.terminal-icon,.book-icon{font-family
 @media(prefers-reduced-motion:reduce){.media-print{animation:none}.blog-paper{animation:none}}
 .motion-reduced .media-print{animation:none}
 .finder-app,.ipod-status,.ipod-menu,.ipod-wordmark,.ipod-home,.terminal-app,.technology-list,.blog-index,.media-print figcaption{text-transform:lowercase}
+/* Native form controls reset inherited casing, so apply the UI rule directly. */
+.os-desktop *{text-transform:lowercase!important}

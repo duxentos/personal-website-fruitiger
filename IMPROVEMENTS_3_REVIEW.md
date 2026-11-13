@@ -29,3 +29,7 @@ Local TypeScript passes. The behavior suite includes 33 checks covering the meas
 Local writes were briefly interrupted by a full disk. Only the task's generated build output and temporary Swift module cache were removed; source writes and validation then resumed. No user content was deleted.
 
 Run on Node.js 22.18+: `npm install`, `npm run dev`; verify with `npm run lint` and `npm run build`. Production/DNS publication is separate from this preview update.
+
+## Preview observations
+
+The first preview deployed READY and independently passed all 33 tests, TypeScript and Vite. Native Chrome showed the supplied crossing clip and automatic desktop entry, with only about me/projects open, compact launchers and three floating media placeholders. Visual QA found native controls resetting inherited lowercase; the rule was applied directly to desktop UI descendants. The native pointer-drag automation timed out and user activity also changed the browser state, so a complete pointer/gesture pass is not claimed.
