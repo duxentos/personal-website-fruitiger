@@ -105,7 +105,7 @@ h1,h2,.boot-logo,.menu-group>.desktop-logo,.terminal-icon,.book-icon{font-family
 .magnetic-dock-art{position:relative;inset:auto;flex:none;transform-origin:center}
 
 /* Improvement #5: one quiet, readable annotation per text app or active post. */
-.annotated-text{position:relative;display:inline-block;white-space:nowrap;isolation:isolate;--annotation-color:#1887a5}
+.annotated-text{position:relative;display:inline-block;line-height:1;white-space:nowrap;isolation:isolate;--annotation-color:#1887a5}
 .annotated-text,.annotated-text *{font-family:inherit!important}
 .annotation-word{position:relative;z-index:1}
 .annotation-mark{position:absolute;left:-4%;top:-.24em;width:108%;height:1.7em;overflow:visible;pointer-events:none;z-index:0;fill:none;stroke:var(--annotation-color);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
