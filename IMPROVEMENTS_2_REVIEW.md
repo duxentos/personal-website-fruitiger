@@ -41,3 +41,19 @@ Run: `npm install`, `npm run dev`. Check: `npm run lint`, `npm run build` (Node.
 ## Browser observations and follow-up
 
 Native Chrome became available for this revision. The preview rendered the plaza desktop wallpaper, four first-visit windows, glass Stories chapters and larger About Me Mii. The Mii app opened with only the supplied image. Visual QA caught and corrected a pre-existing container query that enlarged traffic lights on narrow desktop windows, and removed excess zoom from the Mii-only GIF so it fits fully in its window. Full pointer/mobile and console coverage remains separate from these observations.
+
+## Final preview evidence
+
+Code commit `afbe4beb4d68471b34d2a3bfdaf1194703b4fd79` deployed READY as `dpl_4EkqYHopf2U7BefTFM4mnq6ffEVK`. Vercel independently passed all 32 tests, TypeScript and Vite. Authenticated homepage request returned HTTP 200 and the current bundle entry point.
+
+Observed in native Chrome:
+
+- Startup rendered, then entered the four-window desktop automatically.
+- Plaza wallpaper, glass/paper Stories and the larger About Me avatar rendered.
+- The corrected Mii-only app displayed the supplied full character without clipping; desktop traffic lights matched the other apps.
+- iPod rendered in an opaque Aqua window with matching controls and no Mii. Playback time advanced.
+- Terminal showed no Run button; entering `cd -about me` and pressing Enter returned `Opened About Me.` This was exercised before the final CSS-only correction; its terminal code was unchanged.
+- iPhone SE emulation at 375×667 showed the compact menu, six Dock controls, small gel traffic lights with large hit areas, an active iPod window and the responsive Stories chapter strip/paper layout. This is visual/responsive coverage, not a full mobile drag/drop gesture pass.
+- DevTools Console reported `0 messages in console`. Device emulation and DevTools were closed afterward, leaving the preview in desktop view.
+
+The latest preview source is unchanged by this documentation-only record. Production/DNS publication remains pending.
