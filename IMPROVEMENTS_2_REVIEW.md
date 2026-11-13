@@ -37,3 +37,7 @@ Source: `Improvements #2` on main, blob `01e5707bb1d17fb8774b6b7644e58cd68234f50
 No new package or required asset. The supplied plaza image and Mii artwork are reused. Helvetica Neue is requested from the device font stack; Helvetica/Arial is used on devices without it. Existing missing biography/project media remain explicitly labeled. Production publication/DNS changes are outside this preview update.
 
 Run: `npm install`, `npm run dev`. Check: `npm run lint`, `npm run build` (Node.js 22.18+).
+
+## Browser observations and follow-up
+
+Native Chrome became available for this revision. The preview rendered the plaza desktop wallpaper, four first-visit windows, glass Stories chapters and larger About Me Mii. The Mii app opened with only the supplied image. Visual QA caught and corrected a pre-existing container query that enlarged traffic lights on narrow desktop windows, and removed excess zoom from the Mii-only GIF so it fits fully in its window. Full pointer/mobile and console coverage remains separate from these observations.
