@@ -1,10 +1,10 @@
 import {useCallback, useEffect, useRef, useState, type ReactNode} from 'react';
 import {useReducedMotion} from 'motion/react';
 import {useDesktop} from '../Desktop';
-import {miiAnimations, selectAnimation, type MiiAnimation} from '../../data/miiAnimations';
+import {miiAnimations} from '../../data/miiAnimations';
 import {playSound} from '../../audio/SoundEngine';
 import {wallpapers} from '../../data/wallpapers';
-import {BOOT_DURATION_MS,BOOT_ASSET_TIMEOUT_MS,BOOT_EXIT_MS,canEnterDesktop} from './bootTiming.ts';
+import {BOOT_ASSET_TIMEOUT_MS,BOOT_FALLBACK_MS,crossingDuration,canEnterDesktop} from './bootTiming.ts';
 
 export function BootProvider({children}: {children: ReactNode}) {
   const {preferences} = useDesktop();
@@ -39,161 +39,44 @@ export function BootProvider({children}: {children: ReactNode}) {
   </>;
 }
 
-function loadImage(src: string) {
-  return new Promise<void>((resolve, reject) => {
-    const image = new Image();
-    const timer = setTimeout(() => {
-      image.onload = null;
-      image.onerror = null;
-      reject(new Error('image timeout'));
-    }, BOOT_ASSET_TIMEOUT_MS);
-    image.onload = () => {clearTimeout(timer); resolve();};
-    image.onerror = () => {clearTimeout(timer); reject(new Error('image unavailable'));};
-    image.src = src;
+function loadImage(src:string){return new Promise<void>((resolve,reject)=>{const img=new Image();const timeout=setTimeout(()=>{img.onload=img.onerror=null;reject(new Error('asset fallback'))},BOOT_ASSET_TIMEOUT_MS);img.onload=()=>{clearTimeout(timeout);resolve()};img.onerror=()=>{clearTimeout(timeout);reject(new Error('asset missing'))};img.src=src;});}
+function BootScreen({onDone}:{onDone:()=>void}){
+ const {preferences:p}=useDesktop();const systemReduce=useReducedMotion();const reduced=Boolean(systemReduce||p.reducedMotion);
+ const [phase,setPhase]=useState<'loading'|'ready'|'fallback'>('loading');
+ const [imageReady,setImageReady]=useState(false),[failed,setFailed]=useState(false),[crossed,setCrossed]=useState(false);
+ const [hidden,setHidden]=useState(document.hidden),[playKey,setPlayKey]=useState(()=>Date.now());
+ const done=useRef(false),dialog=useRef<HTMLDivElement>(null),finishRef=useRef(onDone);
+ finishRef.current=onDone;
+ const finish=useCallback(()=>{if(done.current)return;done.current=true;finishRef.current()},[]);
+ const clip=miiAnimations.find(item=>item.id==='scenic-route')!;
+ useEffect(()=>{
+  const update=()=>{setHidden(document.hidden);if(!document.hidden){setImageReady(false);setCrossed(false);setPlayKey(Date.now())}};
+  document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update);
+ },[]);
+ useEffect(()=>{
+  let cancelled=false;let fontTimer:ReturnType<typeof setTimeout>;
+  const fonts=Promise.race([document.fonts.ready,new Promise((_,reject)=>{fontTimer=setTimeout(()=>reject(new Error('font fallback')),BOOT_ASSET_TIMEOUT_MS)})]);
+  Promise.allSettled([fonts,loadImage(wallpapers[p.wallpaper]),loadImage('/mii-still.png')]).then(results=>{
+   clearTimeout(fontTimer);if(cancelled)return;
+   if(results[1].status==='rejected')document.body.dataset.wallpaperFallback='true';
+   setPhase(results.some(result=>result.status==='rejected')?'fallback':'ready');
   });
-}
-
-function BootScreen({onDone}: {onDone: () => void}) {
-  const {preferences: p} = useDesktop();
-  const systemReduce = useReducedMotion();
-  const reduced = Boolean(systemReduce || p.reducedMotion);
-  const [last, setLast] = useState(() => {
-    let previous = '';
-    try {previous = sessionStorage.getItem('mii-last-boot') || '';} catch {}
-    return selectAnimation(miiAnimations.filter(a => a.category === 'locomotion'), previous, {}, Date.now()) || miiAnimations[0];
-  });
-  const [minimumElapsed,setMinimumElapsed]=useState(false);
-  const [leaving,setLeaving]=useState(false);
-  const [phase, setPhase] = useState<'loading' | 'ready' | 'error'>('loading');
-  const [state, setState] = useState<'running' | 'reacting'>('running');
-  const [imageReady, setImageReady] = useState(false);
-  const [hidden, setHidden] = useState(document.hidden);
-  const [cycle, setCycle] = useState(0);
-  const dialog = useRef<HTMLDivElement>(null);
-  const seen = useRef<Record<string, number>>({});
-  const failed = useRef(new Set<string>());
-  const pendingReaction = useRef(false);
-  const transition = useRef(0);
-  const mounted = useRef(true);
-  const done = useRef(false);
-  const finish = useCallback(() => {
-    if (done.current) return;
-    done.current = true;
-    transition.current += 1;
-    try {sessionStorage.setItem('mii-last-boot', last.id);} catch {}
-    onDone();
-  }, [last.id, onDone]);
-  const finishRef = useRef(finish);
-  useEffect(() => {finishRef.current = finish;}, [finish]);
-
-  useEffect(() => {
-    mounted.current = true;
-    return () => {mounted.current = false; transition.current += 1;};
-  }, []);
-
-  // 3.5-second presentation, with critical readiness or bounded fallback.
-  useEffect(() => {
-    const close = setTimeout(() => setMinimumElapsed(true), BOOT_DURATION_MS);
-    return () => clearTimeout(close);
-  }, []);
-
-  useEffect(()=>{
-    if(!canEnterDesktop(minimumElapsed,phase!=='loading'))return;
-    setLeaving(true);
-    const timer=setTimeout(()=>finishRef.current(),reduced?0:BOOT_EXIT_MS);
-    return()=>clearTimeout(timer);
-  },[minimumElapsed,phase,reduced]);
-
-  useEffect(() => {
-    let cancelled=false;
-    const wallpaper=wallpapers[p.wallpaper];
-    if(!reduced)loadImage(last.src).then(()=>{if(!cancelled)setImageReady(true)}).catch(()=>{});
-    let fontTimer:ReturnType<typeof setTimeout>;
-    const fonts=Promise.race([document.fonts.ready,new Promise((_,reject)=>{fontTimer=setTimeout(()=>reject(new Error('font fallback')),BOOT_ASSET_TIMEOUT_MS)})]);
-    Promise.allSettled([fonts,loadImage(wallpaper),loadImage('/mii-still.png')]).then(results=>{
-      clearTimeout(fontTimer);
-      if(cancelled)return;
-      if(results[1].status==='rejected')document.body.dataset.wallpaperFallback='true';
-      setPhase(results.some(result=>result.status==='rejected')?'error':'ready');
-    });
-    return()=>{cancelled=true;clearTimeout(fontTimer)};
-  }, []);
-
-  const showAnimation = useCallback(async (next: MiiAnimation, nextState: 'running' | 'reacting') => {
-    const token = ++transition.current;
-    try {
-      await loadImage(next.src);
-      if (done.current || !mounted.current || token !== transition.current) return false;
-      seen.current[next.id] = Date.now();
-      setLast(next);
-      setImageReady(true);
-      setState(nextState);
-      return true;
-    } catch {
-      failed.current.add(next.id);
-      return false;
-    } finally {
-      if (!done.current && mounted.current && token === transition.current) setCycle(n => n + 1);
-    }
-  }, []);
-
-  useEffect(() => {
-    const update = () => setHidden(document.hidden);
-    document.addEventListener('visibilitychange', update);
-    return () => document.removeEventListener('visibilitychange', update);
-  }, []);
-
-  useEffect(() => {
-    if (reduced || hidden || !imageReady || (!p.randomMii && state !== 'reacting')) return;
-    const timer = setTimeout(() => {
-      if (pendingReaction.current) {setCycle(n => n + 1); return;}
-      const next = selectAnimation(miiAnimations.filter(a => a.category === 'locomotion' && !failed.current.has(a.id)), last.id, seen.current, Date.now());
-      if (next) void showAnimation(next, 'running');
-      else setState('running');
-    }, last.id === 'wave' ? last.durationMs * 5 : last.durationMs);
-    return () => clearTimeout(timer);
-  }, [last, state, hidden, reduced, imageReady, p.randomMii, cycle, showAnimation]);
-
-  async function react() {
-    if (reduced || !p.miiInteractions || state === 'reacting' || pendingReaction.current) return;
-    const reaction = selectAnimation(miiAnimations.filter(a => (a.category === 'greeting' || a.category === 'playful') && !failed.current.has(a.id)), last.id, seen.current, Date.now());
-    if (!reaction) return;
-    pendingReaction.current = true;
-    try {
-      const played = await showAnimation(reaction, 'reacting');
-      if (played && !done.current && p.miiSounds) playSound('mii.interaction');
-    } finally {pendingReaction.current = false;}
-  }
-
-  const animated = !reduced && !hidden && imageReady;
-  return <div ref={dialog} className={`boot-overlay boot-refined ${reduced ? 'boot-reduced' : ''} ${leaving?'boot-leaving':''}`} 
-    role="dialog" aria-modal="true" aria-label="starting desktop" onKeyDown={event => {
-      if (event.key === 'Escape') {event.preventDefault(); finish();}
-      if (event.key !== 'Tab') return;
-      const buttons = dialog.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)');
-      if (!buttons?.length) return;
-      const first = buttons[0], final = buttons[buttons.length - 1];
-      if (event.shiftKey && document.activeElement === first) {event.preventDefault(); final.focus();}
-      else if (!event.shiftKey && document.activeElement === final) {event.preventDefault(); first.focus();}
-    }}>
-    <div className="boot-ambient" aria-hidden="true"><i/><i/><i/></div>
-    <main className="boot-world">
-      <div className="boot-logo">azaanOS<span>your own little corner of the internet</span></div>
-      <div className="boot-stage">
-        <div className="boot-horizon" aria-hidden="true"/>
-        <button className={`boot-character ${animated && last.fullStage ? 'full-stage' : ''}`}
-          disabled={!p.miiInteractions || reduced} onClick={react} aria-label="greet the startup Mii">
-          <img key={animated ? last.id : 'still'} src={animated ? last.src : '/mii-still.png'}
-            alt="Azaan's Mii" onError={() => {failed.current.add(last.id); setImageReady(false);}}/>
-        </button>
-      </div>
-      <div className="boot-status">
-        <div className="boot-dots" aria-hidden="true"><i/><i/><i/></div>
-        <h1>welcome to my desktop</h1>
-        <p role="status">{phase==='loading'?(minimumElapsed?'finishing the desktop artwork…':'preparing the artwork…'):phase==='error'?'ready with available artwork':minimumElapsed?'welcome!':'everything is ready. see you inside.'}</p>
-        <button autoFocus className="aqua-button boot-skip" onClick={finish}>skip intro</button>
-      </div>
-    </main>
-    <span className="boot-edition">personal edition · azaan khan</span>
-  </div>;
+  return()=>{cancelled=true;clearTimeout(fontTimer)};
+ },[]);
+ useEffect(()=>{
+  if(imageReady||hidden)return;const timeout=setTimeout(()=>{setFailed(true);setImageReady(true)},BOOT_ASSET_TIMEOUT_MS);return()=>clearTimeout(timeout);
+ },[imageReady,hidden,playKey]);
+ useEffect(()=>{
+  if(!imageReady||hidden)return;
+  let frame=0;const started=performance.now(),duration=reduced||failed?BOOT_FALLBACK_MS:crossingDuration(clip.durationMs);
+  const tick=(now:number)=>{if(now-started>=duration){setCrossed(true);return;}frame=requestAnimationFrame(tick)};
+  frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame);
+ },[imageReady,hidden,reduced,failed,clip.durationMs,playKey]);
+ useEffect(()=>{if(canEnterDesktop(crossed,phase!=='loading'))finish()},[crossed,phase,finish]);
+ const animated=!reduced&&!hidden&&!failed;
+ return <div ref={dialog} className={`boot-overlay boot-refined ${reduced?'boot-reduced':''}`} role="dialog" aria-modal="true" aria-label="starting desktop" onKeyDown={event=>{
+  if(event.key==='Escape'){event.preventDefault();finish()}
+  if(event.key!=='Tab')return;const buttons=dialog.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)');if(!buttons?.length)return;
+  const first=buttons[0],last=buttons[buttons.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+ }}><div className="boot-ambient" aria-hidden="true"><i/><i/><i/></div><main className="boot-world"><div className="boot-logo">azaanos<span>your own little corner of the internet</span></div><div className="boot-stage"><div className="boot-horizon" aria-hidden="true"/><button className={`boot-character ${animated?'full-stage':''}`} disabled={!p.miiInteractions||reduced} onClick={()=>{if(p.miiSounds)playSound('mii.interaction')}} aria-label="greet the startup mii"><img key={playKey} src={animated?`/mii-crossing.gif?play=${playKey}`:'/mii-still.png'} alt="azaan's mii crossing the screen" onLoad={()=>setImageReady(true)} onError={()=>{setFailed(true);setImageReady(true)}}/></button></div><div className="boot-status"><div className="boot-dots" aria-hidden="true"><i/><i/><i/></div><h1>welcome to my desktop</h1><p role="status">{phase==='loading'?'getting everything ready…':reduced||failed?'see you inside.':'just making my way over…'}</p><button autoFocus className="aqua-button boot-skip" onClick={finish}>skip intro</button></div></main><span className="boot-edition">personal edition · azaan khan</span></div>;
 }

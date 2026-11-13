@@ -1,5 +1,12 @@
 # Website change log
 
+## Improvements #3 — 2026-11-13
+
+- Applied the nine-item brief: smaller about/projects-only entry and reboot, wider Mii waving framing, startup tied to 1.25 measured crossings, compact icon spacing, corrected gesture completion, blog/photo/MP4 placeholders, two type roles and lowercase small UI.
+- Added the original supplied crossing GIF locally and retired the previous Stories chapter data in favor of unpublished blog placeholders.
+- Geometry remains saved; older four-window sessions migrate to the new launch layout.
+- No new dependencies. See `IMPROVEMENTS_3_REVIEW.md` for the file map, timing interpretation, tests and preview evidence.
+
 ## Improvements #2 — 2026-11-13
 
 - Applied all nine items from `Improvements #2` (blob `01e5707bb1d17fb8774b6b7644e58cd68234f508`).

@@ -20,6 +20,7 @@ import {BootProvider} from './components/boot/BootScreen';
 import {MiiCompanion} from './components/MiiCompanion';
 import './components/boot/boot.css';
 import {SocialIcon} from './components/SocialIcon';
+import {ProjectMedia} from './components/ProjectMedia';
 import {DesktopShortcuts} from './components/DesktopShortcuts';
 import {profile} from './profile';
 import './style.css';
@@ -28,7 +29,7 @@ function App(){const d=useDesktop();const[path,setPath]=useState(location.pathna
  useEffect(()=>{const pop=()=>{setPath(location.pathname);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')}};window.addEventListener('popstate',pop);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')};return()=>window.removeEventListener('popstate',pop)},[]);
  function openProject(id:string){const url='/projects/'+id;history.pushState({},'',url);setPath(url);d.open('detail')}
  const selected=projects.find(p=>path===`/projects/${p.id}`);
- return <div style={{'--accent':d.preferences.accent} as CSSProperties} className={`os-desktop wallpaper-${d.wallpaper} theme-${d.preferences.theme} ${d.preferences.reducedMotion?'motion-reduced':''}`}><MenuBar/><BubbleLayer/><div className="wallpaper-art" aria-hidden="true"><span/><span/><span/><span/></div><main className="desktop-workspace" aria-label="azaan's desktop"><DesktopShortcuts/>
+ return <div style={{'--accent':d.preferences.accent} as CSSProperties} className={`os-desktop wallpaper-${d.wallpaper} theme-${d.preferences.theme} ${d.preferences.reducedMotion?'motion-reduced':''}`}><MenuBar/><BubbleLayer/><div className="wallpaper-art" aria-hidden="true"><span/><span/><span/><span/></div><main className="desktop-workspace" aria-label="azaan's desktop"><DesktopShortcuts/><ProjectMedia/>
  <AquaWindow id="welcome" className="welcome-app"><div className="welcome-content"><MiiCompanion compact context="about"/><span className="micro">personal desktop / azaan khan</span><h1>azaan khan<span>.</span></h1><p className="hero-sub">computer engineering @ university of waterloo</p><p className="hero-description">a home for projects, experiments, and things i'm learning along the way.</p><div className="hero-actions"><button className="aqua-button" onClick={()=>d.open('projects')}><FolderOpen size={15}/> explore my projects</button><button className="plain-link" onClick={()=>d.open('connect')}>want to find me? <ArrowUpRight size={15}/></button></div><div className="welcome-status"><span/> a work in progress <small>make yourself at home.</small></div></div></AquaWindow>
  <AquaWindow id="notes" className="notes-app"><NotesApp/></AquaWindow>
  <AquaWindow id="projects" className="projects-app"><ProjectExplorer onOpen={openProject}/></AquaWindow>

@@ -16,20 +16,23 @@ export function AquaWindow({id, children, className = ''}: Props) {
   const section = useRef<HTMLElement>(null);
   const gesture = useRef<Gesture | null>(null);
   const lastDrag = useRef(-Infinity);
+  const pendingCommit=useRef(false);
+  const measuredWorkspace=useRef<WorkspaceSize&{touch:boolean}|null>(null);
+  const clearPreview=()=>{for(const key of ['--drag-x','--drag-y','--drag-w','--drag-h'])section.current?.style.removeProperty(key);section.current?.classList.remove('window-gesturing');};
+  useLayoutEffect(()=>{if(pendingCommit.current){pendingCommit.current=false;clearPreview()}});
   const [workspace, setWorkspace] = useState(() => ({w: innerWidth, h: Math.max(56, innerHeight - 142), touch: isTouchDesktop()}));
   const frame = fitWindowFrame(win, workspace, workspace.touch);
 
   useLayoutEffect(() => {
-    if (win.mode !== 'open') return;
+    if (win.mode !== 'open') {gesture.current=null;pendingCommit.current=false;clearPreview();return;}
     const parent = section.current?.parentElement;
     if (!parent) return;
     const media = matchMedia(touchDesktopQuery);
     const measure = () => {
-      gesture.current = null;
-      section.current?.style.removeProperty('--drag-x');
-      section.current?.style.removeProperty('--drag-y');
-      section.current?.style.removeProperty('--drag-w');section.current?.style.removeProperty('--drag-h');
       const next = {w: parent.clientWidth, h: parent.clientHeight, touch: media.matches};
+      const previous=measuredWorkspace.current;
+      if(previous&&previous.w===next.w&&previous.h===next.h&&previous.touch===next.touch)return;
+      measuredWorkspace.current=next;gesture.current=null;pendingCommit.current=false;clearPreview();
       setWorkspace(previous => previous.w === next.w && previous.h === next.h && previous.touch === next.touch ? previous : next);
     };
     measure();
@@ -44,7 +47,10 @@ export function AquaWindow({id, children, className = ''}: Props) {
     if (event.button !== 0 || gesture.current || win.zoom) return;
     if (kind === 'move' && (event.target as HTMLElement).closest('button')) return;
     event.preventDefault();
-    gesture.current = {kind, pointer: event.pointerId, px: event.clientX, py: event.clientY, frame, edge, next: {...frame}, size: workspace, moved: false};
+    const bounds=section.current?.parentElement?.getBoundingClientRect(),rect=section.current?.getBoundingClientRect();
+    const actual=rect&&bounds?{...frame,x:rect.left-bounds.left,y:rect.top-bounds.top,w:rect.width,h:rect.height}:frame;
+    gesture.current = {kind, pointer: event.pointerId, px: event.clientX, py: event.clientY, frame:actual, edge, next: {...actual}, size: workspace, moved: false};
+    section.current?.classList.add('window-gesturing');
     event.currentTarget.setPointerCapture(event.pointerId);
   }
 
@@ -66,12 +72,11 @@ export function AquaWindow({id, children, className = ''}: Props) {
   function finish(event: PointerEvent<HTMLElement>, cancelled = false) {
     const active = gesture.current;
     if (!active || active.pointer !== event.pointerId) return;
+    if(!cancelled)update(event); // Include the pointer-up position, even if no final move was delivered.
     gesture.current = null;
-    section.current?.style.removeProperty('--drag-x');
-    section.current?.style.removeProperty('--drag-y');
-      section.current?.style.removeProperty('--drag-w');section.current?.style.removeProperty('--drag-h');
-    if (active.moved) lastDrag.current = performance.now();
-    if (active.moved && !cancelled) desktop.change(id, active.next);
+    if(active.moved)lastDrag.current=performance.now();
+    if(active.moved&&!cancelled){pendingCommit.current=true;desktop.change(id,active.next);}
+    else clearPreview();
   }
 
   if (win.mode !== 'open') return null;

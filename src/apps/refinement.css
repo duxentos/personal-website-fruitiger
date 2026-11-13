@@ -40,3 +40,41 @@
 @media(max-width:1023px),(pointer:coarse){.lights button{width:40px;height:40px;min-width:40px;min-height:40px;background:transparent;border:0;box-shadow:none}.lights button:before{content:'';display:block;position:absolute;inset:13px;border:1px solid var(--signal-border);border-radius:50%;background:var(--signal);box-shadow:inset 0 1px 2px #fff9,0 1px 1px #fff9;pointer-events:none}.lights svg{position:relative;width:9px;height:9px;z-index:1}.story-page{margin:8px}.story-copy p{font-size:15px}.story-copy h1{font-size:27px}}
 @container desktop-window (max-width:450px){.welcome-content>.mii-context-about{width:130px;height:180px;margin:-8px -12px 5px 5px}.stories-shelf{max-height:130px;padding:10px}.stories-shelf button{min-width:145px}.story-art,.story-photo{margin:12px 12px 0;width:calc(100% - 24px)}.story-copy{padding:16px}.story-copy h1{font-size:26px}}
 .stories-app button,.stories-app .aqua-button,.chapter-cover,.story-source{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}.chapter-cover{font-weight:700}
+/* The two type roles: Nothing NDot display headings and Helvetica Neue interface text. */
+:root{--font-display:NDot,sans-serif;--font-ui:'Helvetica Neue',Helvetica,Arial,sans-serif}
+body,body *{font-family:var(--font-ui)!important}
+h1,h2,.boot-logo,.menu-group>.desktop-logo,.terminal-icon,.book-icon{font-family:var(--font-display)!important}
+.menu-bar,.menu-popover,.notification-centre,.desktop-dock,.desktop-shortcuts,.window-name,.aqua-button,.plain-link,.micro,.finder-toolbar,.finder-path,.finder-sidebar,.finder-columns-heading,.finder-statusbar,.finder-preview small,.project-status,.resume-toolbar,.preferences-panel,.leather-toolbar,.legal-paper footer,.blog-toolbar,.blog-date,.blog-placeholder{ text-transform:lowercase }
+.window-gesturing{user-select:none;transition:none!important;animation:none!important;will-change:transform}
+.window-gesturing *{user-select:none!important}
+/* Identical 12px launcher gaps, with a compact touch grid. */
+.desktop-shortcuts{grid-template-columns:repeat(2,88px);grid-auto-rows:90px;width:188px;gap:12px;top:20px;right:18px;left:auto;transform:none}
+.desktop-shortcuts>button{width:88px;min-height:90px;padding:6px 3px;gap:7px}.desktop-shortcuts .app-icon{width:52px;height:52px}.desktop-shortcuts>button>span:last-child{font-size:11px}
+.desktop-dock{gap:8px;padding:10px 14px 7px}.desktop-dock .dock-app{width:52px;min-width:52px;min-height:60px}.desktop-dock .app-icon{width:48px;height:48px}
+/* Waving source has a closer camera than the padded still: normalize its framing. */
+.mii-only-app.mii-waving img{width:78%;height:78%;inset:11%}.mii-only-app.mii-still img{width:110%;height:110%;inset:-5%}
+/* A small blog reader, retaining physical glass and paper materials. */
+.blog-app{height:100%;min-height:0;display:flex;flex-direction:column;background:repeating-linear-gradient(45deg,#d6e1e7 0 2px,#e1e9ed 2px 4px);color:#4c687b}
+.blog-toolbar{display:flex;align-items:center;gap:16px;padding:12px 18px;flex:none;border-bottom:1px solid #8ca9bc;background:linear-gradient(#ffffffec,#d9e8f2b3 49%,#c2d9e7a6 50%,#f1faffde);box-shadow:inset 0 1px #fff}
+.blog-toolbar h2{font-size:24px;margin:0}.blog-toolbar>span{font-size:11px;color:#8299a9}
+.blog-body{display:grid;grid-template-columns:175px minmax(0,1fr);flex:1;min-height:0}.blog-index{padding:10px;overflow:auto;background:linear-gradient(90deg,#c8dce8cc,#f0f7fbbb);border-right:1px solid #abc0cd}
+.blog-index button{display:block;width:100%;padding:12px 10px;margin-bottom:10px;border:1px solid #afc5d4;border-radius:7px;background:linear-gradient(#ffffffdf,#dae8f1);box-shadow:inset 0 1px #fff,0 2px 3px #52748c22;color:#4a6c82;text-align:left}
+.blog-index button[aria-current=page]{background:linear-gradient(#87b2d3,#557fa4 49%,#436e94 50%,#78a6c6);color:white;border-color:#4b7396;text-shadow:0 1px #416784}
+.blog-index small,.blog-index strong,.blog-index span{display:block}.blog-index small{font-size:9px;opacity:.7;margin-bottom:6px}.blog-index strong{font-size:12px;font-weight:500}.blog-index span{font-size:10px;line-height:1.6;opacity:.7;margin-top:7px}
+.blog-paper{margin:12px;min-width:0;overflow:auto;padding:25px;border:1px solid #c6c8c0;border-radius:3px;background:repeating-linear-gradient(0deg,#fffcf2 0 2px,#f8f5eb 2px 3px);box-shadow:0 2px 5px #49697f33,inset 0 0 0 4px #fffdf9}
+.blog-date{font-size:10px;color:#95a2aa}.blog-paper h1{font-size:30px;line-height:1.25;color:#456577;overflow-wrap:anywhere}.blog-placeholder{font-size:10px;border:1px solid #c7d4da;border-radius:12px;padding:5px 9px;background:linear-gradient(#fff,#e8f0f2);display:inline-block;color:#849ca9}.blog-paper p{font-size:14px;line-height:1.9;color:#708591}
+/* Authored photo/film slots float gently beside and below the project files. */
+.project-media-orbit{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.media-print{position:absolute;width:140px;margin:0;padding:7px 7px 23px;border:1px solid #c2d3da;border-radius:2px;background:linear-gradient(#fff,#f1f2eb);box-shadow:0 7px 15px #345b7333;transform:rotate(var(--print-angle));animation:media-drift 6s ease-in-out infinite alternate}
+.media-print-1{--print-angle:-7deg;left:clamp(8px,calc(var(--project-x) - 145px),calc(100% - 150px));top:clamp(12px,calc(var(--project-y) + 58px),calc(100% - 160px))}
+.media-print-2{--print-angle:5deg;left:clamp(8px,calc(var(--project-x) + 38px),calc(100% - 150px));top:clamp(12px,calc(var(--project-y) + var(--project-h) + 18px),calc(100% - 160px));animation-delay:-2s}
+.media-print-3{--print-angle:-3deg;left:clamp(8px,calc(var(--project-x) + 225px),calc(100% - 150px));top:clamp(12px,calc(var(--project-y) + var(--project-h) + 5px),calc(100% - 160px));animation-delay:-4s}
+.media-print img,.media-print video,.media-placeholder{display:block;width:100%;height:95px;object-fit:cover;border:1px solid #d1e2e8;border-radius:1px;background:linear-gradient(135deg,#d0e5eb,#f4fafb 55%,#c9dde7)}
+.media-placeholder{display:grid;place-items:center;color:#a1bac6;box-shadow:inset 0 1px 4px #5b849523}.media-print figcaption{font-size:9px;color:#8199a6;position:absolute;bottom:7px;left:7px;right:7px;text-align:center;line-height:1.2}
+@keyframes media-drift{from{transform:translateY(-3px) rotate(var(--print-angle))}to{transform:translateY(4px) rotate(calc(var(--print-angle) + 2deg))}}
+@container desktop-window (max-width:450px){.blog-body{display:flex;flex-direction:column}.blog-index{display:flex;gap:9px;max-height:110px;flex:none;padding:8px;border-right:0;border-bottom:1px solid #afc5d4;overflow:auto}.blog-index button{width:150px;min-width:150px;margin:0;padding:9px}.blog-index span{display:none}.blog-paper{flex:1;margin:8px;padding:18px}.blog-paper h1{font-size:26px}}
+@media(max-width:1023px),(pointer:coarse){.desktop-shortcuts{width:188px;left:50%;right:auto;top:18px;transform:translateX(-50%);grid-template-columns:repeat(2,88px);grid-auto-rows:90px;gap:12px}.desktop-shortcuts>button{width:88px;min-height:90px}.desktop-icon-hint{grid-row:auto;font-size:9px;padding-top:0}.desktop-dock{gap:8px;padding:8px 10px 5px}.desktop-dock .dock-app{width:44px;min-width:44px;min-height:60px}.desktop-dock .app-icon{width:40px;height:40px}.blog-index button{min-height:44px}}
+@media(max-width:599px){.project-media-orbit{display:none}}
+@media(prefers-reduced-motion:reduce){.media-print{animation:none}.blog-paper{animation:none}}
+.motion-reduced .media-print{animation:none}
+.finder-app,.ipod-status,.ipod-menu,.ipod-wordmark,.ipod-home,.terminal-app,.technology-list,.blog-index,.media-print figcaption{text-transform:lowercase}

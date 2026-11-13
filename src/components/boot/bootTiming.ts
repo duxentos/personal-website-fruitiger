@@ -1,5 +1,6 @@
-/** Normal startup, including transition and slow-asset fallback, stays within 3–4 seconds. */
-export const BOOT_DURATION_MS = 3500;
-export const BOOT_ASSET_TIMEOUT_MS = 3800;
-export const BOOT_EXIT_MS = 180;
-export function canEnterDesktop(minimumElapsed:boolean,criticalResolved:boolean){return minimumElapsed&&criticalResolved;}
+export const BOOT_CROSSINGS=1.25;
+export const BOOT_ASSET_TIMEOUT_MS=3800;
+export const BOOT_FALLBACK_MS=1200;
+/** One supplied traversal clip is one crossing (175 frames, measured 7000ms). */
+export function crossingDuration(durationMs:number,crossings=BOOT_CROSSINGS){return Math.round((Number.isFinite(durationMs)&&durationMs>0?durationMs:7000)*crossings);}
+export function canEnterDesktop(crossingComplete:boolean,criticalResolved:boolean){return crossingComplete&&criticalResolved;}

@@ -11,5 +11,5 @@ export function MiiApp(){
  const [failed,setFailed]=useState(false);
  useEffect(()=>{const update=()=>setHidden(document.hidden);document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update)},[]);
  const src=reduce||preferences.reducedMotion||hidden||failed?profile.avatar.still:profile.avatar.wave;
- return <div className="mii-only-app"><img src={src} alt="Azaan’s Mii from the supplied Mii.md artwork" onError={()=>setFailed(true)}/></div>;
+ return <div className={`mii-only-app ${src===profile.avatar.wave?'mii-waving':'mii-still'}`}><img src={src} alt="Azaan’s Mii from the supplied Mii.md artwork" onError={()=>setFailed(true)}/></div>;
 }

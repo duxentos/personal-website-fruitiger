@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createSettingsStore,SETTINGS_KEY,object,finite} from '../src/settings/store.ts';
-import {initialSession,restoreSession,windowReducer} from '../src/components/windowModel.ts';
+import {initialSession,restoreSession,launchSession,LAUNCH_LAYOUT_REVISION,windowReducer} from '../src/components/windowModel.ts';
 import {resizeWindowFrame} from '../src/components/windowGeometry.ts';
 import {validateNotebook,deleteNote,undoDelete} from '../src/apps/notes/noteModel.ts';
 function storage(){const data=new Map<string,string>();return{getItem:(k:string)=>data.get(k)??null,setItem:(k:string,v:string)=>{data.set(k,v)},removeItem:(k:string)=>{data.delete(k)}};}
@@ -18,13 +18,13 @@ test('future settings are not overwritten; restore defaults keeps notes',()=>{
  db.removeItem(SETTINGS_KEY);store.write('notes',{items:[]});store.write('desktop',{theme:'candy'});store.restoreDefaults();
  assert.deepEqual(store.read('notes',object),{items:[]});assert.deepEqual(store.read('desktop',object),{});
 });
-test('fresh launch has four apps; returning sessions respect closed and minimized windows',()=>{
+test('fresh launch has two apps; session deserialization preserves modes before entry policy',()=>{
  const size={w:1280,h:720};let session=initialSession(size);
- assert.deepEqual(Object.values(session.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','stories','projects','connect']);
+ assert.deepEqual(Object.values(session.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects']);
  session=windowReducer(session,{type:'close',id:'welcome'});session=windowReducer(session,{type:'minimize',id:'projects'});
  session.windows.connect.x=9000;const restored=restoreSession(session,size);
  assert.equal(restored.windows.welcome.mode,'closed');assert.equal(restored.windows.projects.mode,'minimized');assert.ok(restored.windows.connect.x+restored.windows.connect.w<=size.w);
- assert.equal(restored.windows[restored.active!].mode,'open');
+ assert.equal(restored.active,null);
  const opened=windowReducer(restored,{type:'open',id:'projects'});assert.equal(Object.values(opened.windows).filter(w=>w.id==='projects').length,1);
 });
 test('edge resize anchors the opposite side and clamps to the workspace',()=>{
@@ -47,4 +47,11 @@ test('a maximized session retains its floating restore frame after refresh',()=>
 test('retired plaza sessions cannot reopen the removed app',()=>{
  const initial=initialSession({w:1280,h:720});const value={...initial,active:'mii',windows:{...initial.windows,mii:{mode:'open',layer:500}}};
  const restored=restoreSession(value,{w:1280,h:720});assert.equal('mii' in restored.windows,false);assert.equal(restored.windows.avatar.mode,'closed');assert.notEqual(restored.active,'mii');
+});
+
+test('entry closes every other app and migrates the previous four-window layout once',()=>{
+ const size={w:1280,h:720};const old=initialSession(size);for(const win of Object.values(old.windows))win.mode='open';old.windows.welcome.w=900;
+ const migrated=launchSession(old,size);assert.deepEqual(Object.values(migrated.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects']);assert.ok(migrated.windows.welcome.w<600);
+ const saved={...migrated,layoutRevision:LAUNCH_LAYOUT_REVISION};saved.windows.projects.x=400;saved.windows.projects.w=480;saved.windows.notes.mode='open';
+ const next=launchSession(saved,size);assert.equal(next.windows.projects.x,400);assert.equal(next.windows.projects.w,480);assert.equal(next.windows.notes.mode,'closed');assert.equal(next.active,'welcome');
 });
