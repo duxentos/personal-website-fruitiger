@@ -21,4 +21,15 @@ Marks draw once on intersection, disconnect their observer, use CSS animation in
 
 Local `npm run lint` and `npm run build` pass: all 39 existing behavior tests, TypeScript and Vite. The suite covers commands, notes, persistence, sound, music, boot, touch window bounds and pointer gesture logic; it is not a visual annotation test. No redundant CSS/string tests were added for this presentation change. React quality review checked effect cleanup, stable keys, no new runtime dependencies, decorative SVG accessibility and no frame-by-frame React updates.
 
-Browser/deployment evidence follows after the preview is available. No production promotion, main-branch update or DNS change is part of this revision.
+Deployed preview evidence is recorded below. No production promotion, main-branch update or DNS change is part of this revision.
+
+## Deployed preview evidence
+
+Final code commit `48fb33f14e30a01635a67f1b09171dc9f3b01e0f` deployed READY as `dpl_8xk63ubcfbpgBoefXKN8i1nV11z5`:
+https://personal-website-fruitiger-jvlizkg4v-azaank041208-hash.vercel.app
+
+Vercel independently passed all 39 tests, TypeScript and Vite. The authenticated homepage returned HTTP 200 with current JS/CSS references.
+
+Native Chrome verified readable Mac-style monospace Terminal text and successful `help` output. Desktop inspection caught the original wavy mark intersecting the letters; giving the inline annotation a single line height fixed its placement. The final preview's iPhone SE emulation (375 × 667) showed the wavy mark below engineering, readable About Me text/actions, fixed Dock labels with separate running dots, a circle around the first blog keyword, switching to a second post with its own single keyword, and a full-width Terminal command field with its dotted prompt mark. `help` also returned successfully on this final mobile preview. DevTools displayed zero console messages during these checks.
+
+This was Chrome device emulation, not a physical iPhone/Safari test. All 12 variants are implemented; only the variants used in the checked views were visually exercised. Reduced-motion behavior was reviewed in CSS, not toggled in this browser pass. Existing model tests cover touch geometry/dragging; no new isolated physical pointer-drag pass is claimed. The final documentation commit records these results without altering the tested application source. Temporary preview access parameters are not stored here.
