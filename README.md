@@ -1,10 +1,10 @@
-# Azaan's Aqua desktop
+# Azaan’s Aqua desktop
 
-A React + TypeScript + Vite portfolio following the repository's Frutiger Aero, macOS Aqua, Mii, iPod, startup and sound-effect briefs.
+An interactive React + TypeScript + Vite portfolio based on the repository’s `Improvements` brief. The existing desktop, music, sound effects and project routes are retained.
 
-## Development
+## Run locally
 
-Use Node.js 22.18+ (Node.js 24 recommended).
+Use Node.js 22.18+ (24 recommended):
 
 ```sh
 npm install
@@ -13,37 +13,23 @@ npm run lint
 npm run build
 ```
 
-The predev/build preparation reads supplied MP3 links from `Music.md`, downloads them into `public/music/tracks`, scans that directory, and updates `public/music/library.json` without discarding manually edited metadata. Network access is needed when a supplied MP3 is not already present. Add more local MP3s to `public/music/tracks` and restart dev or build. Matching artwork can go in `public/music/covers`.
+The build runs the behavior tests, TypeScript and Vite. Music preparation reads `Music.md`, caches supplied MP3s under `public/music/tracks`, and generates the local library. An internet connection is needed if those cached tracks are missing.
 
-## Configuration
+## Desktop and apps
 
-- `src/profile.ts`: configured profiles and résumé.
-- `src/projects.ts`: project files; unverified technical details remain unfilled.
-- `src/data/miiAnimations.ts`: supplied character clips, measured timings, weights and cooldowns.
-- `src/data/soundManifest.ts`: actual local interface-effect paths and default event settings.
-- `public/sounds/CREDITS.md`: sound origins and CC0 licence records.
-- System Preferences: themes, wallpaper, startup, Mii, bubbles and sound controls; preferences are saved in that browser.
+- First visit: About Me, Stories, Projects and Where to Connect open in a staggered layout. Phones show the active app, with the system menu/window centre and Dock providing app switching.
+- Returning visits restore open, closed and minimized states, stacking and floating geometry. Drag title bars; resize any edge or corner; traffic lights close, minimize and expand/restore. Keyboard arrows move a focused title bar or resize handle.
+- Notes uses a leather header and legal paper, with editable titles/bodies, new/delete and recoverable deletion. Everything saves locally in this browser.
+- Stories has illustrated chapters in `src/data/stories.ts`. Verified facts come from the supplied résumé. Reflections and missing personal anecdotes remain clearly marked for editing.
+- Mii Plaza uses the supplied local image copied to `public/assets/mii-plaza-background.png`. Four original SVG visitors walk independently, change size with depth, wave and show character cards. Pause, visibility, speed and reduced motion are supported. Decorative figures baked into the background are static.
+- Projects uses Aqua Finder icon/list/column views, folders, history, selection, keyboard navigation and project details. Edit `src/projects.ts` to add verified screenshots, status and project links.
+- Terminal accepts `cd -about me`, `help`, `clear`, `ls` and `pwd`.
+- Startup runs for a five-second minimum, then enters when critical artwork/font loading or fallbacks resolve. Skip/Escape enters immediately. Ordinary app navigation does not replay startup.
 
-Music persists while app windows are closed/minimized. Browser autoplay rejection displays a Play control. Desktop effects only unlock after an interaction and have separate volume/mute settings.
+## Settings and content
 
-Startup is a full-screen Aqua scene with your supplied Mii artwork, with no 3DS/handheld shell. Each startup lasts a fixed 5 seconds, then reveals the desktop directly with no fade-in or fade-out. Skip Intro or Escape enters immediately. To replay it, use the desktop menu’s **preview startup** command, System Preferences, or `?startup=preview`. Preview follows the same automatic timing. Slow optional assets cannot extend that interval; available static artwork remains visible while GIFs load. System Preferences can disable startup or enable reduced motion.
+`src/settings/store.ts` validates and versions browser settings under `azaan-os-settings`, migrates earlier desktop/music/sound/icon keys, and preserves independent sections. System Preferences can restore defaults while keeping notes. Private browsing or disabled storage provides session-only state.
 
-`IMPLEMENTATION_REVIEW.md` records the requirement review, validation and limitations. `CHANGELOG.md` records the implementation history. Work is tracked in PR #1; preview deployment links and verified build/browser results are in that PR.
+Profile destinations and résumé are configured in `src/profile.ts`. The Nothing NDot display font and system UI fonts are preserved. No new package dependencies were added for this refinement.
 
-## Desktop and touch controls
-
-Only Find Me, Résumé, Project Files and About Me live on the desktop. The Dock contains Home, Terminal, Notes and iPod, so these destinations are not duplicated. Social links remain inside Find Me. Touch layouts (up to 1023px or a coarse primary pointer) start on the home screen, open floating windows that can be dragged by their title bars, and provide a Back to Desktop control and the Dock’s Home button. Buttons use larger tap targets; title-bar dragging works with touch, pen and mouse. Touch windows can expand/restore; corner resizing and Dock hover magnification remain mouse interactions.
-
-A shared trusted-click listener supplies a quiet CC0 click when an action has no dedicated sound. Dedicated feedback takes precedence, avoiding a second generic click; rapid generic clicks retrigger the cached sound. Existing sound mute/volume/category settings still apply. Mii artwork differs by context, while tap reactions vary without immediate repeats; only the iPod Mii dances with music.
-
-## Icon arrangement, Terminal and Notes
-
-On phones and tablets, drag a desktop icon onto another grid position to rearrange the four shortcuts. A tap still opens the app; dragging does not. The order is saved locally and the grid adapts to rotation. Alt + arrow keys also rearrange a focused icon.
-
-All Terminal commands now use `cd -something`. Use `cd -help` or expand the command list to see and tap every available command. App commands include `cd -projects`, `cd -resume`, `cd -about`, `cd -findme`, `cd -notes`, `cd -ipod`, `cd -settings`. Profiles use `cd -linkedin`, `cd -github`, `cd -instagram`, and `cd -devpost`; music uses `cd -play`, `cd -pause`, `cd -next`, and `cd -previous`. Utilities include `cd -apps`, `cd -home`, and `cd -clear`. History and Tab completion remain available.
-
-Notes opens by itself on launch and Restart, with every other app window closed. It contains “Welcome to my personal website”, a short résumé-informed introduction, cricket as the favourite hobby, and a separate note about engineering. The old command guide stays inside Terminal.
-
-Touch windows stay within the usable workspace while moving. Multiple windows can stay open; touching a window brings it forward. Drag the title bar, scroll inside the content, and use the green control to expand or restore. Rotation/viewport changes refit windows so title-bar controls remain reachable.
-
-The former Wii-inspired Say Hi/Mii app and its Dock/menu/CLI entries have been removed. The intro uses the résumé already included at `public/azaan-khan-resume.pdf`; first-year status and cricket come from the user’s instructions. The engineering motivation is a first-person editorial draft grounded in the listed projects, not a quotation from the résumé.
+See `IMPROVEMENTS_REVIEW.md` for file changes, verification evidence, source limitations and deployment status. Historical requests and their superseding changes remain in `CHANGELOG.md`.

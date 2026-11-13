@@ -3,7 +3,7 @@ import {useReducedMotion} from 'motion/react';
 import {useDesktop} from '../Desktop';
 import {miiAnimations, selectAnimation, type MiiAnimation} from '../../data/miiAnimations';
 import {playSound} from '../../audio/SoundEngine';
-import {BOOT_DURATION_MS} from './bootTiming.ts';
+import {BOOT_DURATION_MS,canEnterDesktop} from './bootTiming.ts';
 
 export function BootProvider({children}: {children: ReactNode}) {
   const {preferences} = useDesktop();
@@ -11,11 +11,13 @@ export function BootProvider({children}: {children: ReactNode}) {
   const returnFocus = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(preferences.startup || directPreview);
   const [session, setSession] = useState(1);
+  const booting=useRef(preferences.startup||directPreview);
 
   useEffect(() => {
     const start = (event: Event) => {
       const preview = (event as CustomEvent<{preview?: boolean}>).detail?.preview === true;
-      if (!preferences.startup && !preview) return;
+      if ((!preferences.startup && !preview)||booting.current) return;
+      booting.current=true;
       returnFocus.current = document.activeElement as HTMLElement;
       setSession(n => n + 1);
       setVisible(true);
@@ -27,6 +29,7 @@ export function BootProvider({children}: {children: ReactNode}) {
   return <>
     <div className="desktop-session" inert={visible}>{children}</div>
     {visible && <BootScreen key={session} onDone={() => {
+      booting.current=false;
       setVisible(false);
       requestAnimationFrame(() => {
         if (returnFocus.current?.isConnected) returnFocus.current.focus();
@@ -42,7 +45,7 @@ function loadImage(src: string) {
       image.onload = null;
       image.onerror = null;
       reject(new Error('image timeout'));
-    }, 4500);
+    }, 8000);
     image.onload = () => {clearTimeout(timer); resolve();};
     image.onerror = () => {clearTimeout(timer); reject(new Error('image unavailable'));};
     image.src = src;
@@ -58,6 +61,8 @@ function BootScreen({onDone}: {onDone: () => void}) {
     try {previous = sessionStorage.getItem('mii-last-boot') || '';} catch {}
     return selectAnimation(miiAnimations.filter(a => a.category === 'locomotion'), previous, {}, Date.now()) || miiAnimations[0];
   });
+  const [minimumElapsed,setMinimumElapsed]=useState(false);
+  const [leaving,setLeaving]=useState(false);
   const [phase, setPhase] = useState<'loading' | 'ready' | 'error'>('loading');
   const [state, setState] = useState<'running' | 'reacting'>('running');
   const [imageReady, setImageReady] = useState(false);
@@ -85,25 +90,32 @@ function BootScreen({onDone}: {onDone: () => void}) {
     return () => {mounted.current = false; transition.current += 1;};
   }, []);
 
-  // The requested five-second presentation is independent of network speed.
-  // Slow or missing optional artwork must never hold the desktop behind it.
+  // Five-second minimum, followed by critical readiness (or a resolved fallback).
   useEffect(() => {
-    const close = setTimeout(() => finishRef.current(), BOOT_DURATION_MS);
+    const close = setTimeout(() => setMinimumElapsed(true), BOOT_DURATION_MS);
     return () => clearTimeout(close);
   }, []);
 
+  useEffect(()=>{
+    if(!canEnterDesktop(minimumElapsed,phase!=='loading'))return;
+    setLeaving(true);
+    const timer=setTimeout(()=>finishRef.current(),reduced?0:180);
+    return()=>clearTimeout(timer);
+  },[minimumElapsed,phase,reduced]);
+
   useEffect(() => {
-    let cancelled = false;
-    const wallpaper = p.wallpaper === 'meadow'
-      ? 'https://github.com/user-attachments/assets/c879a033-99eb-4dd1-acda-c36fa5b9bf3e'
-      : '/vista-aurora.svg';
-    const character = reduced ? Promise.resolve() : loadImage(last.src).then(() => {
-      if (!cancelled) setImageReady(true);
+    let cancelled=false;
+    const wallpaper=p.wallpaper==='meadow'?'https://github.com/user-attachments/assets/c879a033-99eb-4dd1-acda-c36fa5b9bf3e':'/vista-aurora.svg';
+    if(!reduced)loadImage(last.src).then(()=>{if(!cancelled)setImageReady(true)}).catch(()=>{});
+    let fontTimer:ReturnType<typeof setTimeout>;
+    const fonts=Promise.race([document.fonts.ready,new Promise((_,reject)=>{fontTimer=setTimeout(()=>reject(new Error('font fallback')),8000)})]);
+    Promise.allSettled([fonts,loadImage(wallpaper),loadImage('/mii-still.png')]).then(results=>{
+      clearTimeout(fontTimer);
+      if(cancelled)return;
+      if(results[1].status==='rejected')document.body.dataset.wallpaperFallback='true';
+      setPhase(results.some(result=>result.status==='rejected')?'error':'ready');
     });
-    Promise.allSettled([document.fonts.ready, loadImage(wallpaper), loadImage('/mii-still.png'), character]).then(results => {
-      if (!cancelled) setPhase(results.some(r => r.status === 'rejected') ? 'error' : 'ready');
-    });
-    return () => {cancelled = true;};
+    return()=>{cancelled=true;clearTimeout(fontTimer)};
   }, []);
 
   const showAnimation = useCallback(async (next: MiiAnimation, nextState: 'running' | 'reacting') => {
@@ -153,7 +165,7 @@ function BootScreen({onDone}: {onDone: () => void}) {
   }
 
   const animated = !reduced && !hidden && imageReady;
-  return <div ref={dialog} className={`boot-overlay ${reduced ? 'boot-reduced' : ''}`}
+  return <div ref={dialog} className={`boot-overlay boot-refined ${reduced ? 'boot-reduced' : ''} ${leaving?'boot-leaving':''}`} 
     role="dialog" aria-modal="true" aria-label="starting desktop" onKeyDown={event => {
       if (event.key === 'Escape') {event.preventDefault(); finish();}
       if (event.key !== 'Tab') return;
@@ -177,7 +189,7 @@ function BootScreen({onDone}: {onDone: () => void}) {
       <div className="boot-status">
         <div className="boot-dots" aria-hidden="true"><i/><i/><i/></div>
         <h1>welcome to my desktop</h1>
-        <p role="status">{phase === 'loading' ? 'preparing the artwork…' : phase === 'error' ? 'opening with available artwork' : 'everything is ready. see you inside.'}</p>
+        <p role="status">{phase==='loading'?(minimumElapsed?'finishing the desktop artwork…':'preparing the artwork…'):phase==='error'?'ready with available artwork':minimumElapsed?'welcome!':'everything is ready. see you inside.'}</p>
         <button autoFocus className="aqua-button boot-skip" onClick={finish}>skip intro</button>
       </div>
     </main>

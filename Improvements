@@ -1,0 +1,801 @@
+# CODEX MASTER PROMPT — PORTFOLIO OS REFINEMENT
+
+## ROLE
+
+You are a senior frontend engineer, interaction designer, and creative developer specializing in:
+
+- macOS Aqua (Mac OS X 10.0–10.4)
+- iOS 6 skeuomorphic interface design
+- Nintendo Wii / Wii U / Mii-inspired 3D interfaces
+- Frutiger Aero and Y2K visual design
+- Desktop operating-system window management
+- Responsive React, TypeScript, and animation architecture
+
+Your task is to **refine my existing portfolio website, not rebuild it from scratch**.
+
+Before making changes, inspect the existing repository, identify reusable components, and understand the current state-management architecture.
+
+Preserve functioning features unless explicitly instructed to remove them.
+
+The finished result should behave like a cohesive, interactive desktop operating system.
+
+---
+
+# 1. RESTORE THE INTERACTIVE MII APP
+
+Restore the previously implemented interactive Mii application.
+
+Use this image as the background:
+
+`file:///Users/azaankhan/Futuristic%20Glass%20Plaza%20with%20Mii%20Walkers.png`
+
+**Important:** This is a local filesystem URL and cannot be loaded reliably by a deployed website.
+
+Find the image in the project or local environment and copy it into the appropriate public assets directory.
+
+For example:
+
+`public/assets/mii-plaza-background.png`
+
+Do not reference the original `file:///` URL in production code.
+
+If Codex cannot access the image, make the asset path configurable and report what file I need to provide.
+
+### Interactive Mii plaza
+
+- Use the supplied image as the environment background.
+- Restore interactive Mii characters.
+- Increase character sizes to make them more proportional to the plaza.
+- Allow Miis to walk around the environment.
+- Characters should have independent movement paths.
+- Implement idle, walking, waving, and turning animations.
+- Characters must not all perform the same animation simultaneously.
+- Aim for smooth 60 FPS rendering where supported.
+- Use `requestAnimationFrame` for animation updates.
+- Use time-based movement rather than frame-dependent movement.
+- Implement depth-aware character scaling.
+- Characters farther away should appear smaller.
+- Characters closer to the camera should appear larger.
+- Keep characters visually grounded on the pavement.
+- Avoid floating, clipping, and teleportation.
+- Make characters clickable or selectable.
+- Clicking a Mii should open a small interactive character card.
+- Preserve a cheerful, rounded Nintendo-inspired visual language without introducing Nintendo branding.
+
+### Scaling and movement
+
+Implement a perspective-aware coordinate system.
+
+For example:
+
+- Foreground Miis: approximately 100–150 px tall on desktop.
+- Midground Miis: approximately 65–100 px.
+- Background Miis: approximately 30–60 px.
+
+These are starting values, not rigid requirements. Adjust them based on perspective, viewport dimensions, and the supplied image.
+
+Use predefined walkable zones so Miis don't walk through buildings, trees, or physical barriers.
+
+### Mii app controls
+
+Include:
+
+- Pause/resume animations
+- Show/hide Miis
+- Animation speed control
+- Optional Mii selection
+- Reduced-motion accessibility support
+
+Keep the experience playful without making it resource-intensive.
+
+---
+
+# 2. CREATE A DEDICATED STORIES APPLICATION
+
+Create a standalone desktop application named **Stories**.
+
+Its primary purpose is to explain why I chose engineering and document the experiences, motivations, and interests that shaped my journey.
+
+### Content direction
+
+The Stories app should support narratives covering:
+
+- Why I chose engineering
+- My interest in biomedical engineering
+- My fascination with software and hardware integration
+- My motivation to build technology that helps people
+- My interest in healthcare automation
+- How personal observations inspired projects such as ClinTempo
+- My experiences building projects, learning programming, and participating in hackathons
+
+Do not invent personal experiences or present assumptions as factual autobiographical details.
+
+Use existing portfolio content where available. Otherwise, create clearly labeled editable placeholders.
+
+### Visual direction
+
+Create an interface inspired by early-2000s digital journals, Apple iPhoto, and classic Mac OS X media browsers.
+
+Features:
+
+- A dedicated Stories application window
+- Story cards or chapters
+- Cover artwork
+- Smooth chapter transitions
+- Scrollable long-form content
+- Support for images and illustrations
+- Optional timeline navigation
+- Elegant typography
+- Subtle page-turning effects
+- Aqua-inspired navigation controls
+
+The experience should feel like opening a personal digital scrapbook rather than reading a standard blog.
+
+Make all stories editable through a centralized data file.
+
+---
+
+# 3. REDESIGN NOTES — iOS 6 SKEUOMORPHISM
+
+Completely redesign the existing Notes application to closely recreate the visual language of the classic iOS 6 Notes app.
+
+Use iOS 6 as a visual reference, but keep the implementation original and integrated into this portfolio.
+
+### Appearance
+
+Implement:
+
+- Yellow legal-paper texture
+- Horizontal ruled lines
+- Subtle paper grain
+- Warm cream and yellow tones
+- Leather-inspired navigation header
+- Subtle stitched detailing
+- Beveled toolbar buttons
+- Soft inset shadows
+- Realistic paper edges
+- Classic skeuomorphic icons
+- Elegant, readable typography
+- Carefully designed highlights and gradients
+
+Avoid flat modern UI styling.
+
+The application should feel physical, tactile, and nostalgic.
+
+### Functionality
+
+- View notes
+- Create new notes
+- Edit notes
+- Delete notes
+- Navigate between notes
+- Automatically save edits
+- Restore saved notes after refreshing
+- Smooth scrolling
+- Responsive note layout
+- Keyboard-friendly editing
+
+Store notes in local storage or the existing persistence system.
+
+### Content restructuring
+
+**Remove the "Why I Chose Engineering" content from Notes.**
+
+Move that material into the dedicated Stories app.
+
+Notes should now function exclusively as a note-taking and personal notebook application.
+
+Preserve other useful existing notes.
+
+---
+
+# 4. SIMPLIFY THE TERMINAL APPLICATION
+
+Simplify the terminal interface considerably.
+
+Remove the dedicated commands for:
+
+- GitHub
+- Devpost
+- Resume
+- Instagram
+- LinkedIn
+
+These should no longer appear as individual terminal commands.
+
+### Primary command
+
+Implement:
+
+`cd -about me`
+
+When entered, this command should open or focus the About Me application.
+
+The terminal should provide clear success feedback.
+
+### Other terminal behavior
+
+Retain only essential commands required for the terminal to feel functional, such as:
+
+- `help`
+- `clear`
+- `ls`
+- `pwd`
+
+Keep the terminal deliberately minimal.
+
+Do not introduce unnecessary developer commands, fake system utilities, or gimmicky terminal interactions.
+
+### Remove Mii integration
+
+The terminal does not need any Mii characters.
+
+Remove:
+
+- Mii sprites
+- Mii animations
+- Mii-related terminal widgets
+- Decorative character overlays
+
+Keep the terminal visually consistent with a classic macOS terminal application.
+
+Use authentic-looking monospace typography, subtle shadows, and appropriate spacing.
+
+---
+
+# 5. SET LOADING SCREEN TO EXACTLY FIVE SECONDS
+
+Update the website's initial loading screen.
+
+### Requirements
+
+- The intended loading-screen duration is 5 seconds.
+- Use smooth entrance and exit transitions.
+- Prevent a blank screen after loading.
+- Transition directly into the desktop experience.
+- Avoid flickering.
+- Prevent duplicate loading sequences.
+
+The loading animation should follow a Nintendo DS / Wii-inspired, glossy Frutiger Aero visual direction.
+
+If the existing loading screen uses Mii animations, preserve them.
+
+### Important implementation details
+
+Do not delay critical asset loading artificially without accounting for readiness.
+
+The boot sequence should last at least 5 seconds and transition once required desktop assets are ready.
+
+If required resources take longer, show an appropriate loading state rather than displaying an incomplete desktop.
+
+The loading animation should run only on initial entry or a deliberate reboot action, not during ordinary application navigation.
+
+Respect reduced-motion preferences.
+
+---
+
+# 6. PERSIST USER SETTINGS
+
+Fix the settings application so all user preferences are remembered.
+
+Currently, some settings appear to reset when the website reloads.
+
+Implement persistent state.
+
+### Persist the following where applicable
+
+- Selected wallpaper
+- Theme preference
+- Accent colour
+- Sound effects enabled/disabled
+- Music preferences
+- Mii visibility
+- Mii animation settings
+- Desktop appearance
+- Window positions
+- Window sizes
+- User interface preferences
+
+### Storage
+
+Use the existing storage architecture where possible.
+
+For a client-side implementation, `localStorage` is acceptable.
+
+Create a centralized settings service rather than separate storage logic inside every component.
+
+### Requirements
+
+- Load saved settings before initializing the desktop UI.
+- Prevent theme or wallpaper flashes on refresh.
+- Save settings when they change.
+- Validate loaded data.
+- Handle missing or corrupted saved settings gracefully.
+- Provide sensible defaults for first-time visitors.
+- Support future settings-schema migrations.
+- Do not overwrite stored preferences with default values during initialization.
+
+Include a Restore Defaults option.
+
+Settings must remain consistent across application windows and subsequent visits in the same browser.
+
+---
+
+# 7. IMPROVE MII CHARACTER PROPORTIONS
+
+The existing Mii characters appear too small compared with the environment.
+
+Increase their scale and improve their proportions.
+
+### Requirements
+
+- Keep the classic rounded Mii-inspired character appearance.
+- Make character sizes believable relative to the plaza.
+- Preserve correct perspective.
+- Avoid overly large heads that obstruct the interface.
+- Ensure proper foot positioning.
+- Ensure characters animate smoothly when scaled.
+- Use responsive scaling for mobile devices.
+
+Do not simply apply a global CSS scale transform to every Mii.
+
+Implement size logic that accounts for depth, position, and screen dimensions.
+
+---
+
+# 8. REDESIGN PROJECTS — CLASSIC macOS AQUA
+
+Redesign the Projects application to closely recreate the visual design and behavior of a classic Mac OS X Aqua Finder window.
+
+Target the Mac OS X Panther / Tiger era.
+
+The goal is a highly faithful, polished desktop-style file browser.
+
+### Visual requirements
+
+- Brushed-metal or glossy Aqua toolbar
+- Classic traffic-light window controls
+- Rounded window corners
+- Beveled interactive buttons
+- Glossy blue selection highlights
+- Classic Finder-style sidebar
+- Subtle metallic gradients
+- Soft drop shadows
+- Traditional Mac folder icons
+- Familiar Finder toolbar spacing
+- Aqua scrollbars
+- Proper column alignment
+- Classic desktop typography
+
+Avoid modern flat-design cards.
+
+### Finder-style project browser
+
+Represent projects as folders or application icons.
+
+Support:
+
+- Icon view
+- List view
+- Column view, if practical
+- Folder navigation
+- Back/forward controls
+- Double-click to open
+- Selection highlighting
+- Contextual project information
+- Keyboard navigation
+
+### Project details
+
+Opening a project should show:
+
+- Project title
+- Description
+- Technologies used
+- Screenshots
+- Features
+- Development status
+- GitHub link, if available
+- Demo link, if available
+
+Preserve existing project data and working links.
+
+Do not fabricate project accomplishments or claim unfinished projects are completed.
+
+### Interaction polish
+
+- Smooth hover states
+- Correct double-click behavior
+- Familiar desktop selection mechanics
+- Scrollable content
+- Responsive window resizing
+- No layout shifting
+- No text overflowing its container
+
+The final result should feel like a genuine Aqua Finder experience, not a modern webpage inside a silver rectangle.
+
+---
+
+# 9. FIX THE DESKTOP WINDOW MANAGEMENT SYSTEM
+
+This is a high-priority architectural improvement.
+
+Currently, some windows are not sufficiently flexible, draggable, or resizable.
+
+Refactor the window manager so desktop applications behave like real operating-system windows.
+
+### Window dragging
+
+Every desktop application window must support:
+
+- Click-and-drag movement by its title bar
+- Smooth movement
+- Accurate cursor positioning
+- Proper pointer capture
+- No unexpected jumps
+- No accidental text selection while dragging
+
+Windows must be movable freely around the desktop.
+
+Dragging must not be restricted to arbitrary predefined positions.
+
+### Window resizing
+
+Implement:
+
+- Horizontal resizing
+- Vertical resizing
+- Corner resizing
+- Minimum window dimensions
+- Maximum viewport-aware dimensions
+- Proper content reflow
+
+Resizing should feel responsive and stable.
+
+### Window stacking
+
+Implement proper z-index and focus management.
+
+- Clicking a window brings it to the front.
+- The active window is visually distinguishable.
+- Opening a new window places it above existing windows.
+- Minimized windows do not capture pointer events.
+- Closing a window removes its active state.
+
+### Window controls
+
+Every desktop window should support:
+
+- Close
+- Minimize
+- Maximize
+- Restore
+- Drag
+- Resize
+
+Preserve classic Mac-style traffic-light controls.
+
+### State persistence
+
+Store window geometry using the application's centralized state-management system.
+
+Restore saved dimensions and positions on reload where appropriate.
+
+If a saved position would place a window outside the visible viewport, automatically move it into a usable location.
+
+### Window behavior
+
+- Windows should not disappear behind inaccessible screen edges.
+- A title bar must remain reachable.
+- Windows should not overlap the dock in ways that prevent interaction.
+- Dragging must work with mouse, trackpad, and appropriate pointer events.
+- Avoid event conflicts between window dragging and content scrolling.
+- Applications should remain independent of one another.
+
+### Recommended architecture
+
+If no suitable window manager exists, create a reusable desktop window component.
+
+Suggested structure:
+
+`DesktopWindow`
+
+`WindowManager`
+
+`WindowRegistry`
+
+`WindowState`
+
+`useWindowManager`
+
+Use React state and pointer events, or an appropriate existing library.
+
+Do not add a large dependency if the existing architecture can be repaired cleanly.
+
+---
+
+# 10. LAUNCH DEFAULT APPLICATIONS
+
+After the initial five-second boot sequence, automatically launch these four applications:
+
+1. About Me
+2. Stories
+3. Projects
+4. Where to Connect
+
+These applications should appear as separate desktop windows.
+
+### Default layout
+
+Arrange the windows in a deliberate, visually balanced staggered layout.
+
+Suggested arrangement:
+
+- About Me: upper left
+- Stories: upper right
+- Projects: lower left
+- Where to Connect: lower right
+
+Use viewport-aware positioning rather than hardcoded pixel coordinates alone.
+
+For smaller screens, use a responsive alternative instead of squeezing four desktop windows into the viewport.
+
+### Desktop restoration rules
+
+For first-time visitors:
+
+Launch the four default applications.
+
+For returning visitors:
+
+Restore their previous desktop arrangement when saved state exists.
+
+Avoid creating duplicate windows after refreshing.
+
+If a user previously closed or minimized a default window, respect the saved session state where applicable.
+
+The four default windows should open automatically only when there is no previous desktop session to restore.
+
+---
+
+# 11. MAKE ALL WINDOWS RESPONSIVE
+
+Every application needs to adapt to changes in window dimensions.
+
+Do not merely make the entire website responsive.
+
+Each application should also respond to the dimensions of its own window.
+
+### Requirements
+
+- Use flexible layouts.
+- Use CSS Grid and Flexbox appropriately.
+- Use container queries where beneficial.
+- Avoid fixed-width application content.
+- Prevent horizontal overflow.
+- Ensure buttons remain clickable.
+- Ensure text wraps correctly.
+- Make scrollable regions behave properly.
+- Preserve window controls at smaller sizes.
+- Avoid excessively nested scrollbars.
+
+### Mobile behavior
+
+On small screens:
+
+- Prioritize usable application content.
+- Use maximized or appropriately sized windows.
+- Provide touch-friendly controls.
+- Support switching between open applications.
+- Prevent windows from becoming inaccessible.
+- Avoid spawning four overlapping, unusably small windows.
+
+Keep the desktop aesthetic while adapting the interaction model to mobile.
+
+---
+
+# 12. VISUAL DESIGN SYSTEM
+
+The complete portfolio should combine four visual influences.
+
+### Frutiger Aero
+
+- Bright skies
+- Glossy glass
+- Cyan and blue gradients
+- Translucent surfaces
+- Floating bubbles
+- Lush greenery
+- Reflective highlights
+- Optimistic futuristic atmosphere
+
+### Classic macOS Aqua
+
+- Gel-like buttons
+- Blue selection states
+- Metallic window frames
+- Soft bevels
+- Traffic-light controls
+- Familiar Finder interactions
+
+### iOS 6 Skeuomorphism
+
+- Physical material textures
+- Paper surfaces
+- Leather-inspired details
+- Realistic shadows
+- Tactile controls
+- Layered gradients
+
+### Nintendo-inspired playful design
+
+- Friendly character proportions
+- Cheerful ambient animation
+- Rounded interfaces
+- Smooth transitions
+- Interactive plaza environments
+
+Use each design language where it makes sense.
+
+Do not force every application to look identical.
+
+The desktop should tie everything together visually, while individual applications retain their distinctive identities.
+
+---
+
+# 13. PERFORMANCE REQUIREMENTS
+
+Target a smooth 60 FPS experience where hardware and browser conditions allow.
+
+Prioritize:
+
+- Hardware-accelerated transforms
+- Efficient animation loops
+- Minimal unnecessary React re-renders
+- Lazy-loading heavy assets
+- Optimized background images
+- Efficient Mii rendering
+- Avoiding unnecessary layout calculations
+- Appropriate cleanup of event listeners
+- Memory management
+
+Avoid using expensive CSS blur effects excessively.
+
+Pause unnecessary animations when their windows are hidden, minimized, or when the browser tab is inactive.
+
+Respect the user's `prefers-reduced-motion` setting.
+
+---
+
+# 14. DEVELOPMENT AND TESTING REQUIREMENTS
+
+Before editing:
+
+1. Inspect the repository.
+2. Identify the application and window architecture.
+3. Identify existing Mii-related components.
+4. Review the current persistence implementation.
+5. Identify the location of the wallpaper assets.
+6. Identify existing routing and navigation behavior.
+7. Create an implementation plan.
+
+Then implement the requested improvements.
+
+### Test the following
+
+- Mii app launches successfully.
+- Mii characters move independently.
+- Background image loads.
+- Stories app opens.
+- Stories content is separate from Notes.
+- Notes preserve saved data.
+- Terminal commands behave correctly.
+- Five-second boot sequence works.
+- Settings persist after refresh.
+- Projects application uses Aqua styling.
+- All windows can be dragged.
+- All windows can be resized.
+- All windows can be minimized, maximized, and restored.
+- Window stacking works correctly.
+- Four default applications open for first-time visitors.
+- Returning visitors recover their previous settings and desktop state.
+- Small-screen layouts are usable.
+- Existing project links still work.
+- No new console errors appear.
+
+Use browser-based interaction tests where tooling is available.
+
+### Regression protection
+
+Do not break:
+
+- Existing sound effects
+- Working music playback
+- Other desktop applications
+- Existing navigation
+- Stored notes
+- Working project links
+- Desktop appearance settings
+- Existing keyboard interactions
+
+---
+
+# 15. IMPLEMENTATION PRIORITY
+
+Complete the work in this order:
+
+**Phase 1 — Core functionality**
+
+- Repair window management.
+- Implement dragging and resizing.
+- Fix application stacking.
+- Implement persistent settings and desktop state.
+
+**Phase 2 — Application restructuring**
+
+- Restore Mii application.
+- Create Stories application.
+- Move engineering story content out of Notes.
+- Simplify terminal commands.
+
+**Phase 3 — Visual redesign**
+
+- Recreate iOS 6-inspired Notes.
+- Recreate Aqua-inspired Projects.
+- Improve Mii scaling and animation.
+- Integrate the supplied plaza wallpaper.
+
+**Phase 4 — Boot and defaults**
+
+- Update five-second loading sequence.
+- Launch default applications.
+- Restore previous sessions.
+
+**Phase 5 — Quality assurance**
+
+- Test all applications.
+- Check responsive behavior.
+- Fix interaction bugs.
+- Optimize rendering performance.
+- Verify persistence.
+
+---
+
+# 16. ACCEPTANCE CRITERIA
+
+The task is complete only when:
+
+1. The desktop functions like a miniature operating system.
+2. Windows can be freely dragged and resized.
+3. Saved settings and desktop state survive refreshes.
+4. The Mii plaza is interactive and uses the supplied background.
+5. The Mii characters are appropriately scaled and animated.
+6. Stories is a separate, functional application.
+7. Notes has a polished iOS 6-inspired appearance.
+8. Projects closely resembles classic macOS Aqua Finder.
+9. Terminal commands are simplified.
+10. The loading sequence lasts at least five seconds.
+11. The four specified applications launch by default for new visitors.
+12. Returning visitors recover their desktop state.
+13. The site works on desktop and mobile.
+14. Existing working features remain functional.
+
+Do not replace these requirements with static mockups.
+
+Implement actual interactions, functioning state management, and persistent behavior.
+
+## FINAL DELIVERABLE
+
+After implementation, provide:
+
+- A summary of the changes made
+- The files modified
+- Any new dependencies
+- Any required assets I must supply
+- Any features that remain incomplete
+- Test results
+- Instructions for running the updated portfolio
+
+Make direct code changes rather than only describing how to implement them.
+
+**The final product should feel like a fully interactive 2005-era personal operating system, combining the playful atmosphere of a Mii Plaza, the tactile interface of iOS 6, and the glossy sophistication of classic Mac OS X Aqua.**

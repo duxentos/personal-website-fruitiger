@@ -11,17 +11,9 @@ test('saved icon arrangements recover from invalid, repeated or missing entries'
   assert.equal(moveIcon(order, 'resume', -1), order);
 });
 
-test('every terminal command requires the cd - prefix and dispatches the intended destination', () => {
-  assert.ok(commandGuide.every(command => command.startsWith('cd -')));
+test('terminal exposes the minimal commands and rejects removed destinations', () => {
+  assert.deepEqual(commandGuide, ['cd -about me','help','clear','ls','pwd']);
   for (const command of commandGuide) assert.ok(parseCommand(command));
-  assert.equal(parseCommand('open projects'), undefined);
-  assert.equal(parseCommand('help'), undefined);
-  assert.equal(parseCommand('cd -projects extra'), undefined);
-  assert.equal(parseCommand('cd -nonexistent'), undefined);
-  const app = parseCommand(' CD   -RESUME ');
-  assert.ok(app?.kind === 'app');
-  assert.equal(app.app, 'resume');
-  const link = parseCommand('cd -linkedin');
-  assert.ok(link?.kind === 'profile');
-  assert.equal(link.profile, 'linkedin');
+  assert.deepEqual(parseCommand(' CD   -ABOUT ME '), {kind:'app',app:'welcome',description:'About Me'});
+  for (const command of ['cd -resume','cd -linkedin','cd -projects','open projects','cd -about me extra']) assert.equal(parseCommand(command),undefined);
 });

@@ -2,13 +2,12 @@ import {useEffect, useRef, useState, type PointerEvent} from 'react';
 import {AppIcon} from './DesktopChrome';
 import {useDesktop} from './Desktop';
 import {desktopShortcuts, isTouchDesktop} from './desktopLayout';
+import {settingsStore} from '../settings/store';
 import {moveIcon, normalizeIconOrder, type ShortcutId} from './iconOrder';
 
 const storageKey = 'azaan-desktop-icon-order';
-function readOrder() {
-  try {return normalizeIconOrder(JSON.parse(localStorage.getItem(storageKey) || 'null'));}
-  catch {return normalizeIconOrder(null);}
-}
+function readOrder() {return settingsStore.read('icons',normalizeIconOrder);}
+
 type Drag = {
   id: ShortcutId; pointer: number; startX: number; startY: number; dx: number; dy: number; moved: boolean;
   origin: DOMRect; bounds: DOMRect; slots: {id: ShortcutId; x: number; y: number}[];
@@ -23,7 +22,7 @@ export function DesktopShortcuts() {
   const drag = useRef<Drag | null>(null);
   const suppressClick = useRef(false);
   useEffect(() => {
-    try {localStorage.setItem(storageKey, JSON.stringify(order));} catch {}
+    settingsStore.write('icons',order);
   }, [order]);
 
   function start(event: PointerEvent<HTMLButtonElement>, id: ShortcutId) {

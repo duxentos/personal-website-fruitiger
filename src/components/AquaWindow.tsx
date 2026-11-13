@@ -2,12 +2,12 @@ import {useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, t
 import {Minus, Plus, X} from 'lucide-react';
 import {useDesktop, type WindowId} from './Desktop';
 import {isTouchDesktop, touchDesktopQuery} from './desktopLayout';
-import {fitWindowFrame, moveWindowFrame, type WindowFrame, type WorkspaceSize} from './windowGeometry';
+import {fitWindowFrame, moveWindowFrame, resizeWindowFrame, type ResizeEdge, type WindowFrame, type WorkspaceSize} from './windowGeometry';
 
 type Props = {id: WindowId; children: ReactNode; className?: string};
 type Gesture = {
   kind: 'move' | 'resize'; pointer: number; px: number; py: number; frame: WindowFrame;
-  next: {x: number; y: number}; size: WorkspaceSize; moved: boolean;
+  edge?:ResizeEdge; next: WindowFrame; size: WorkspaceSize; moved: boolean;
 };
 
 export function AquaWindow({id, children, className = ''}: Props) {
@@ -28,6 +28,7 @@ export function AquaWindow({id, children, className = ''}: Props) {
       gesture.current = null;
       section.current?.style.removeProperty('--drag-x');
       section.current?.style.removeProperty('--drag-y');
+      section.current?.style.removeProperty('--drag-w');section.current?.style.removeProperty('--drag-h');
       const next = {w: parent.clientWidth, h: parent.clientHeight, touch: media.matches};
       setWorkspace(previous => previous.w === next.w && previous.h === next.h && previous.touch === next.touch ? previous : next);
     };
@@ -39,11 +40,11 @@ export function AquaWindow({id, children, className = ''}: Props) {
     return () => {observer?.disconnect(); window.removeEventListener('resize', measure); media.removeEventListener('change', measure);};
   }, [win.mode]);
 
-  function start(event: PointerEvent<HTMLElement>, kind: 'move' | 'resize') {
-    if (event.button !== 0 || gesture.current || win.zoom || (kind === 'resize' && workspace.touch)) return;
+  function start(event: PointerEvent<HTMLElement>, kind: 'move' | 'resize', edge?:ResizeEdge) {
+    if (event.button !== 0 || gesture.current || win.zoom) return;
     if (kind === 'move' && (event.target as HTMLElement).closest('button')) return;
     event.preventDefault();
-    gesture.current = {kind, pointer: event.pointerId, px: event.clientX, py: event.clientY, frame, next: {x: frame.x, y: frame.y}, size: workspace, moved: false};
+    gesture.current = {kind, pointer: event.pointerId, px: event.clientX, py: event.clientY, frame, edge, next: {...frame}, size: workspace, moved: false};
     event.currentTarget.setPointerCapture(event.pointerId);
   }
 
@@ -53,15 +54,12 @@ export function AquaWindow({id, children, className = ''}: Props) {
     const dx = event.clientX - active.px, dy = event.clientY - active.py;
     if (!active.moved && Math.hypot(dx, dy) < 6) return;
     active.moved = true;
-    if (active.kind === 'move') {
-      active.next = moveWindowFrame(active.frame, dx, dy, active.size);
-      section.current?.style.setProperty('--drag-x', `${active.next.x - active.frame.x}px`);
-      section.current?.style.setProperty('--drag-y', `${active.next.y - active.frame.y}px`);
-    } else {
-      desktop.change(id, {
-        w: Math.max(Math.min(260, active.size.w), Math.min(active.size.w - active.frame.x, active.frame.w + dx)),
-        h: Math.max(Math.min(180, active.size.h), Math.min(active.size.h - active.frame.y, active.frame.h + dy)),
-      });
+    active.next = active.kind==='move' ? {...active.frame,...moveWindowFrame(active.frame,dx,dy,active.size)} : resizeWindowFrame(active.frame,dx,dy,active.edge||'se',active.size);
+    section.current?.style.setProperty('--drag-x', `${active.next.x-active.frame.x}px`);
+    section.current?.style.setProperty('--drag-y', `${active.next.y-active.frame.y}px`);
+    if(active.kind==='resize'){
+      section.current?.style.setProperty('--drag-w', `${active.next.w}px`);
+      section.current?.style.setProperty('--drag-h', `${active.next.h}px`);
     }
   }
 
@@ -71,8 +69,9 @@ export function AquaWindow({id, children, className = ''}: Props) {
     gesture.current = null;
     section.current?.style.removeProperty('--drag-x');
     section.current?.style.removeProperty('--drag-y');
+      section.current?.style.removeProperty('--drag-w');section.current?.style.removeProperty('--drag-h');
     if (active.moved) lastDrag.current = performance.now();
-    if (active.moved && !cancelled && active.kind === 'move') desktop.change(id, active.next);
+    if (active.moved && !cancelled) desktop.change(id, active.next);
   }
 
   if (win.mode !== 'open') return null;
@@ -107,16 +106,9 @@ export function AquaWindow({id, children, className = ''}: Props) {
       <span className="window-name">{win.title}</span>
     </div>
     <div className="window-content">{children}</div>
-    <button hidden={win.zoom} className="resize-handle" aria-label={`resize ${win.title}; use arrow keys`}
-      onPointerDown={event => start(event, 'resize')} onPointerMove={update}
-      onPointerUp={event => finish(event)} onPointerCancel={event => finish(event, true)} onLostPointerCapture={event => finish(event, true)}
-      onKeyDown={event => {
-        if (!event.key.startsWith('Arrow')) return;
-        event.preventDefault();
-        desktop.change(id, {
-          w: Math.max(Math.min(260, workspace.w), Math.min(workspace.w - frame.x, frame.w + (event.key === 'ArrowRight' ? 20 : event.key === 'ArrowLeft' ? -20 : 0))),
-          h: Math.max(Math.min(180, workspace.h), Math.min(workspace.h - frame.y, frame.h + (event.key === 'ArrowDown' ? 20 : event.key === 'ArrowUp' ? -20 : 0))),
-        });
-      }}/>
+    {!win.zoom&&(['n','s','e','w','ne','nw','se','sw'] as ResizeEdge[]).map(edge=><button key={edge} className={`window-resize resize-${edge}`} aria-label={`resize ${win.title} ${edge}; use arrow keys`}
+      onPointerDown={event=>start(event,'resize',edge)} onPointerMove={update}
+      onPointerUp={event=>finish(event)} onPointerCancel={event=>finish(event,true)} onLostPointerCapture={event=>finish(event,true)}
+      onKeyDown={event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;event.preventDefault();desktop.change(id,resizeWindowFrame(frame,event.key==='ArrowLeft'?-15:event.key==='ArrowRight'?15:0,event.key==='ArrowUp'?-15:event.key==='ArrowDown'?15:0,edge,workspace));}}/>)}
   </section>;
 }

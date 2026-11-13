@@ -1,5 +1,14 @@
 # Website change log
 
+## Improvements brief refinement — 2026-11-13
+
+- Applied the latest `Improvements` brief. It supersedes the earlier Notes-only startup, removed plaza, all-`cd` terminal commands and no-transition startup requests.
+- Repaired shared window focus, eight-direction resize, touch gestures, bounds and saved geometry/session modes; new visitors receive four primary apps.
+- Added Stories, a restored interactive plaza with the supplied image, persistent editable skeuomorphic Notes and an Aqua Finder project browser.
+- Centralized validated/versioned preferences and legacy migration; preserved sound effects/music/profile destinations.
+- Boot now waits at least five seconds and for critical assets or fallbacks, with reduced-motion-aware transitions.
+- No dependency additions. See `IMPROVEMENTS_REVIEW.md` for tests, file map and remaining content placeholders.
+
 ## Fixed five-second startup — 2026-11-12
 
 - Replaced random 1–2 second startup with a fixed 5000ms presentation, as requested.

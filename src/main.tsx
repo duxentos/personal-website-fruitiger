@@ -1,8 +1,8 @@
 import {useEffect,useState,type CSSProperties} from 'react';
 import {createRoot} from 'react-dom/client';
-import {ArrowUpRight,FolderOpen,Search,SlidersHorizontal} from 'lucide-react';
+import {ArrowUpRight,FolderOpen} from 'lucide-react';
 import {useReducedMotion} from 'motion/react';
-import {projects,type Category} from './projects';
+import {projects} from './projects';
 import {AquaWindow} from './components/AquaWindow';
 import {DesktopProvider,useDesktop} from './components/Desktop';
 import {Dock,MenuBar} from './components/DesktopChrome';
@@ -10,7 +10,11 @@ import {BubbleLayer,PreferencesPanel} from './components/DesktopExtras';
 import {MusicProvider} from './apps/ipod/MusicProvider';
 import {IPodApp} from './apps/ipod/IPodApp';
 import './apps/ipod/ipod.css';
-import {TerminalApp,NotesApp} from './apps/terminal/TerminalApp';
+import {TerminalApp} from './apps/terminal/TerminalApp';
+import {NotesApp} from './apps/notes/NotesApp';
+import {StoriesApp} from './apps/stories/StoriesApp';
+import {MiiPlaza} from './apps/mii/MiiPlaza';
+import {ProjectExplorer,ProjectDetails} from './apps/projects/ProjectExplorer';
 import {SoundProvider} from './audio/SoundProvider';
 import {BootProvider} from './components/boot/BootScreen';
 import {MiiCompanion} from './components/MiiCompanion';
@@ -19,17 +23,20 @@ import {SocialIcon} from './components/SocialIcon';
 import {DesktopShortcuts} from './components/DesktopShortcuts';
 import {profile} from './profile';
 import './style.css';
-const categories:('all'|Category)[]=['all','software engineering','ai / machine learning','biomedical engineering','embedded systems','hardware','hackathons'];
-function App(){const d=useDesktop();const[path,setPath]=useState(location.pathname);const[filter,setFilter]=useState('all');const[query,setQuery]=useState('');const reduce=useReducedMotion();
+import './apps/refinement.css';
+function App(){const d=useDesktop();const[path,setPath]=useState(location.pathname);const reduce=useReducedMotion();
  useEffect(()=>{const pop=()=>{setPath(location.pathname);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')}};window.addEventListener('popstate',pop);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')};return()=>window.removeEventListener('popstate',pop)},[]);
  function openProject(id:string){const url='/projects/'+id;history.pushState({},'',url);setPath(url);d.open('detail')}
- const selected=projects.find(p=>path===`/projects/${p.id}`);const visible=projects.filter(p=>(filter==='all'||p.category===filter)&&p.name.toLowerCase().includes(query.toLowerCase())).sort((a,b)=>d.sort==='category'?a.category.localeCompare(b.category):d.sort==='name'?a.name.localeCompare(b.name):0);
- return <div className={`os-desktop wallpaper-${d.wallpaper} theme-${d.preferences.theme} ${d.preferences.reducedMotion?'motion-reduced':''}`}><MenuBar/><BubbleLayer/><div className="wallpaper-art" aria-hidden="true"><span/><span/><span/><span/></div><main className="desktop-workspace" aria-label="azaan's desktop"><DesktopShortcuts/>
+ const selected=projects.find(p=>path===`/projects/${p.id}`);
+ return <div style={{'--accent':d.preferences.accent} as CSSProperties} className={`os-desktop wallpaper-${d.wallpaper} theme-${d.preferences.theme} ${d.preferences.reducedMotion?'motion-reduced':''}`}><MenuBar/><BubbleLayer/><div className="wallpaper-art" aria-hidden="true"><span/><span/><span/><span/></div><main className="desktop-workspace" aria-label="azaan's desktop"><DesktopShortcuts/>
  <AquaWindow id="welcome" className="welcome-app"><div className="welcome-content"><MiiCompanion compact context="about"/><span className="micro">personal desktop / azaan khan</span><h1>azaan khan<span>.</span></h1><p className="hero-sub">computer engineering @ university of waterloo</p><p className="hero-description">a home for projects, experiments, and things i'm learning along the way.</p><div className="hero-actions"><button className="aqua-button" onClick={()=>d.open('projects')}><FolderOpen size={15}/> explore my projects</button><button className="plain-link" onClick={()=>d.open('connect')}>want to find me? <ArrowUpRight size={15}/></button></div><div className="welcome-status"><span/> a work in progress <small>make yourself at home.</small></div></div></AquaWindow>
  <AquaWindow id="notes" className="notes-app"><NotesApp/></AquaWindow>
- <AquaWindow id="projects" className="projects-app"><div className="explorer-toolbar"><div className="location"><FolderOpen size={15}/><span>desktop</span><span>›</span><strong>projects</strong></div><label className="search"><Search size={15}/><input id="project-search" aria-label="search projects" value={query} onChange={e=>setQuery(e.target.value)} placeholder="search projects"/></label></div><div className="explorer-main"><aside className="filters" aria-label="filter projects"><span><SlidersHorizontal size={14}/> filter by</span>{categories.map(c=><button key={c} className={filter===c?'active':''} onClick={()=>setFilter(c)}>{c}</button>)}</aside><div className={`file-list layout-${d.layout}`}><div className="list-header"><span>name</span><span>category</span><span>status</span></div>{visible.map(p=><button key={p.id} className="file-row" onClick={()=>openProject(p.id)}><span className="file-name"><span className="file-icon" style={{'--project-color':p.accent} as CSSProperties}><FolderOpen size={23}/></span><span><strong>{p.name}</strong><small>open project file</small></span></span><span className="category">{p.category}</span><span className="status">details coming soon <ArrowUpRight size={15}/></span></button>)}{visible.length===0&&<p className="empty">no projects in this view. try another filter or search.</p>}<div className="file-footer"><MiiCompanion compact context="projects"/><span>{visible.length} project files</span><span>details will be added as they're ready.</span></div></div></div></AquaWindow>
+ <AquaWindow id="projects" className="projects-app"><ProjectExplorer onOpen={openProject}/></AquaWindow>
+ <AquaWindow id="stories" className="stories-window"><StoriesApp/></AquaWindow>
+ <AquaWindow id="mii" className="plaza-window"><MiiPlaza/></AquaWindow>
  <AquaWindow id="connect" className="connect-app"><div className="connect-content"><div><span className="micro">somewhere else on the internet</span><h2>want to find me?</h2><p>let's connect. you'll find me on linkedin.</p><div className="social-pills">{(['linkedin','github','devpost','instagram'] as const).map(name=><a key={name} className="aqua-button" href={profile[name]} target="_blank" rel="noreferrer"><SocialIcon name={name}/>{name} <ArrowUpRight size={13}/></a>)}</div></div><div className="curious-stage"><img src={reduce||d.preferences.reducedMotion?profile.avatar.still:profile.avatar.curious} alt="azaan’s confused mii looking around"/></div></div></AquaWindow>
- <AquaWindow id="detail" className="detail-app">{selected?<div className="detail-inner"><div><span className="micro">project file / {selected.category}</span><h1>{selected.name}</h1><p>the details for this project are being prepared. its technical overview, status, and links will be added when they are ready to share.</p><button className="plain-link" onClick={()=>{d.close('detail');d.open('projects');history.pushState({},'','/');setPath('/')}}>back to project explorer</button></div><div className="detail-art" style={{'--project-color':selected.accent} as CSSProperties}><FolderOpen size={65}/><span>project file</span></div></div>:<div className="empty"><h2>no project selected.</h2><button className="aqua-button" onClick={()=>d.open('projects')}>open project explorer</button></div>}</AquaWindow>
+ <AquaWindow id="detail" className="detail-app">{selected?<ProjectDetails project={selected} onBack={()=>{d.close('detail');d.open('projects');history.pushState({},'','/');setPath('/')}}/>:<p className="empty">Choose a project from Project Files.</p>}</AquaWindow>
  <AquaWindow id="terminal" className="terminal-window"><TerminalApp/></AquaWindow><AquaWindow id="resume" className="resume-window"><div className="resume-toolbar"><MiiCompanion compact context="resume"/><span>azaan khan — résumé</span><a className="aqua-button" href={profile.resume} target="_blank" rel="noreferrer">open PDF <ArrowUpRight size={13}/></a><a className="aqua-button" href={profile.resume} download>download</a></div><iframe className="resume-document" title="azaan khan résumé" src={profile.resume}/></AquaWindow><AquaWindow id="ipod" className="ipod-window"><IPodApp/></AquaWindow><AquaWindow id="settings" className="settings-app"><PreferencesPanel/></AquaWindow></main><Dock/></div>
 }
 createRoot(document.getElementById('root')!).render(<SoundProvider><MusicProvider><DesktopProvider><BootProvider><App/></BootProvider></DesktopProvider></MusicProvider></SoundProvider>);
+

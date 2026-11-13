@@ -1,3 +1,5 @@
+> Current refinement: see [IMPROVEMENTS_REVIEW.md](IMPROVEMENTS_REVIEW.md). The following is historical and superseded where the latest Improvements brief differs.
+
 # Markdown requirements and implementation review
 
 Review date: 2026-11-12. Reviewed all 11 Markdown briefs on `main` at `6093c4a5ac49af03ab0a1075443bff3a5e0fc1b9`, including unchanged design constraints and the new/updated subprompts. Implementation continues on `codex/aero-portfolio` / PR #1.
