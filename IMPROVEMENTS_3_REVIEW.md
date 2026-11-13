@@ -33,3 +33,9 @@ Run on Node.js 22.18+: `npm install`, `npm run dev`; verify with `npm run lint` 
 ## Preview observations
 
 The first preview deployed READY and independently passed all 33 tests, TypeScript and Vite. Native Chrome showed the supplied crossing clip and automatic desktop entry, with only about me/projects open, compact launchers and three floating media placeholders. Visual QA found native controls resetting inherited lowercase; the rule was applied directly to desktop UI descendants. The native pointer-drag automation timed out and user activity also changed the browser state, so a complete pointer/gesture pass is not claimed.
+
+## Final build and browser limits
+
+Code commit `dc2f3ab57fd28620bf0f41aeacbc98fb56c63fa6` deployed READY as `dpl_5pBZAZvFZ7zeH41wn2DrRUajqq2N`. Vercel passed all 33 tests, TypeScript and Vite. The final homepage and CSS returned HTTP 200, and the deployed CSS contains the direct lowercase-control rule.
+
+The preceding preview was observed rendering the crossing animation and entering the two-window desktop automatically. Blog-reader accessibility content showed the three unpublished post placeholders. The last browser navigation was blocked by an unexpected Chrome password-security alert, which was left untouched. Final visual casing, current phone spacing and a full pointer-drag pass are not claimed as browser-verified. No console-error pass is claimed for this revision.
