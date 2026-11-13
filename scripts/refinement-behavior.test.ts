@@ -4,7 +4,6 @@ import {createSettingsStore,SETTINGS_KEY,object,finite} from '../src/settings/st
 import {initialSession,restoreSession,windowReducer} from '../src/components/windowModel.ts';
 import {resizeWindowFrame} from '../src/components/windowGeometry.ts';
 import {validateNotebook,deleteNote,undoDelete} from '../src/apps/notes/noteModel.ts';
-import {createVisitors,advanceVisitor,destination,inZone,walkableZones,characterHeight} from '../src/apps/mii/plazaModel.ts';
 function storage(){const data=new Map<string,string>();return{getItem:(k:string)=>data.get(k)??null,setItem:(k:string,v:string)=>{data.set(k,v)},removeItem:(k:string)=>{data.delete(k)}};}
 test('settings migrate valid legacy values and preserve independent sections',()=>{
  const db=storage();db.setItem('azaan-ipod',JSON.stringify({volume:.3}));const store=createSettingsStore(db);
@@ -39,16 +38,13 @@ test('notebook deletion is recoverable and an intentionally empty notebook stays
  assert.equal(validateNotebook(deleted).items.length,0);assert.equal(undoDelete(deleted).items[0].body,book.items[0].body);
  const malformed=validateNotebook({items:[{},book.items[0],book.items[0]],selectedId:'missing'});assert.equal(malformed.items.length,1);assert.equal(malformed.selectedId,'welcome');
 });
-test('plaza paths remain walkable and animation speed is independent of frame rate',()=>{
- for(let z=0;z<walkableZones.length;z++)for(let i=0;i<100;i++)assert.ok(inZone(destination(z),walkableZones[z]));
- const first=createVisitors()[0];first.target={x:first.x+.1,y:first.y};first.pose='walking';const second=structuredClone(first);
- for(let i=0;i<60;i++)advanceVisitor(first,1/60,i/60,1);for(let i=0;i<30;i++)advanceVisitor(second,1/30,i/30,1);
- assert.ok(Math.abs(first.x-second.x)<.000001);assert.ok(characterHeight(.95,800)>characterHeight(.76,800));
- const visitors=createVisitors();for(let i=0;i<1000;i++)for(const v of visitors){advanceVisitor(v,1/30,i/30,2);assert.ok(inZone(v,walkableZones[v.zone]));}
-});
-
 test('a maximized session retains its floating restore frame after refresh',()=>{
  const size={w:1280,h:720};const session=initialSession(size);session.windows.notes={...session.windows.notes,x:50,y:40,w:600,h:450,mode:'open',zoom:true};
  const restored=restoreSession(session,size);assert.equal(restored.windows.notes.zoom,true);assert.equal(restored.windows.notes.w,600);assert.equal(restored.windows.notes.x,50);
  const unzoomed=windowReducer(restored,{type:'zoom',id:'notes'});assert.equal(unzoomed.windows.notes.zoom,false);assert.equal(unzoomed.windows.notes.h,450);
+});
+
+test('retired plaza sessions cannot reopen the removed app',()=>{
+ const initial=initialSession({w:1280,h:720});const value={...initial,active:'mii',windows:{...initial.windows,mii:{mode:'open',layer:500}}};
+ const restored=restoreSession(value,{w:1280,h:720});assert.equal('mii' in restored.windows,false);assert.equal(restored.windows.avatar.mode,'closed');assert.notEqual(restored.active,'mii');
 });

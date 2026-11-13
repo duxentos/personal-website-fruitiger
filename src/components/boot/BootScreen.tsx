@@ -3,7 +3,8 @@ import {useReducedMotion} from 'motion/react';
 import {useDesktop} from '../Desktop';
 import {miiAnimations, selectAnimation, type MiiAnimation} from '../../data/miiAnimations';
 import {playSound} from '../../audio/SoundEngine';
-import {BOOT_DURATION_MS,canEnterDesktop} from './bootTiming.ts';
+import {wallpapers} from '../../data/wallpapers';
+import {BOOT_DURATION_MS,BOOT_ASSET_TIMEOUT_MS,BOOT_EXIT_MS,canEnterDesktop} from './bootTiming.ts';
 
 export function BootProvider({children}: {children: ReactNode}) {
   const {preferences} = useDesktop();
@@ -45,7 +46,7 @@ function loadImage(src: string) {
       image.onload = null;
       image.onerror = null;
       reject(new Error('image timeout'));
-    }, 8000);
+    }, BOOT_ASSET_TIMEOUT_MS);
     image.onload = () => {clearTimeout(timer); resolve();};
     image.onerror = () => {clearTimeout(timer); reject(new Error('image unavailable'));};
     image.src = src;
@@ -90,7 +91,7 @@ function BootScreen({onDone}: {onDone: () => void}) {
     return () => {mounted.current = false; transition.current += 1;};
   }, []);
 
-  // Five-second minimum, followed by critical readiness (or a resolved fallback).
+  // 3.5-second presentation, with critical readiness or bounded fallback.
   useEffect(() => {
     const close = setTimeout(() => setMinimumElapsed(true), BOOT_DURATION_MS);
     return () => clearTimeout(close);
@@ -99,16 +100,16 @@ function BootScreen({onDone}: {onDone: () => void}) {
   useEffect(()=>{
     if(!canEnterDesktop(minimumElapsed,phase!=='loading'))return;
     setLeaving(true);
-    const timer=setTimeout(()=>finishRef.current(),reduced?0:180);
+    const timer=setTimeout(()=>finishRef.current(),reduced?0:BOOT_EXIT_MS);
     return()=>clearTimeout(timer);
   },[minimumElapsed,phase,reduced]);
 
   useEffect(() => {
     let cancelled=false;
-    const wallpaper=p.wallpaper==='meadow'?'https://github.com/user-attachments/assets/c879a033-99eb-4dd1-acda-c36fa5b9bf3e':'/vista-aurora.svg';
+    const wallpaper=wallpapers[p.wallpaper];
     if(!reduced)loadImage(last.src).then(()=>{if(!cancelled)setImageReady(true)}).catch(()=>{});
     let fontTimer:ReturnType<typeof setTimeout>;
-    const fonts=Promise.race([document.fonts.ready,new Promise((_,reject)=>{fontTimer=setTimeout(()=>reject(new Error('font fallback')),8000)})]);
+    const fonts=Promise.race([document.fonts.ready,new Promise((_,reject)=>{fontTimer=setTimeout(()=>reject(new Error('font fallback')),BOOT_ASSET_TIMEOUT_MS)})]);
     Promise.allSettled([fonts,loadImage(wallpaper),loadImage('/mii-still.png')]).then(results=>{
       clearTimeout(fontTimer);
       if(cancelled)return;

@@ -1,14 +1,13 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {useReducedMotion} from 'motion/react';
-import {useMusic} from '../apps/ipod/MusicProvider';
 import {useDesktop} from './Desktop';
 import {miiAnimations, selectAnimation, type MiiAnimation} from '../data/miiAnimations';
 import {playSound} from '../audio/SoundEngine';
 
-type MiiContext = 'desktop' | 'about' | 'projects' | 'notes' | 'terminal' | 'ipod' | 'resume';
+type MiiContext = 'desktop' | 'about' | 'projects' | 'notes' | 'terminal' | 'resume';
 const contextAnimation: Record<MiiContext, string> = {
   desktop: 'wave', about: 'intro', projects: 'little-hop', notes: 'shortcut',
-  terminal: 'curious', ipod: 'happy', resume: 'scenic-route',
+  terminal: 'curious', resume: 'scenic-route',
 };
 function prepare(src: string) {
   return new Promise<void>((resolve, reject) => {
@@ -21,7 +20,6 @@ function prepare(src: string) {
 }
 
 export function MiiCompanion({compact = false, context = 'desktop'}: {compact?: boolean; context?: MiiContext}) {
-  const music = useMusic();
   const {preferences: p} = useDesktop();
   const systemReduce = useReducedMotion();
   const reduced = Boolean(systemReduce || p.reducedMotion);
@@ -35,8 +33,6 @@ export function MiiCompanion({compact = false, context = 'desktop'}: {compact?: 
   const busy = useRef(false);
   const request = useRef(0);
   const mounted = useRef(true);
-  const dancing = context === 'ipod' && music.playing && !reduced && !reaction;
-  const rick = music.track?.id === 'track-three';
 
   const show = useCallback(async (animation: MiiAnimation, isReaction: boolean) => {
     const token = ++request.current;
@@ -72,14 +68,14 @@ export function MiiCompanion({compact = false, context = 'desktop'}: {compact?: 
   }, [reaction, current, hidden, base, show]);
 
   useEffect(() => {
-    if (!p.randomMii || reduced || hidden || dancing || reaction) return;
+    if (!p.randomMii || reduced || hidden || reaction) return;
     const timer = setTimeout(() => {
       if (busy.current) return;
       const next = selectAnimation(miiAnimations.filter(a => !a.fullStage && !failed.current.has(a.id)), previous.current, seen.current, Date.now());
       if (next) void show(next, true);
     }, p.miiFrequency * 1000);
     return () => clearTimeout(timer);
-  }, [p.randomMii, p.miiFrequency, reduced, hidden, dancing, reaction, current, show]);
+  }, [p.randomMii, p.miiFrequency, reduced, hidden, reaction, current, show]);
 
   async function greet() {
     if (!p.miiInteractions || busy.current) return;
@@ -93,10 +89,10 @@ export function MiiCompanion({compact = false, context = 'desktop'}: {compact?: 
 
   const src = reduced || hidden ? '/mii-still.png' : current?.src || '/mii-still.png';
   return <div className={`${compact ? 'mii-presence' : 'mii-companion'} mii-context-${context} ${current?.fullStage ? 'mii-wide' : ''} ${hidden ? 'animation-paused' : ''}`}>
-    <button className={`mii-figure ${dancing ? (rick ? 'dance-rick' : 'dance-normal') : ''}`}
+    <button className="mii-figure"
       onClick={greet} disabled={!p.miiInteractions} aria-label={`interact with Azaan's ${context === 'desktop' ? 'Mii' : context + ' Mii'}`}>
       <img key={src} src={src} alt="Azaan's Mii companion" onError={() => {if (current) failed.current.add(current.id); setCurrent(null);}}/>
     </button>
-    {!compact && <div className="mii-caption"><span>{reaction ? 'a little something different' : dancing ? (rick ? 'a little jazzy side-step' : 'dancing along') : 'tap to say hi'}</span><button onClick={greet} disabled={!p.miiInteractions}>say hi ↗</button></div>}
+    {!compact && <div className="mii-caption"><span>{reaction ? 'a little something different' : 'tap to say hi'}</span><button onClick={greet} disabled={!p.miiInteractions}>say hi ↗</button></div>}
   </div>;
 }

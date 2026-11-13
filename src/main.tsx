@@ -13,7 +13,7 @@ import './apps/ipod/ipod.css';
 import {TerminalApp} from './apps/terminal/TerminalApp';
 import {NotesApp} from './apps/notes/NotesApp';
 import {StoriesApp} from './apps/stories/StoriesApp';
-import {MiiPlaza} from './apps/mii/MiiPlaza';
+import {MiiApp} from './apps/mii/MiiApp';
 import {ProjectExplorer,ProjectDetails} from './apps/projects/ProjectExplorer';
 import {SoundProvider} from './audio/SoundProvider';
 import {BootProvider} from './components/boot/BootScreen';
@@ -33,7 +33,7 @@ function App(){const d=useDesktop();const[path,setPath]=useState(location.pathna
  <AquaWindow id="notes" className="notes-app"><NotesApp/></AquaWindow>
  <AquaWindow id="projects" className="projects-app"><ProjectExplorer onOpen={openProject}/></AquaWindow>
  <AquaWindow id="stories" className="stories-window"><StoriesApp/></AquaWindow>
- <AquaWindow id="mii" className="plaza-window"><MiiPlaza/></AquaWindow>
+ <AquaWindow id="avatar" className="mii-only-window"><MiiApp/></AquaWindow>
  <AquaWindow id="connect" className="connect-app"><div className="connect-content"><div><span className="micro">somewhere else on the internet</span><h2>want to find me?</h2><p>let's connect. you'll find me on linkedin.</p><div className="social-pills">{(['linkedin','github','devpost','instagram'] as const).map(name=><a key={name} className="aqua-button" href={profile[name]} target="_blank" rel="noreferrer"><SocialIcon name={name}/>{name} <ArrowUpRight size={13}/></a>)}</div></div><div className="curious-stage"><img src={reduce||d.preferences.reducedMotion?profile.avatar.still:profile.avatar.curious} alt="azaan’s confused mii looking around"/></div></div></AquaWindow>
  <AquaWindow id="detail" className="detail-app">{selected?<ProjectDetails project={selected} onBack={()=>{d.close('detail');d.open('projects');history.pushState({},'','/');setPath('/')}}/>:<p className="empty">Choose a project from Project Files.</p>}</AquaWindow>
  <AquaWindow id="terminal" className="terminal-window"><TerminalApp/></AquaWindow><AquaWindow id="resume" className="resume-window"><div className="resume-toolbar"><MiiCompanion compact context="resume"/><span>azaan khan — résumé</span><a className="aqua-button" href={profile.resume} target="_blank" rel="noreferrer">open PDF <ArrowUpRight size={13}/></a><a className="aqua-button" href={profile.resume} download>download</a></div><iframe className="resume-document" title="azaan khan résumé" src={profile.resume}/></AquaWindow><AquaWindow id="ipod" className="ipod-window"><IPodApp/></AquaWindow><AquaWindow id="settings" className="settings-app"><PreferencesPanel/></AquaWindow></main><Dock/></div>

@@ -1,9 +1,9 @@
 import {finite, object} from '../settings/store.ts';
 import {fitWindowFrame, type WorkspaceSize} from './windowGeometry.ts';
-export const windowIds = ['welcome','stories','projects','connect','notes','mii','detail','settings','ipod','terminal','resume'] as const;
+export const windowIds = ['welcome','stories','projects','connect','notes','avatar','detail','settings','ipod','terminal','resume'] as const;
 export type WindowId = typeof windowIds[number];
 export type WindowState = {id: WindowId; title: string; x: number; y: number; w: number; h: number; mode: 'open'|'minimized'|'closed'; zoom: boolean; layer: number};
-export const windowTitles: Record<WindowId,string> = {welcome:'About Me',stories:'Stories',projects:'Projects',connect:'Where to Connect',notes:'Notes',mii:'Mii Plaza',detail:'Project Info',settings:'System Preferences',ipod:'iPod',terminal:'Terminal',resume:'Résumé'};
+export const windowTitles: Record<WindowId,string> = {welcome:'About Me',stories:'Stories',projects:'Projects',connect:'Where to Connect',notes:'Notes',avatar:'Mii',detail:'Project Info',settings:'System Preferences',ipod:'iPod',terminal:'Terminal',resume:'Résumé'};
 export type DesktopSession = {windows: Record<WindowId,WindowState>; active: WindowId | null};
 export function initialSession(size: WorkspaceSize): DesktopSession {
   const small = size.w < 600;
@@ -11,7 +11,7 @@ export function initialSession(size: WorkspaceSize): DesktopSession {
   const defaults: Record<WindowId, [number,number,number,number]> = {
     welcome:[16,12,cellW,cellH], stories:[size.w-cellW-18,25,cellW,cellH],
     projects:[26,size.h-cellH-12,cellW,cellH], connect:[size.w-cellW-28,size.h-cellH-22,cellW,cellH],
-    notes:[50,30,660,520],mii:[65,35,880,570],detail:[80,45,740,500],settings:[90,40,590,520],ipod:[40,25,345,610],terminal:[70,55,650,420],resume:[60,35,760,600],
+    notes:[50,30,660,520],avatar:[65,35,430,470],detail:[80,45,740,500],settings:[90,40,590,520],ipod:[40,25,345,610],terminal:[70,55,650,420],resume:[60,35,760,600],
   };
   const primary = ['welcome','stories','projects','connect'];
   const windows = Object.fromEntries(windowIds.map((id,index) => {

@@ -1,3 +1,5 @@
+> Superseded items: the latest [Improvements #2 review](IMPROVEMENTS_2_REVIEW.md) replaces the plaza app, five-second boot and borderless iPod decisions below.
+
 # Improvements implementation review
 
 Date: 2026-11-13. Source: `Improvements` on main, blob `252421af93af2b7510d2db68a144db9f58fcae2d`. This latest brief supersedes historical requests that conflict with it. Work remains on `codex/aero-portfolio` / PR #1.

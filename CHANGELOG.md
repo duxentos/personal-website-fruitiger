@@ -1,5 +1,16 @@
 # Website change log
 
+## Improvements #2 — 2026-11-13
+
+- Applied all nine items from `Improvements #2` (blob `01e5707bb1d17fb8774b6b7644e58cd68234f508`).
+- Stories now uses an iOS 6 glass journal, physical paper/photo layers and Helvetica Neue typography.
+- Replaced XP/meadow wallpaper with the supplied plaza image, including saved-setting migration. Removed the plaza application, generated visitor code and controls; added an app containing only the supplied Mii artwork.
+- Restored the standard Aqua iPod window and shared traffic lights; removed the iPod Mii and music-driven companion coupling. Larger About Me artwork accounts for source-image padding.
+- Terminal submits with Enter/Go without a Run button.
+- Shortened startup to 3.5 seconds plus a short transition, with bounded critical-asset fallback within the 3–4 second target.
+- Replaced slow bubble drift with lively time-based motion, natural collision impulses, separation and wall bounce.
+- TypeScript, production build and all 32 behavior tests pass locally. No new dependencies/assets. See `IMPROVEMENTS_2_REVIEW.md` for scope and verification limits.
+
 ## Improvements brief refinement — 2026-11-13
 
 - Applied the latest `Improvements` brief. It supersedes the earlier Notes-only startup, removed plaza, all-`cd` terminal commands and no-transition startup requests.
