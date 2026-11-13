@@ -1,0 +1,21 @@
+1. fix the font for the terminal and make it terminal style for mac 
+2. ensure the ui is easy to use on both mac and mobile
+3. add/replace some more animations: 
+import { AnnotatedText } from "@/components/ui/annotated-text"
+ 
+<div className="grid grid-cols-2 items-center justify-items-center gap-x-8 gap-y-7 text-base sm:gap-x-16 sm:gap-y-12 sm:text-xl">
+  <AnnotatedText variant="wavy" delay={0.0}>wavy</AnnotatedText>
+  <AnnotatedText variant="underline" delay={0.08}>underline</AnnotatedText>
+  <AnnotatedText variant="doubleUnderline" delay={0.16}>doubleUnderline</AnnotatedText>
+  <AnnotatedText variant="dottedUnderline" delay={0.24}>dottedUnderline</AnnotatedText>
+  <AnnotatedText variant="line" delay={0.32}>line</AnnotatedText>
+  <AnnotatedText variant="arrow" delay={0.4}>arrow</AnnotatedText>
+  <AnnotatedText variant="highlight" delay={0.48}>highlight</AnnotatedText>
+  <AnnotatedText variant="circle" delay={0.56}>circle</AnnotatedText>
+  <AnnotatedText variant="box" delay={0.64}>box</AnnotatedText>
+  <AnnotatedText variant="bracket" delay={0.72}>bracket</AnnotatedText>
+  <AnnotatedText variant="strikethrough" delay={0.8}>strikethrough</AnnotatedText>
+  <AnnotatedText variant="crossOut" delay={0.88}>crossOut</AnnotatedText>
+</div>
+
+add these animations to highlight one key word per page, blog etc 

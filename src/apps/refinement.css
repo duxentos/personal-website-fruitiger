@@ -103,3 +103,36 @@ h1,h2,.boot-logo,.menu-group>.desktop-logo,.terminal-icon,.book-icon{font-family
 @media(prefers-reduced-motion:reduce){.magnetic-dock *{transition:none!important}}
 
 .magnetic-dock-art{position:relative;inset:auto;flex:none;transform-origin:center}
+
+/* Improvement #5: one quiet, readable annotation per text app or active post. */
+.annotated-text{position:relative;display:inline-block;white-space:nowrap;isolation:isolate;--annotation-color:#1887a5}
+.annotated-text,.annotated-text *{font-family:inherit!important}
+.annotation-word{position:relative;z-index:1}
+.annotation-mark{position:absolute;left:-4%;top:-.24em;width:108%;height:1.7em;overflow:visible;pointer-events:none;z-index:0;fill:none;stroke:var(--annotation-color);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.annotation-mark path{stroke-dasharray:1;stroke-dashoffset:1}
+.annotation-visible .annotation-mark path{animation:annotation-draw .65s ease-out var(--annotation-delay) both}
+.annotation-dottedUnderline .annotation-mark path{stroke-dasharray:.005 .065;stroke-dashoffset:0;clip-path:inset(0 100% 0 0)}
+.annotation-visible.annotation-dottedUnderline .annotation-mark path{animation:annotation-reveal .65s ease-out var(--annotation-delay) both}
+.annotation-highlight .annotation-mark{stroke:#70d6e4;stroke-width:13;opacity:.34}
+.leather-toolbar .annotated-text{--annotation-color:#ffdb99}
+.ipod-wordmark .annotated-text{--annotation-color:#528b9a}
+@keyframes annotation-draw{to{stroke-dashoffset:0}}
+@keyframes annotation-reveal{to{clip-path:inset(0)}}
+.motion-reduced .annotation-mark path{animation:none!important;stroke-dashoffset:0;clip-path:none}
+@media(prefers-reduced-motion:reduce){.annotation-mark path{animation:none!important;stroke-dashoffset:0;clip-path:none}}
+/* Terminal is the deliberate monospace exception to the Nothing / Helvetica UI. */
+.terminal-app,.terminal-app *{font-family:'SFMono-Regular',Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace!important;font-variant-ligatures:none;letter-spacing:0}
+.terminal-app{font-size:14px;line-height:1.65;padding:18px;color:#dce9e8;background:linear-gradient(#20252b,#14191e)}
+.terminal-app label{font-size:inherit;white-space:nowrap}
+.terminal-app .annotated-text{--annotation-color:#81d7b4}
+.terminal-app form{gap:8px;align-items:baseline}
+.terminal-app input{min-width:120px;max-width:100%;font-size:inherit;border-radius:3px}
+.terminal-app input:focus-visible{outline:1px solid #81d7b488;outline-offset:4px}
+.terminal-output{overflow-wrap:anywhere}
+.welcome-content{padding:26px 28px 22px}
+.welcome-content h1{font-size:clamp(34px,8cqw,50px);line-height:1.15}
+.welcome-content .hero-sub{line-height:1.7}
+.magnetic-dock[data-touch=true]{padding-bottom:30px}
+.magnetic-dock[data-touch=true] .magnetic-running-dot{bottom:-24px}
+@container desktop-window (max-width:450px){.terminal-app{padding:14px;font-size:13px}.terminal-app form{display:block}.terminal-app input{display:block;width:100%;min-height:44px;font-size:16px;margin-top:5px}.welcome-content{padding:24px 20px}.welcome-content h1{font-size:clamp(30px,9cqw,40px)}}
+@media(hover:none),(pointer:coarse){.finder-toolbar button,.finder-statusbar button,.leather-toolbar button{min-width:44px;min-height:44px}.finder-path button{min-height:44px}.finder-search input{min-height:44px}}

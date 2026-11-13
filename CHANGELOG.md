@@ -1,5 +1,12 @@
 # Website change log
 
+## Improvement #5 — 2026-11-13
+
+- Restored Mac-style monospace Terminal typography with an explicit font exception and responsive command entry/focus feedback.
+- Added a reusable, accessible SVG annotation component supporting the 12 supplied styles; one keyword per text app or active blog post. Reduced motion displays static marks. Mii stays image-only and editable Notes content stays untouched.
+- Refined About Me heading sizing, touch Finder/Notes controls and Dock indicator spacing.
+- All 39 behavior tests, TypeScript and Vite pass locally. No new dependencies/assets. See `IMPROVEMENTS_5_REVIEW.md`.
+
 ## Improvements #4 — 2026-11-13
 
 - Adapted the supplied magnetic Dock with existing Motion, Aqua colours/icons, spring sizing/lift, labels, running state, touch and reduced-motion support.
