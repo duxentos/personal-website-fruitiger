@@ -1,5 +1,12 @@
 # Website change log
 
+## Mii GIF delivery repair — 2026-11-14
+
+- Found that intro/happy/curious GIFs existed locally but were missing from the GitHub tree. Their deployed URLs returned the SPA HTML with HTTP 200, triggering image-error still fallbacks.
+- Added the missing supplied GIFs and original waving GIF to the repository. All active clips now use local URLs through a shared manifest; startup uses the same manifest.
+- Explicit say-hi taps bypass the automatic greeting cooldown and replay immediately. Added actual packaged-GIF/frame/duration/PNG/HTML-fallback and replay checks: all 51 tests, TypeScript and Vite pass locally.
+- See `MII_ANIMATIONS_FIX.md` for deployed evidence.
+
 ## Distinct floating pictures — 2026-11-14
 
 - Replaced the two empty Polaroid slots with the existing meadow and Vista aurora illustrations. Each set now shows E7, green hills and blue aurora with its own accurate caption.

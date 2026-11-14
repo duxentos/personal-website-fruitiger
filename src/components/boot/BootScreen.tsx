@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useRef, useState, type ReactNode} from 'react';
 import {useReducedMotion} from 'motion/react';
 import {useDesktop} from '../Desktop';
-import {miiAnimations} from '../../data/miiAnimations';
+import {miiClips,miiStill} from '../../data/miiClips';
 import {playSound} from '../../audio/SoundEngine';
 import {wallpapers} from '../../data/wallpapers';
 import {BOOT_ASSET_TIMEOUT_MS,BOOT_FALLBACK_MS,crossingDuration,canEnterDesktop} from './bootTiming.ts';
@@ -49,7 +49,7 @@ function BootScreen({onDone}:{onDone:()=>void}){
  const done=useRef(false),dialog=useRef<HTMLDivElement>(null),finishRef=useRef(onDone);
  finishRef.current=onDone;
  const finish=useCallback(()=>{if(done.current)return;done.current=true;finishRef.current()},[]);
- const clip=miiAnimations.find(item=>item.id==='scenic-route')!;
+ const clip=miiClips.crossing;
  useEffect(()=>{
   const update=()=>{setHidden(document.hidden);if(!document.hidden){setImageReady(false);setCrossed(false);setPlayKey(Date.now())}};
   document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update);
@@ -57,7 +57,7 @@ function BootScreen({onDone}:{onDone:()=>void}){
  useEffect(()=>{
   let cancelled=false;let fontTimer:ReturnType<typeof setTimeout>;
   const fonts=Promise.race([document.fonts.ready,new Promise((_,reject)=>{fontTimer=setTimeout(()=>reject(new Error('font fallback')),BOOT_ASSET_TIMEOUT_MS)})]);
-  Promise.allSettled([fonts,loadImage(wallpapers[p.wallpaper]),loadImage('/mii-still.png')]).then(results=>{
+  Promise.allSettled([fonts,loadImage(wallpapers[p.wallpaper]),loadImage(miiStill)]).then(results=>{
    clearTimeout(fontTimer);if(cancelled)return;
    if(results[1].status==='rejected')document.body.dataset.wallpaperFallback='true';
    setPhase(results.some(result=>result.status==='rejected')?'fallback':'ready');
@@ -79,5 +79,5 @@ function BootScreen({onDone}:{onDone:()=>void}){
   if(event.key==='Escape'){event.preventDefault();finish()}
   if(event.key!=='Tab')return;const buttons=dialog.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)');if(!buttons?.length)return;
   const first=buttons[0],last=buttons[buttons.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
- }}><div className="boot-ambient" aria-hidden="true"><i/><i/><i/></div><main className="boot-world"><div className="boot-logo">azaanos<span>your own little corner of the internet</span></div><div className="boot-stage"><div className="boot-horizon" aria-hidden="true"/><button className={`boot-character ${animated?'full-stage':''}`} disabled={!p.miiInteractions||reduced} onClick={()=>{if(p.miiSounds)playSound('mii.interaction')}} aria-label="greet the startup mii"><img key={playKey} src={animated?`/mii-crossing.gif?play=${playKey}`:'/mii-still.png'} alt="azaan's mii crossing the screen" onLoad={()=>setImageReady(true)} onError={()=>{setFailed(true);setImageReady(true)}}/></button></div><div className="boot-status"><div className="boot-dots" aria-hidden="true"><i/><i/><i/></div><h1>welcome to my desktop</h1><p role="status">{phase==='loading'?'getting everything ready…':reduced||failed?'see you inside.':'just making my way over…'}</p><button autoFocus className="aqua-button boot-skip fj-button fj-button--md fj-button--aero" onClick={finish}>skip intro</button></div></main><span className="boot-edition">personal edition · azaan khan</span></div>;
+ }}><div className="boot-ambient" aria-hidden="true"><i/><i/><i/></div><main className="boot-world"><div className="boot-logo">azaanos<span>your own little corner of the internet</span></div><div className="boot-stage"><div className="boot-horizon" aria-hidden="true"/><button className={`boot-character ${animated?'full-stage':''}`} disabled={!p.miiInteractions||reduced} onClick={()=>{if(p.miiSounds)playSound('mii.interaction')}} aria-label="greet the startup mii"><img key={playKey} src={animated?`${clip.src}?play=${playKey}`:miiStill} alt="azaan's mii crossing the screen" onLoad={()=>setImageReady(true)} onError={()=>{setFailed(true);setImageReady(true)}}/></button></div><div className="boot-status"><div className="boot-dots" aria-hidden="true"><i/><i/><i/></div><h1>welcome to my desktop</h1><p role="status">{phase==='loading'?'getting everything ready…':reduced||failed?'see you inside.':'just making my way over…'}</p><button autoFocus className="aqua-button boot-skip fj-button fj-button--md fj-button--aero" onClick={finish}>skip intro</button></div></main><span className="boot-edition">personal edition · azaan khan</span></div>;
 }

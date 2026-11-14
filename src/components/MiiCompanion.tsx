@@ -3,19 +3,19 @@ import {useReducedMotion} from 'motion/react';
 import {useDesktop} from './Desktop';
 import {useMusic} from '../apps/ipod/MusicProvider';
 import {playSound} from '../audio/SoundEngine';
-import {profile} from '../profile';
-import {greetingDuration,nextGreeting,resolveMiiReaction,type GreetingPhase,type MiiReaction} from './miiReaction';
+import {miiClips,miiStill} from '../data/miiClips';
+import {canStartGreeting,greetingDuration,nextGreeting,resolveMiiReaction,type GreetingPhase,type MiiReaction} from './miiReaction';
 
-// Exact supplied Mii.md clips. Only the wave still needs its original external URL.
-const clips:Record<MiiReaction,string>={still:profile.avatar.still,jump:'/mii-intro.gif',wave:profile.avatar.wave,dance:'/mii-happy.gif',curious:'/mii-curious.gif'};
+// Every active clip is included in public/ and verified during the build.
+const clips:Record<MiiReaction,string>={still:miiStill,jump:miiClips.jump.src,wave:miiClips.wave.src,dance:miiClips.dance.src,curious:miiClips.curious.src};
 export function MiiCompanion({context}:{context:'about'|'connect'}){
  const {preferences:p}=useDesktop(),music=useMusic(),systemReduce=useReducedMotion();
  const [hidden,setHidden]=useState(document.hidden),[inView,setInView]=useState(false),[ipodHovered,setIpodHovered]=useState(false);
  const [greeting,setGreeting]=useState<GreetingPhase>(null),[cycle,setCycle]=useState(0),[loaded,setLoaded]=useState('');
  const [failed,setFailed]=useState<string[]>([]);const root=useRef<HTMLDivElement>(null),lastGreet=useRef(-Infinity);
  const reduced=Boolean(systemReduce||p.reducedMotion),visible=!hidden&&inView;
- const greet=useCallback((sound=false)=>{
-  if(context!=='about'||!p.miiInteractions||reduced||document.hidden||performance.now()-lastGreet.current<5500)return;
+ const greet=useCallback((sound=false,explicit=false)=>{
+  if(context!=='about'||!p.miiInteractions||reduced||document.hidden||!canStartGreeting(performance.now(),lastGreet.current,explicit))return;
   lastGreet.current=performance.now();setGreeting('jump');setCycle(n=>n+1);
   if(sound&&p.miiSounds)playSound('mii.interaction');
  },[context,p.miiInteractions,p.miiSounds,reduced]);
@@ -41,6 +41,6 @@ export function MiiCompanion({context}:{context:'about'|'connect'}){
   const timer=setTimeout(()=>setGreeting(nextGreeting),greetingDuration[greeting]);return()=>clearTimeout(timer);
  },[visible,reduced,greeting,src,base,loaded,failed]);
  return <div ref={root} className={`context-mii context-mii-${context}`} data-reaction={reaction}>
-  {context==='about'?<button className="context-mii-button" aria-label="say hi to azaan’s mii" disabled={!p.miiInteractions} onClick={()=>greet(true)}><img key={src} src={src} alt="Azaan’s Mii" onLoad={()=>setLoaded(src)} onError={()=>setFailed(value=>value.includes(base)?value:[...value,base])}/><span>say hi ↗</span></button>:<img key={src} src={src} alt="Azaan’s confused Mii looking around" onError={()=>setFailed(value=>value.includes(base)?value:[...value,base])}/>}
+  {context==='about'?<button className="context-mii-button" aria-label="say hi to azaan’s mii" disabled={!p.miiInteractions} onClick={()=>greet(true,true)}><img key={src} src={src} alt="Azaan’s Mii" onLoad={()=>setLoaded(src)} onError={()=>setFailed(value=>value.includes(base)?value:[...value,base])}/><span>say hi ↗</span></button>:<img key={src} src={src} alt="Azaan’s confused Mii looking around" onError={()=>setFailed(value=>value.includes(base)?value:[...value,base])}/>}
  </div>;
 }
