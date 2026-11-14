@@ -1,7 +1,7 @@
 export type ProjectMedia={id:string;kind:'photo'|'video';label:string;src?:string;poster?:string};
-/** Add local image/MP4 URLs when supplied. Empty src values render placeholders. */
+/** Distinct existing landscape artwork. Replace URLs here to use personal photos/films. */
 export const projectMedia:ProjectMedia[]=[
- {id:'photo-one',kind:'photo',label:'e7 · glass & sky',src:'/assets/improvement6-wallpaper.png'},
- {id:'film-one',kind:'video',label:'a little film, soon'},
- {id:'photo-two',kind:'photo',label:'another memory, soon'},
+ {id:'e7',kind:'photo',label:'e7 · glass & sky',src:'/assets/improvement6-wallpaper.png'},
+ {id:'meadow',kind:'photo',label:'green hills',src:'/meadow.svg'},
+ {id:'aurora',kind:'photo',label:'blue aurora',src:'/vista-aurora.svg'},
 ];

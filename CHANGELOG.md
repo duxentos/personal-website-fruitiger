@@ -1,5 +1,10 @@
 # Website change log
 
+## Distinct floating pictures — 2026-11-14
+
+- Replaced the two empty Polaroid slots with the existing meadow and Vista aurora illustrations. Each set now shows E7, green hills and blue aurora with its own accurate caption.
+- Welcome and Projects share the three-image gallery and retain their existing floating motion. The E7 desktop wallpaper and iOS 6/Aqua palette are preserved. No new assets or dependencies.
+
 ## Aqua palette correction — 2026-11-14
 
 - Re-read `codex prompt.md` and `UIreference.md`, and inspected the supplied heyclicky/Aqua and iOS 6 reference images after the author clarified the palette.
