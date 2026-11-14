@@ -16,4 +16,14 @@ Each measures 1000×480, 175 frames, 7000ms. The existing GIF record parser veri
 
 ## Validation
 
-`npm run build` passes all 57 behavior tests, TypeScript and Vite. New checks cover selection across all three runners, no immediate repeat on reboot, the fixed-choice preference, waiting for image load before starting timing, the exact one-crossing boundary, critical-resource readiness, and failure/reduced-motion completion. Existing desktop Mii reaction and startup-window checks remain passing. Deployed and browser observations are recorded separately after verification; model tests alone do not claim a visual browser pass.
+`npm run build` passes all 57 behavior tests, TypeScript and Vite. New checks cover selection across all three runners, no immediate repeat on reboot, the fixed-choice preference, waiting for image load before starting timing, the exact one-crossing boundary, critical-resource readiness, and failure/reduced-motion completion. Existing desktop Mii reaction and startup-window checks remain passing.
+
+## Deployed verification
+
+Application commit `61bdd0d0ce782a4df2185ca24b5b267cefbf2791` is READY as `dpl_ATmd8WLrj4hAi8uNeW78NKrB4zfM`:
+https://personal-website-fruitiger-rhfwiawmt-azaank041208-hash.vercel.app
+
+Vercel independently passed all 57 tests and completed the production bundle. The scenic-route, shortcut and little-hop URLs, including their boot replay query strings, each returned HTTP 200 with `Content-Type: image/gif`.
+
+Native Chrome observed the loading dialog with the supplied runner image, automatic entry into the Aqua desktop without Skip, and the default-open jumping Mii app. The system-menu preview-startup action replayed the loader; a capture sequence visibly showed different running poses as the supplied Mii entered from the left. These observations confirm animated rendering and automatic desktop entry, not stopwatch-level timing or independent visual coverage of every randomly selected clip. The exact seven-second duration and all three packaged GIF records are covered by tests. No new physical-device or reduced-motion toggle pass was performed. This documentation-only follow-up does not alter tested application source.
+
