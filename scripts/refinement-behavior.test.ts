@@ -18,13 +18,13 @@ test('future settings are not overwritten; restore defaults keeps notes',()=>{
  db.removeItem(SETTINGS_KEY);store.write('notes',{items:[]});store.write('desktop',{theme:'candy'});store.restoreDefaults();
  assert.deepEqual(store.read('notes',object),{items:[]});assert.deepEqual(store.read('desktop',object),{});
 });
-test('fresh launch has two apps; session deserialization preserves modes before entry policy',()=>{
+test('fresh launch has Welcome, Projects and one Mii app; session deserialization preserves modes before entry policy',()=>{
  const size={w:1280,h:720};let session=initialSession(size);
- assert.deepEqual(Object.values(session.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects']);
+ assert.deepEqual(Object.values(session.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects','avatar']);
  session=windowReducer(session,{type:'close',id:'welcome'});session=windowReducer(session,{type:'minimize',id:'projects'});
  session.windows.connect.x=9000;const restored=restoreSession(session,size);
  assert.equal(restored.windows.welcome.mode,'closed');assert.equal(restored.windows.projects.mode,'minimized');assert.ok(restored.windows.connect.x+restored.windows.connect.w<=size.w);
- assert.equal(restored.active,null);
+ assert.equal(restored.active,'avatar');
  const opened=windowReducer(restored,{type:'open',id:'projects'});assert.equal(Object.values(opened.windows).filter(w=>w.id==='projects').length,1);
 });
 test('edge resize anchors the opposite side and clamps to the workspace',()=>{
@@ -46,17 +46,22 @@ test('a maximized session retains its floating restore frame after refresh',()=>
 
 test('retired plaza sessions cannot reopen the removed app',()=>{
  const initial=initialSession({w:1280,h:720});const value={...initial,active:'mii',windows:{...initial.windows,mii:{mode:'open',layer:500}}};
- const restored=restoreSession(value,{w:1280,h:720});assert.equal('mii' in restored.windows,false);assert.equal('avatar' in restored.windows,false);assert.notEqual(restored.active,'mii');
+ const restored=restoreSession(value,{w:1280,h:720});assert.equal('mii' in restored.windows,false);assert.equal(restored.windows.avatar.mode,'open');assert.notEqual(restored.active,'mii');
 });
 
-test('entry closes every other app and migrates the previous four-window layout once',()=>{
+test('entry opens the requested trio and migrates older layouts once',()=>{
  const size={w:1280,h:720};const old=initialSession(size);for(const win of Object.values(old.windows))win.mode='open';old.windows.welcome.w=900;
- const migrated=launchSession(old,size);assert.deepEqual(Object.values(migrated.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects']);assert.ok(migrated.windows.welcome.w<600);
+ const migrated=launchSession(old,size);assert.deepEqual(Object.values(migrated.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects','avatar']);assert.ok(migrated.windows.welcome.w<600);
  const saved={...migrated,layoutRevision:LAUNCH_LAYOUT_REVISION};saved.windows.projects.x=400;saved.windows.projects.w=480;saved.windows.notes.mode='open';
  const next=launchSession(saved,size);assert.equal(next.windows.projects.x,400);assert.equal(next.windows.projects.w,480);assert.equal(next.windows.notes.mode,'closed');assert.equal(next.active,'welcome');
 });
 
-test('retired standalone avatar sessions recover to a current window',()=>{
- const initial=initialSession({w:1280,h:720});const saved={...initial,active:'avatar',windows:{...initial.windows,avatar:{mode:'open',layer:999}}};
- const restored=restoreSession(saved,{w:1280,h:720});assert.equal('avatar' in restored.windows,false);assert.equal(restored.active,'welcome');
+test('saved Mii app geometry is kept while the single app is restored on launch',()=>{
+ const size={w:1280,h:720};const initial=initialSession(size);initial.windows.avatar.x=300;initial.windows.avatar.mode='closed';
+ const restored=launchSession({...initial,layoutRevision:LAUNCH_LAYOUT_REVISION},size);assert.equal(restored.windows.avatar.mode,'open');assert.equal(restored.windows.avatar.x,300);
+});
+test('the Mii app stays above the app driving its reaction without stealing focus',()=>{
+ const initial=initialSession({w:1280,h:720});const find=windowReducer(initial,{type:'open',id:'connect'});
+ assert.equal(find.active,'connect');assert.ok(find.windows.avatar.layer>find.windows.connect.layer);
+ const closed=windowReducer(find,{type:'close',id:'avatar'});const music=windowReducer(closed,{type:'open',id:'ipod'});assert.equal(music.windows.avatar.mode,'closed');
 });

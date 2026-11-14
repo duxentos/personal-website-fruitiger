@@ -1,5 +1,12 @@
 # Website change log
 
+## Single contextual Mii app — 2026-11-14
+
+- Restored one standalone Mii app and its Dock/File-menu launcher; it opens on arrival alongside Welcome and Projects. Removed embedded Welcome/Find Me Miis and the startup crossing character.
+- The app loops jumping on arrival/home, dances for iPod or user-started music, and thinks while Find Me is active, including during music. Background autoplay alone does not override jumping. No waving sequence.
+- The normal draggable/resizable/minimizable/closable app stays above its context window without taking focus. Existing GIF packaging checks remain. Startup now waits only for critical assets, with Skip/Escape and bounded fallback.
+- Updated context/session regressions; see `SINGLE_MII_APP_REVIEW.md`.
+
 ## Mii GIF delivery repair — 2026-11-14
 
 - Found that intro/happy/curious GIFs existed locally but were missing from the GitHub tree. Their deployed URLs returned the SPA HTML with HTTP 200, triggering image-error still fallbacks.

@@ -1,9 +1,9 @@
 import {finite, object} from '../settings/store.ts';
 import {fitWindowFrame, type WorkspaceSize} from './windowGeometry.ts';
-export const windowIds = ['welcome','stories','projects','connect','notes','detail','settings','ipod','terminal','resume'] as const;
+export const windowIds = ['welcome','stories','projects','connect','notes','avatar','detail','settings','ipod','terminal','resume'] as const;
 export type WindowId = typeof windowIds[number];
 export type WindowState = {id: WindowId; title: string; x: number; y: number; w: number; h: number; mode: 'open'|'minimized'|'closed'; zoom: boolean; layer: number};
-export const windowTitles: Record<WindowId,string> = {welcome:'about me',stories:'blogs',projects:'projects',connect:'where to connect',notes:'notes',detail:'project info',settings:'system preferences',ipod:'ipod',terminal:'terminal',resume:'résumé'};
+export const windowTitles: Record<WindowId,string> = {welcome:'about me',stories:'blogs',projects:'projects',connect:'where to connect',notes:'notes',avatar:'mii',detail:'project info',settings:'system preferences',ipod:'ipod',terminal:'terminal',resume:'résumé'};
 export type DesktopSession = {windows: Record<WindowId,WindowState>; active: WindowId | null};
 export function initialSession(size: WorkspaceSize): DesktopSession {
   const small = size.w < 600;
@@ -12,15 +12,15 @@ export function initialSession(size: WorkspaceSize): DesktopSession {
   const defaults: Record<WindowId, [number,number,number,number]> = {
     welcome:[24,24,aboutW,aboutH], stories:[65,35,660,500],
     projects:[size.w-projectW-38,Math.min(105,size.h-projectH-24),projectW,projectH], connect:[75,55,640,420],
-    notes:[50,30,660,520],detail:[80,45,740,500],settings:[90,40,590,520],ipod:[40,25,345,610],terminal:[70,55,650,420],resume:[60,35,760,600],
+    notes:[50,30,660,520],avatar:[Math.max(0,size.w-280),Math.max(0,size.h-270),260,250],detail:[80,45,740,500],settings:[90,40,590,520],ipod:[40,25,345,610],terminal:[70,55,650,420],resume:[60,35,760,600],
   };
-  const primary = ['welcome','projects'];
+  const primary = ['welcome','projects','avatar'];
   const windows = Object.fromEntries(windowIds.map((id,index) => {
     const [x,y,w,h] = defaults[id];
-    const geometry = fitWindowFrame({x,y,w:small?size.w:w,h:small?size.h:h,zoom:small&&primary.includes(id)}, size, false);
-    return [id,{id,title:windowTitles[id],...geometry,mode:primary.includes(id)?'open':'closed',zoom:small&&primary.includes(id),layer:index+1}];
+    const geometry = fitWindowFrame({x,y,w:small&&id!=='avatar'?size.w:w,h:small&&id!=='avatar'?size.h:h,zoom:small&&id!=='avatar'&&primary.includes(id)}, size, false);
+    return [id,{id,title:windowTitles[id],...geometry,mode:primary.includes(id)?'open':'closed',zoom:small&&id!=='avatar'&&primary.includes(id),layer:index+1}];
   })) as Record<WindowId,WindowState>;
-  windows.welcome.layer=20;
+  windows.welcome.layer=20;windows.avatar.layer=21;
   return {windows,active:'welcome'};
 }
 export function restoreSession(value: unknown, size: WorkspaceSize): DesktopSession {
@@ -34,15 +34,15 @@ export function restoreSession(value: unknown, size: WorkspaceSize): DesktopSess
   initial.active = windowIds.includes(root.active as WindowId) && initial.windows[root.active as WindowId].mode==='open' ? root.active as WindowId : topWindow(initial.windows);
   return initial;
 }
-/** Entry/reboot opens only the requested pair, while retaining their saved geometry. */
-export const LAUNCH_LAYOUT_REVISION=4;
+/** Entry/reboot opens Welcome, Projects and the single reactive Mii app. */
+export const LAUNCH_LAYOUT_REVISION=5;
 export function launchSession(value:unknown,size:WorkspaceSize):DesktopSession{
  const session=restoreSession(value,size),root=object(value),fresh=initialSession(size);
  for(const id of windowIds){
-  if(root.layoutRevision!==LAUNCH_LAYOUT_REVISION&&(id==='welcome'||id==='projects'))session.windows[id]={...fresh.windows[id]};
-  session.windows[id].mode=id==='welcome'||id==='projects'?'open':'closed';
+  if(root.layoutRevision!==LAUNCH_LAYOUT_REVISION&&(id==='welcome'||id==='projects'||id==='avatar'))session.windows[id]={...fresh.windows[id]};
+  session.windows[id].mode=id==='welcome'||id==='projects'||id==='avatar'?'open':'closed';
  }
- session.active='welcome';session.windows.welcome.layer=Math.max(...Object.values(session.windows).map(w=>w.layer))+1;
+ session.active='welcome';session.windows.welcome.layer=Math.max(...Object.values(session.windows).map(w=>w.layer))+1;session.windows.avatar.layer=session.windows.welcome.layer+1;
  return session;
 }
 export function topWindow(windows: Record<WindowId,WindowState>): WindowId|null {return windowIds.filter(id=>windows[id].mode==='open').sort((a,b)=>windows[b].layer-windows[a].layer)[0]??null;}
@@ -60,5 +60,6 @@ export function windowReducer(state: DesktopSession, action: WindowAction): Desk
   else {next.mode='open';next.layer=Math.max(...Object.values(state.windows).map(w=>w.layer))+1;if(action.type==='zoom')next.zoom=!current.zoom;active=id;}
   const windows={...state.windows,[id]:next};
   if((action.type==='close'||action.type==='minimize')&&active===id)active=topWindow(windows);
+  if(id!=='avatar'&&windows.avatar.mode==='open'&&['open','focus','zoom'].includes(action.type))windows.avatar={...windows.avatar,layer:Math.max(...Object.values(windows).map(w=>w.layer))+1};
   return {windows,active};
 }

@@ -1,19 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {canStartGreeting,resolveMiiReaction,nextGreeting,greetingDuration} from '../src/components/miiReaction.ts';
-const idle={context:'about' as const,visible:true,reduced:false,enabled:true,greeting:null,playing:false,ipodHovered:false};
-test('welcome greets with a jump then a wave before returning to music or idle',()=>{
- assert.equal(resolveMiiReaction({...idle,greeting:'jump'}),'jump');
- assert.equal(nextGreeting('jump'),'wave');assert.equal(nextGreeting('wave'),null);
- assert.equal(greetingDuration.jump,4000);assert.equal(resolveMiiReaction({...idle,greeting:'wave',playing:true}),'wave');assert.equal(resolveMiiReaction({...idle,playing:true}),'dance');assert.equal(resolveMiiReaction(idle),'still');
-});
-test('iPod hover dances without playback, while Find Me stays confused',()=>{
- assert.equal(resolveMiiReaction({...idle,greeting:'jump',ipodHovered:true}),'dance');assert.equal(resolveMiiReaction({...idle,context:'connect',playing:true,greeting:'jump'}),'curious');
-});
-test('hidden, reduced-motion and disabled companions stay static during any reaction',()=>{
- for(const override of [{visible:false},{reduced:true},{enabled:false}])assert.equal(resolveMiiReaction({...idle,playing:true,greeting:'jump',...override}),'still');
-});
-
-test('an explicit second tap replays the greeting while automatic hover stays throttled',()=>{
- assert.equal(canStartGreeting(1000,900),false);assert.equal(canStartGreeting(1000,900,true),true);assert.equal(canStartGreeting(6400,900),true);
-});
+import {miiContextForActiveApp,resolveMiiAppReaction} from '../src/components/miiReaction.ts';
+const home={context:'home' as const,playing:false,musicInteracted:false,visible:true,reduced:false,enabled:true};
+test('arrival/home plays jumping only, without a waving sequence',()=>{assert.equal(resolveMiiAppReaction(home),'jump');assert.equal(resolveMiiAppReaction({...home,playing:true}),'jump')});
+test('using iPod dances even when paused; ongoing music also dances',()=>{assert.equal(resolveMiiAppReaction({...home,context:'ipod'}),'dance');assert.equal(resolveMiiAppReaction({...home,playing:true,musicInteracted:true}),'dance')});
+test('Find Me thinking takes priority over music playback',()=>{assert.equal(resolveMiiAppReaction({...home,context:'find',playing:true}),'curious')});
+test('focusing Mii preserves the app context, while closing that app releases it',()=>{assert.equal(miiContextForActiveApp('avatar','find',true,false),'find');assert.equal(miiContextForActiveApp('avatar','find',false,false),'home');assert.equal(miiContextForActiveApp('avatar','ipod',false,true),'ipod')});
+test('other app navigation returns to jumping and Find Me/iPod select their context',()=>{assert.equal(miiContextForActiveApp('welcome','find',true,true),'home');assert.equal(miiContextForActiveApp('connect','home',true,false),'find');assert.equal(miiContextForActiveApp('ipod','home',false,true),'ipod')});
+test('hidden, reduced-motion or disabled Mii app uses the supplied still',()=>{for(const override of [{visible:false},{reduced:true},{enabled:false}])assert.equal(resolveMiiAppReaction({...home,context:'find',playing:true,...override}),'still')});
