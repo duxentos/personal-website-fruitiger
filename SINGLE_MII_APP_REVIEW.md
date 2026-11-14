@@ -1,5 +1,7 @@
 # Single contextual Mii app
 
+Update, 2026-11-14: the author subsequently restored randomized running Miis **in the loading screen only**. The single desktop Mii app and its reactions remain as described below. The historical brand-only startup statements are superseded by `LOADING_MII_REVIEW.md`.
+
 Latest author instruction supersedes the previous placement restriction and jump→wave sequence. Restore exactly one standalone Mii app. Remove embedded copies from Welcome and Find Me and remove the crossing Mii from startup.
 
 The Mii app opens on arrival, with looping jump as its default/home animation. It uses the supplied local jump GIF only; no wave phase. Active iPod triggers dancing even if paused. Playback after a deliberate music interaction keeps dancing after switching apps. The MusicProvider tracks manual use separately from automatic playback/retry so autoplay alone cannot change the arrival jump. Active Find Me selects the supplied thinking/curious GIF and takes priority over playback. Focusing/replaying/dragging Mii retains the previous app context; closing the contextual app releases it.

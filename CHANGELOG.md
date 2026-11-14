@@ -1,5 +1,11 @@
 # Website change log
 
+## Randomized running Mii loader — 2026-11-14
+
+- Restored one randomly selected supplied running GIF per startup/reboot: scenic route, shortcut or little hop. Added both missing original GIFs as local assets.
+- Finish after one measured seven-second crossing and bounded critical-asset readiness; no fade. Skip/Escape and reduced-motion/failure fallbacks remain. Normal app navigation does not replay the loader.
+- Preserved the single default-open desktop Mii app and its jump/dance/thinking reactions. Added selection/timing/packaged-asset coverage; all 57 tests, TypeScript and production build pass. See `LOADING_MII_REVIEW.md`.
+
 ## Compact Find Me links — 2026-11-14
 
 - Removed the diagonal arrows from the four “want to find me?” social links.

@@ -30,3 +30,7 @@
 @media(prefers-reduced-motion:reduce){.boot-dots i,.boot-ambient i,.mii-figure{animation:none!important}.desktop-social a:hover .retro-social{transform:none}}
 
 .desktop-social[hidden]{display:none}.motion-reduced *,.motion-reduced *:before,.motion-reduced *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+
+/* The supplied full-stage GIF owns movement; no extra translate or fade. */
+.boot-overlay.boot-running{animation:none;transition:none}
+.boot-running .boot-character{cursor:default}
