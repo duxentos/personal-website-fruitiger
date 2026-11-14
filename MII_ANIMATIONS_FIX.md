@@ -16,4 +16,13 @@ Explicit say-hi clicks now bypass the 5.5-second automatic hover/open cooldown, 
 
 `mii-assets-behavior.test.ts` reads each runtime manifest file from `public/`, parses GIF records/frame timing, checks the supplied animated frame counts/durations and PNG fallback, and rejects an HTML fallback even when HTTP status is 200. Missing files now fail the build on a fresh checkout/Vercel. A replay regression checks that an explicit second tap is accepted while automatic hover remains throttled. Local lint/build pass all 51 tests, TypeScript and Vite.
 
-Deployment and browser results follow after the corrected preview is available. No UI palette, wallpaper or Polaroid change is included.
+## Deployed verification
+
+Application commit `538f02d62b10b74834974db0b4c6f18dc1fd582a` is READY as `dpl_62JfHmEzEnxBgbDhFFbVe6pU1Lk7`:
+https://personal-website-fruitiger-hvr6nixf2-azaank041208-hash.vercel.app
+
+Vercel independently passed all 51 tests, including the new packaged-asset checks on its clean checkout. The five deployed requests now return HTTP 200 and `Content-Type: image/gif`: intro with `?reaction=2`, wave with `?reaction=2`, happy, curious, and crossing with `?play=1`. This correct image MIME type replaces the HTML fallback from the reproduced failure.
+
+Native Chrome opened the repaired desktop, accepted the say-hi click, and showed the Welcome Mii in different animation poses across captures, including the happy/star-eyed dancing pose during music playback. Find Me opened from its button and displayed the supplied confused Mii image. The confused GIF is visually subtle; captures showed it loaded rather than claiming a complete frame-by-frame/physical-device audit. The full original wave GIF was downloaded from the supplied Mii.md link and verified as 11 frames / 220ms; its short transition was not isolated in a browser capture. Reduced-motion and disabled-animation settings deliberately retain still images.
+
+The Aqua palette, E7 wallpaper, Polaroids and other app behavior remain. README, CHANGELOG, exact asset bytes and this diagnosis are recorded in the working branch/PR. The following documentation-only commit does not alter the tested application source.
