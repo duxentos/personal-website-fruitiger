@@ -30,6 +30,8 @@ export function MiiCompanion({context}:{context:'about'|'connect'}){
   const observer=new IntersectionObserver(entries=>setInView(entries.some(entry=>entry.isIntersecting)),{threshold:.15});observer.observe(root.current);return()=>observer.disconnect();
  },[]);
  useEffect(()=>{if(visible)greet();else setGreeting(null)},[visible,greet]);
+ // A newly started song/hover interrupts a greeting; later explicit greetings may play over ongoing music.
+ useEffect(()=>{if(music.playing||ipodHovered)setGreeting(null)},[music.playing,ipodHovered]);
  const reaction=resolveMiiReaction({context,visible,reduced,enabled:p.miiInteractions,greeting,playing:music.playing,ipodHovered});
  const base=clips[reaction],src=failed.includes(base)?clips.still:greeting&&reaction===greeting?`${base}${base.includes('?')?'&':'?'}reaction=${cycle}`:base;
  useEffect(()=>{
