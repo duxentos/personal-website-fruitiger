@@ -1,5 +1,11 @@
 # Website change log
 
+## Compact Find Me links — 2026-11-14
+
+- Removed the diagonal arrows from the four “want to find me?” social links.
+- Made the Aqua pills fit their icon and label, with less horizontal padding and wrapping on narrow windows. Kept 44px touch targets on mobile and coarse pointers.
+- Validation: `npm run build` passed with all 52 behavior tests, TypeScript, and Vite production bundling.
+
 ## Mii startup default — 2026-11-14
 
 - Made Mii the focused startup app as well as an open, frontmost window on fresh entry and reboot. A previous close/minimize does not keep it hidden on the next visit; saved floating geometry is retained.
