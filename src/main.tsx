@@ -26,6 +26,7 @@ import './style.css';
 import './apps/refinement.css';
 import './vendor/frutiger-buttons.css';
 import './apps/improvement6.css';
+import './apps/aquaPalette.css';
 function App(){const d=useDesktop();const[path,setPath]=useState(location.pathname);
  useEffect(()=>{const pop=()=>{setPath(location.pathname);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')}};window.addEventListener('popstate',pop);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')};return()=>window.removeEventListener('popstate',pop)},[]);
  function openProject(id:string){const url='/projects/'+id;history.pushState({},'',url);setPath(url);d.open('detail')}

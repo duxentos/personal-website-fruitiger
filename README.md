@@ -30,6 +30,8 @@ The build runs the behavior tests, TypeScript and Vite. Music preparation reads 
 
 The magnetic Dock uses spring-based proximity sizing and lift with the established Aqua palette. Touch controls stay fixed-size with visible labels; reduced motion keeps the Dock still. The active pointer gesture is tracked at window level, and final geometry stays visible until state confirms it.
 
+The default appearance keeps the supplied E7 wallpaper with a subtle violet atmosphere confined to the background. Window chrome, controls and selections retain glossy iOS 6/Aqua blue with dark navy text. Palette tokens live in `src/apps/aquaPalette.css`; the Nothing display font and Mac Terminal font remain.
+
 ## Settings and content
 
 `src/settings/store.ts` validates and versions browser settings under `azaan-os-settings`, migrates earlier desktop/music/sound/icon keys, and preserves independent sections. System Preferences can restore defaults while keeping notes. Private browsing or disabled storage provides session-only state.

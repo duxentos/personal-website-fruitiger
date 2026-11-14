@@ -1,0 +1,44 @@
+/* E7 carries the violet atmosphere; the operating system stays iOS 6 / Aqua blue. */
+:root{
+ --aqua-ink:#203649;
+ --aqua-ink-soft:#3b5264;
+ --aqua-ice:#f1fcff;
+ --aqua-edge:#789dbb;
+ --aqua-control:linear-gradient(#f6fcff 0%,#d4ebff 46%,#8ebeea 50%,#c8eaff 100%);
+ --aqua-selected:linear-gradient(#d5edff 0%,#a3c9ed 48%,#82b5e0 50%,#b5dcf6 100%);
+}
+.os-desktop.wallpaper-plaza{
+ background-image:radial-gradient(ellipse at 78% 76%,#7157ae22,transparent 62%),linear-gradient(115deg,#8264b50e,#9478cb06 50%,#6f4ea21a),url('/assets/improvement6-wallpaper.png'),url('/vista-aurora.svg');
+ background-position:center,center,center 57%,center;
+ background-size:cover;
+ background-repeat:no-repeat;
+}
+.os-desktop{color:var(--aqua-ink)}
+.os-desktop .window-bar{background:linear-gradient(#f9fcff,#d9e8f6 47%,#b9d0e6 50%,#e5f2fc);color:var(--aqua-ink);border-bottom-color:#89a5bd;text-shadow:0 1px #ffffffd9}
+.window-name,.menu-bar,.menu-popover,.finder-toolbar,.finder-path,.resume-toolbar{color:var(--aqua-ink)}
+.menu-bar{background:linear-gradient(#fcfeff,#e8f2fb 46%,#cbdfee 50%,#eef7ff);border-bottom-color:#7898b2}
+.welcome-app .window-content{background:radial-gradient(ellipse at 100% 0,#c9e9ff70,transparent 65%),linear-gradient(#fafdff,#eaf5fc)}
+.welcome-copy h1,.connect-content h2,.blog-paper h1,.project-dossier h1,.project-dossier h2,.preferences-panel h2{color:var(--aqua-ink)}
+.welcome-copy .micro,.welcome-degree,.welcome-university,.welcome-description,.welcome-footer>div:first-child,.welcome-footer small,.context-mii-button,.context-mii-button>span,.media-print figcaption,.connect-content p,.project-dossier,.finder-file,.finder-sidebar button,.finder-preview h3,.finder-preview p,.finder-preview small,.finder-statusbar,.blog-toolbar>span,.blog-date,.blog-paper p,.blog-index small,.blog-index span,.preferences-panel p,.preferences-panel small,.preferences-panel label,.preferences-panel legend,.resume-toolbar>span{color:var(--aqua-ink-soft)}
+.welcome-degree{color:var(--aqua-ink)}
+.welcome-copy h1>span{color:#176ea3}
+.connect-content{background:linear-gradient(120deg,#f8fcff,#dceefa)}
+.blog-index button{color:var(--aqua-ink)}
+.finder-file.selected,.finder-sidebar button.selected,.blog-index button[aria-current=page]{color:var(--aqua-ink);background:var(--aqua-selected);text-shadow:0 1px #ffffffa6}
+.finder-file.selected small,.blog-index button[aria-current=page] small,.blog-index button[aria-current=page] span{color:#2c475c}
+.menu-popover button:hover,.menu-popover button:focus-visible{color:var(--aqua-ink);background:var(--aqua-selected);text-shadow:0 1px #ffffffa6}
+/* Pale blue gel, dark labels, rounded rims and the same specular dome. */
+.fj-button--aero.aqua-button,.finder-toolbar .fj-icon-btn[aria-pressed=true]{color:var(--aqua-ink);background:var(--aqua-control);border-color:#608fb9;box-shadow:inset 0 1px #fff,inset 0 -1px #548cc070,0 2px 5px #1b507b38;text-shadow:0 1px #ffffffe6}
+.fj-button--aero.aqua-button:hover:not(:disabled){color:#142e43;background:linear-gradient(#fff,#dff2ff 46%,#a2cff3 50%,#d3efff);box-shadow:inset 0 1px #fff,0 3px 8px #28689b40;text-shadow:0 1px #fff}
+.fj-button--aero.aqua-button:active:not(:disabled){color:#142e43;background:linear-gradient(#93bfe3,#c2e4fb);box-shadow:inset 0 2px 4px #2c587e4d;text-shadow:0 1px #ffffffb3}
+.fj-button--glass.aqua-button,.finder-toolbar .fj-icon-btn{color:var(--aqua-ink);background:linear-gradient(#ffffffed,#e0effb);border-color:#90aec5;text-shadow:0 1px #fff}
+.fj-button--glass.aqua-button:hover:not(:disabled){color:#142e43;background:linear-gradient(#fff,#cde6fa)}
+.finder-toolbar .fj-icon-btn[aria-pressed=true]{background:var(--aqua-selected)}
+.leather-toolbar .fj-button--glass{color:#332d27}
+.leather-toolbar .fj-button--danger{color:#602036;background:linear-gradient(#ffe7ed,#f9b7c8 60%,#efa0b5);border-color:#b9637a;text-shadow:0 1px #ffffffb3}
+.fj-button:disabled{opacity:.64}
+.desktop-shortcuts>button>span:last-child{color:var(--aqua-ink);background:#f1fcffcc;padding:2px 5px;border-radius:4px;text-shadow:0 1px #fff}
+.magnetic-label,.magnetic-label.touch-label{color:var(--aqua-ink);text-shadow:0 1px #ffffffd9}
+.blog-placeholder,.project-status,.technology-list li,.media-print figcaption,.finder-search input::placeholder{color:var(--aqua-ink-soft)}
+.ipod-screen{color:#20313f}
+/* Terminal retains its readable light-on-dark Mac monospace presentation. */

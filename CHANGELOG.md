@@ -1,5 +1,11 @@
 # Website change log
 
+## Aqua palette correction — 2026-11-14
+
+- Re-read `codex prompt.md` and `UIreference.md`, and inspected the supplied heyclicky/Aqua and iOS 6 reference images after the author clarified the palette.
+- Confined subtle violet hues to the exact E7 wallpaper through light CSS layers; restored pale glossy Aqua blue controls and dark navy text across window content, button labels and selections.
+- Preserved Frutiger button shapes/highlights, Nothing display type, Mac Terminal contrast, icons and all app behavior. See `AQUA_PALETTE_REVIEW.md`.
+
 ## Improvement 6 — 2026-11-14
 
 - Read `improvement6.md` and `Mii.md`; added the exact supplied E7 wallpaper locally and changed startup from 1.25 traversals to one completed crossing.
