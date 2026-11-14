@@ -4,6 +4,7 @@
 
 - Replaced the two empty Polaroid slots with the existing meadow and Vista aurora illustrations. Each set now shows E7, green hills and blue aurora with its own accurate caption.
 - Welcome and Projects share the three-image gallery and retain their existing floating motion. The E7 desktop wallpaper and iOS 6/Aqua palette are preserved. No new assets or dependencies.
+- Local and Vercel builds pass all 43 tests. Native Chrome visually confirmed three distinct pictures/captions in Welcome and the new hills/aurora orbiting Projects. Both SVG asset URLs returned HTTP 200. Tested code: `896ada2a64c6b50a19a56348dfd5b7a333121cf2`; preview: https://personal-website-fruitiger-sq4m5jevc-azaank041208-hash.vercel.app
 
 ## Aqua palette correction — 2026-11-14
 
