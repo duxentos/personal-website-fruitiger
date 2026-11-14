@@ -19,7 +19,7 @@ test('future settings are not overwritten; restore defaults keeps notes',()=>{
  assert.deepEqual(store.read('notes',object),{items:[]});assert.deepEqual(store.read('desktop',object),{});
 });
 test('fresh launch has Welcome, Projects and one Mii app; session deserialization preserves modes before entry policy',()=>{
- const size={w:1280,h:720};let session=initialSession(size);
+ const size={w:1280,h:720};let session=initialSession(size);assert.equal(session.active,'avatar');
  assert.deepEqual(Object.values(session.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects','avatar']);
  session=windowReducer(session,{type:'close',id:'welcome'});session=windowReducer(session,{type:'minimize',id:'projects'});
  session.windows.connect.x=9000;const restored=restoreSession(session,size);
@@ -53,12 +53,13 @@ test('entry opens the requested trio and migrates older layouts once',()=>{
  const size={w:1280,h:720};const old=initialSession(size);for(const win of Object.values(old.windows))win.mode='open';old.windows.welcome.w=900;
  const migrated=launchSession(old,size);assert.deepEqual(Object.values(migrated.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects','avatar']);assert.ok(migrated.windows.welcome.w<600);
  const saved={...migrated,layoutRevision:LAUNCH_LAYOUT_REVISION};saved.windows.projects.x=400;saved.windows.projects.w=480;saved.windows.notes.mode='open';
- const next=launchSession(saved,size);assert.equal(next.windows.projects.x,400);assert.equal(next.windows.projects.w,480);assert.equal(next.windows.notes.mode,'closed');assert.equal(next.active,'welcome');
+ const next=launchSession(saved,size);assert.equal(next.windows.projects.x,400);assert.equal(next.windows.projects.w,480);assert.equal(next.windows.notes.mode,'closed');assert.equal(next.active,'avatar');
 });
 
-test('saved Mii app geometry is kept while the single app is restored on launch',()=>{
- const size={w:1280,h:720};const initial=initialSession(size);initial.windows.avatar.x=300;initial.windows.avatar.mode='closed';
- const restored=launchSession({...initial,layoutRevision:LAUNCH_LAYOUT_REVISION},size);assert.equal(restored.windows.avatar.mode,'open');assert.equal(restored.windows.avatar.x,300);
+test('entry opens and focuses Mii after it was closed or minimized, keeping saved geometry',()=>{
+ const size={w:1280,h:720};
+ for(const mode of ['closed','minimized'] as const){const initial=initialSession(size);initial.windows.avatar.x=300;initial.windows.avatar.mode=mode;initial.active='welcome';
+ const restored=launchSession({...initial,layoutRevision:LAUNCH_LAYOUT_REVISION},size);assert.equal(restored.windows.avatar.mode,'open');assert.equal(restored.active,'avatar');assert.equal(restored.windows.avatar.x,300);assert.ok(restored.windows.avatar.layer>restored.windows.welcome.layer);}
 });
 test('the Mii app stays above the app driving its reaction without stealing focus',()=>{
  const initial=initialSession({w:1280,h:720});const find=windowReducer(initial,{type:'open',id:'connect'});

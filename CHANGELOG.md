@@ -1,5 +1,11 @@
 # Website change log
 
+## Mii startup default — 2026-11-14
+
+- Made Mii the focused startup app as well as an open, frontmost window on fresh entry and reboot. A previous close/minimize does not keep it hidden on the next visit; saved floating geometry is retained.
+- Extended the launch regression to cover both closed and minimized returning sessions.
+- Validation: `npm run build` passed with all 52 behavior tests, TypeScript, and Vite production bundling.
+
 ## Single contextual Mii app — 2026-11-14
 
 - Restored one standalone Mii app and its Dock/File-menu launcher; it opens on arrival alongside Welcome and Projects. Removed embedded Welcome/Find Me Miis and the startup crossing character.

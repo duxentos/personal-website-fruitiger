@@ -21,7 +21,7 @@ export function initialSession(size: WorkspaceSize): DesktopSession {
     return [id,{id,title:windowTitles[id],...geometry,mode:primary.includes(id)?'open':'closed',zoom:small&&id!=='avatar'&&primary.includes(id),layer:index+1}];
   })) as Record<WindowId,WindowState>;
   windows.welcome.layer=20;windows.avatar.layer=21;
-  return {windows,active:'welcome'};
+  return {windows,active:'avatar'};
 }
 export function restoreSession(value: unknown, size: WorkspaceSize): DesktopSession {
   const root = object(value), saved = object(root.windows), initial = initialSession(size);
@@ -42,7 +42,7 @@ export function launchSession(value:unknown,size:WorkspaceSize):DesktopSession{
   if(root.layoutRevision!==LAUNCH_LAYOUT_REVISION&&(id==='welcome'||id==='projects'||id==='avatar'))session.windows[id]={...fresh.windows[id]};
   session.windows[id].mode=id==='welcome'||id==='projects'||id==='avatar'?'open':'closed';
  }
- session.active='welcome';session.windows.welcome.layer=Math.max(...Object.values(session.windows).map(w=>w.layer))+1;session.windows.avatar.layer=session.windows.welcome.layer+1;
+ session.active='avatar';session.windows.welcome.layer=Math.max(...Object.values(session.windows).map(w=>w.layer))+1;session.windows.avatar.layer=session.windows.welcome.layer+1;
  return session;
 }
 export function topWindow(windows: Record<WindowId,WindowState>): WindowId|null {return windowIds.filter(id=>windows[id].mode==='open').sort((a,b)=>windows[b].layer-windows[a].layer)[0]??null;}
