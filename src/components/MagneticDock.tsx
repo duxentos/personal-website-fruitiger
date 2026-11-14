@@ -1,7 +1,7 @@
 import {useCallback,useEffect,useRef,useState,type CSSProperties,type ReactNode,type PointerEvent} from 'react';
 import {AnimatePresence,LazyMotion,domAnimation,m,useMotionValue,useReducedMotion,useSpring,useTransform,type MotionValue} from 'motion/react';
 
-export type DockItemData={id:string;label:string;icon:ReactNode;onClick?:()=>void;isActive?:boolean;isRunning?:boolean;isMinimized?:boolean;badge?:number};
+export type DockItemData={id:string;label:string;icon:ReactNode;onClick?:()=>void;onHoverChange?:(hovered:boolean)=>void;isActive?:boolean;isRunning?:boolean;isMinimized?:boolean;badge?:number};
 export type MagneticDockProps={items:DockItemData[];iconSize?:number;maxScale?:number;magneticDistance?:number;showLabels?:boolean;position?:'bottom'|'top'|'left'|'right';variant?:'glass'|'solid'|'transparent';className?:string;reducedMotion?:boolean};
 const spring={damping:20,stiffness:300,mass:.5};
 function DockItem({item,pointer,iconSize,maxScale,magneticDistance,showLabels,vertical,reduced,touch}:{item:DockItemData;pointer:MotionValue<number>;iconSize:number;maxScale:number;magneticDistance:number;showLabels:boolean;vertical:boolean;reduced:boolean;touch:boolean}){
@@ -15,8 +15,8 @@ function DockItem({item,pointer,iconSize,maxScale,magneticDistance,showLabels,ve
  useEffect(()=>{if(reduced||touch){focusScale.set(1);scale.jump(1);lift.jump(0)}},[reduced,touch,focusScale,scale,lift]);
  const label=showLabels&&(hovered||focused||touch);
  return <m.button ref={ref} type="button" className={`magnetic-dock-item ${item.isActive?'is-active':''}`} aria-label={`${item.label}${item.isMinimized?', minimized':''}`} aria-current={item.isActive?'page':undefined} onClick={item.onClick}
-  onFocus={()=>{setFocused(true);focusScale.set(reduced||touch?1:maxScale)}} onBlur={()=>{setFocused(false);focusScale.set(1)}}
-  onPointerEnter={event=>{if(event.pointerType==='mouse'&&!touch)setHovered(true)}} onPointerLeave={()=>setHovered(false)}
+  onFocus={()=>{item.onHoverChange?.(true);setFocused(true);focusScale.set(reduced||touch?1:maxScale)}} onBlur={()=>{item.onHoverChange?.(false);setFocused(false);focusScale.set(1)}}
+  onPointerEnter={event=>{if(event.pointerType==='mouse'&&!touch){item.onHoverChange?.(true);setHovered(true)}}} onPointerLeave={()=>{item.onHoverChange?.(false);setHovered(false)}}
   style={{width:reduced||touch?iconSize:size,height:reduced||touch?iconSize:size,x:vertical&&!reduced&&!touch?lift:0,y:!vertical&&!reduced&&!touch?lift:0}}
   whileTap={reduced?undefined:{scale:.94}}>
   <m.span className="magnetic-dock-art" aria-hidden="true" style={{width:iconSize,height:iconSize,scale:reduced||touch?1:scale}}>{item.icon}<m.span className="magnetic-shine" animate={{opacity:hovered ? .8 : .4}}/><m.span className="magnetic-glow" animate={{opacity:hovered||focused?1:0}}/></m.span>

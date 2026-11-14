@@ -1,98 +1,44 @@
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback,useEffect,useRef,useState} from 'react';
 import {useReducedMotion} from 'motion/react';
 import {useDesktop} from './Desktop';
-import {miiAnimations, selectAnimation, type MiiAnimation} from '../data/miiAnimations';
+import {useMusic} from '../apps/ipod/MusicProvider';
 import {playSound} from '../audio/SoundEngine';
+import {profile} from '../profile';
+import {greetingDuration,nextGreeting,resolveMiiReaction,type GreetingPhase,type MiiReaction} from './miiReaction';
 
-type MiiContext = 'desktop' | 'about' | 'projects' | 'notes' | 'terminal' | 'resume';
-const contextAnimation: Record<MiiContext, string> = {
-  desktop: 'wave', about: 'intro', projects: 'little-hop', notes: 'shortcut',
-  terminal: 'curious', resume: 'scenic-route',
-};
-function prepare(src: string) {
-  return new Promise<void>((resolve, reject) => {
-    const image = new Image();
-    const timer = setTimeout(() => {image.onload = null; image.onerror = null; reject(new Error('unavailable animation'));}, 4500);
-    image.onload = () => {clearTimeout(timer); resolve();};
-    image.onerror = () => {clearTimeout(timer); reject(new Error('unavailable animation'));};
-    image.src = src;
-  });
-}
-
-export function MiiCompanion({compact = false, context = 'desktop'}: {compact?: boolean; context?: MiiContext}) {
-  const {preferences: p} = useDesktop();
-  const systemReduce = useReducedMotion();
-  const reduced = Boolean(systemReduce || p.reducedMotion);
-  const base = miiAnimations.find(animation => animation.id === contextAnimation[context])!;
-  const [current, setCurrent] = useState<MiiAnimation | null>(null);
-  const [reaction, setReaction] = useState(false);
-  const [hidden, setHidden] = useState(document.hidden);
-  const seen = useRef<Record<string, number>>({});
-  const previous = useRef(base.id);
-  const failed = useRef(new Set<string>());
-  const busy = useRef(false);
-  const request = useRef(0);
-  const mounted = useRef(true);
-
-  const show = useCallback(async (animation: MiiAnimation, isReaction: boolean) => {
-    const token = ++request.current;
-    try {
-      await prepare(animation.src);
-      if (!mounted.current || token !== request.current) return;
-      previous.current = animation.id;
-      seen.current[animation.id] = Date.now();
-      setCurrent(animation);
-      setReaction(isReaction);
-    } catch {failed.current.add(animation.id);}
-  }, []);
-
-  useEffect(() => {
-    mounted.current = true;
-    if (!reduced) void show(base, false);
-    return () => {mounted.current = false; request.current++;};
-  }, [base, reduced, show]);
-
-  useEffect(() => {
-    const visibility = () => setHidden(document.hidden);
-    document.addEventListener('visibilitychange', visibility);
-    return () => document.removeEventListener('visibilitychange', visibility);
-  }, []);
-
-  useEffect(() => {
-    if (!reaction || !current || hidden) return;
-    const timer = setTimeout(() => {
-      setReaction(false);
-      void show(base, false);
-    }, current.id === 'wave' ? current.durationMs * 5 : current.durationMs);
-    return () => clearTimeout(timer);
-  }, [reaction, current, hidden, base, show]);
-
-  useEffect(() => {
-    if (!p.randomMii || reduced || hidden || reaction) return;
-    const timer = setTimeout(() => {
-      if (busy.current) return;
-      const next = selectAnimation(miiAnimations.filter(a => !a.fullStage && !failed.current.has(a.id)), previous.current, seen.current, Date.now());
-      if (next) void show(next, true);
-    }, p.miiFrequency * 1000);
-    return () => clearTimeout(timer);
-  }, [p.randomMii, p.miiFrequency, reduced, hidden, reaction, current, show]);
-
-  async function greet() {
-    if (!p.miiInteractions || busy.current) return;
-    if (p.miiSounds) playSound('mii.interaction');
-    if (reduced) return;
-    const next = selectAnimation(miiAnimations.filter(a => !a.fullStage && !failed.current.has(a.id)), previous.current, seen.current, Date.now());
-    if (!next) return;
-    busy.current = true;
-    try {await show(next, true);} finally {busy.current = false;}
-  }
-
-  const src = reduced || hidden ? '/mii-still.png' : current?.src || '/mii-still.png';
-  return <div className={`${compact ? 'mii-presence' : 'mii-companion'} mii-context-${context} ${current?.fullStage ? 'mii-wide' : ''} ${hidden ? 'animation-paused' : ''}`}>
-    <button className="mii-figure"
-      onClick={greet} disabled={!p.miiInteractions} aria-label={`interact with Azaan's ${context === 'desktop' ? 'Mii' : context + ' Mii'}`}>
-      <img key={src} src={src} alt="Azaan's Mii companion" onError={() => {if (current) failed.current.add(current.id); setCurrent(null);}}/>
-    </button>
-    {!compact && <div className="mii-caption"><span>{reaction ? 'a little something different' : 'tap to say hi'}</span><button onClick={greet} disabled={!p.miiInteractions}>say hi ↗</button></div>}
-  </div>;
+// Exact supplied Mii.md clips. Only the wave still needs its original external URL.
+const clips:Record<MiiReaction,string>={still:profile.avatar.still,jump:'/mii-intro.gif',wave:profile.avatar.wave,dance:'/mii-happy.gif',curious:'/mii-curious.gif'};
+export function MiiCompanion({context}:{context:'about'|'connect'}){
+ const {preferences:p}=useDesktop(),music=useMusic(),systemReduce=useReducedMotion();
+ const [hidden,setHidden]=useState(document.hidden),[inView,setInView]=useState(false),[ipodHovered,setIpodHovered]=useState(false);
+ const [greeting,setGreeting]=useState<GreetingPhase>(null),[cycle,setCycle]=useState(0),[loaded,setLoaded]=useState('');
+ const [failed,setFailed]=useState<string[]>([]);const root=useRef<HTMLDivElement>(null),lastGreet=useRef(-Infinity);
+ const reduced=Boolean(systemReduce||p.reducedMotion),visible=!hidden&&inView;
+ const greet=useCallback((sound=false)=>{
+  if(context!=='about'||!p.miiInteractions||reduced||document.hidden||performance.now()-lastGreet.current<5500)return;
+  lastGreet.current=performance.now();setGreeting('jump');setCycle(n=>n+1);
+  if(sound&&p.miiSounds)playSound('mii.interaction');
+ },[context,p.miiInteractions,p.miiSounds,reduced]);
+ useEffect(()=>{
+  const visibility=()=>setHidden(document.hidden),hover=(event:Event)=>setIpodHovered(Boolean((event as CustomEvent<boolean>).detail)),hello=()=>greet();
+  document.addEventListener('visibilitychange',visibility);window.addEventListener('ipod-hover',hover);window.addEventListener('mii-greet',hello);
+  return()=>{document.removeEventListener('visibilitychange',visibility);window.removeEventListener('ipod-hover',hover);window.removeEventListener('mii-greet',hello)};
+ },[greet]);
+ useEffect(()=>{
+  if(!root.current)return;
+  if(!('IntersectionObserver' in window)){setInView(true);return;}
+  const observer=new IntersectionObserver(entries=>setInView(entries.some(entry=>entry.isIntersecting)),{threshold:.15});observer.observe(root.current);return()=>observer.disconnect();
+ },[]);
+ useEffect(()=>{if(visible)greet();else setGreeting(null)},[visible,greet]);
+ const reaction=resolveMiiReaction({context,visible,reduced,enabled:p.miiInteractions,greeting,playing:music.playing,ipodHovered});
+ const base=clips[reaction],src=failed.includes(base)?clips.still:greeting&&reaction===greeting?`${base}${base.includes('?')?'&':'?'}reaction=${cycle}`:base;
+ useEffect(()=>{
+  if(!visible||reduced||!greeting)return;
+  if(failed.includes(base)){setGreeting(null);return;}
+  if(loaded!==src)return;
+  const timer=setTimeout(()=>setGreeting(nextGreeting),greetingDuration[greeting]);return()=>clearTimeout(timer);
+ },[visible,reduced,greeting,src,base,loaded,failed]);
+ return <div ref={root} className={`context-mii context-mii-${context}`} data-reaction={reaction}>
+  {context==='about'?<button className="context-mii-button" aria-label="say hi to azaan’s mii" disabled={!p.miiInteractions} onClick={()=>greet(true)}><img key={src} src={src} alt="Azaan’s Mii" onLoad={()=>setLoaded(src)} onError={()=>setFailed(value=>value.includes(base)?value:[...value,base])}/><span>say hi ↗</span></button>:<img key={src} src={src} alt="Azaan’s confused Mii looking around" onError={()=>setFailed(value=>value.includes(base)?value:[...value,base])}/>}
+ </div>;
 }

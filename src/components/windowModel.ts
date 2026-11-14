@@ -1,18 +1,18 @@
 import {finite, object} from '../settings/store.ts';
 import {fitWindowFrame, type WorkspaceSize} from './windowGeometry.ts';
-export const windowIds = ['welcome','stories','projects','connect','notes','avatar','detail','settings','ipod','terminal','resume'] as const;
+export const windowIds = ['welcome','stories','projects','connect','notes','detail','settings','ipod','terminal','resume'] as const;
 export type WindowId = typeof windowIds[number];
 export type WindowState = {id: WindowId; title: string; x: number; y: number; w: number; h: number; mode: 'open'|'minimized'|'closed'; zoom: boolean; layer: number};
-export const windowTitles: Record<WindowId,string> = {welcome:'about me',stories:'blogs',projects:'projects',connect:'where to connect',notes:'notes',avatar:'mii',detail:'project info',settings:'system preferences',ipod:'ipod',terminal:'terminal',resume:'résumé'};
+export const windowTitles: Record<WindowId,string> = {welcome:'about me',stories:'blogs',projects:'projects',connect:'where to connect',notes:'notes',detail:'project info',settings:'system preferences',ipod:'ipod',terminal:'terminal',resume:'résumé'};
 export type DesktopSession = {windows: Record<WindowId,WindowState>; active: WindowId | null};
 export function initialSession(size: WorkspaceSize): DesktopSession {
   const small = size.w < 600;
-  const aboutW=Math.min(500,size.w*.42),projectW=Math.min(570,size.w*.48);
-  const aboutH=Math.min(340,size.h*.62),projectH=Math.min(350,size.h*.65);
+  const aboutW=Math.min(550,size.w*.45),projectW=Math.min(570,size.w*.48);
+  const aboutH=Math.min(470,size.h*.8),projectH=Math.min(350,size.h*.65);
   const defaults: Record<WindowId, [number,number,number,number]> = {
     welcome:[24,24,aboutW,aboutH], stories:[65,35,660,500],
     projects:[size.w-projectW-38,Math.min(105,size.h-projectH-24),projectW,projectH], connect:[75,55,640,420],
-    notes:[50,30,660,520],avatar:[65,35,430,470],detail:[80,45,740,500],settings:[90,40,590,520],ipod:[40,25,345,610],terminal:[70,55,650,420],resume:[60,35,760,600],
+    notes:[50,30,660,520],detail:[80,45,740,500],settings:[90,40,590,520],ipod:[40,25,345,610],terminal:[70,55,650,420],resume:[60,35,760,600],
   };
   const primary = ['welcome','projects'];
   const windows = Object.fromEntries(windowIds.map((id,index) => {
@@ -35,7 +35,7 @@ export function restoreSession(value: unknown, size: WorkspaceSize): DesktopSess
   return initial;
 }
 /** Entry/reboot opens only the requested pair, while retaining their saved geometry. */
-export const LAUNCH_LAYOUT_REVISION=3;
+export const LAUNCH_LAYOUT_REVISION=4;
 export function launchSession(value:unknown,size:WorkspaceSize):DesktopSession{
  const session=restoreSession(value,size),root=object(value),fresh=initialSession(size);
  for(const id of windowIds){

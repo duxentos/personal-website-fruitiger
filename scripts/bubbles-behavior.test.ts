@@ -24,6 +24,6 @@ test('time-based bubble motion and speed limits tolerate slow frames',()=>{
  assert.ok(Math.abs((b.x-100)/(a.x-100)-2)<.01);
  const fast=bubble({vx:400,vy:400});advanceBubble(fast,10,1,1.5);assert.ok(Math.hypot(fast.vx,fast.vy)<=90.00001);assert.ok(fast.x<110);
 });
-test('the plaza replaces saved XP wallpaper while preserving explicit Vista choice',()=>{
- assert.equal(resolveWallpaper('meadow'),'plaza');assert.equal(resolveWallpaper(undefined),'plaza');assert.equal(resolveWallpaper('vista'),'vista');assert.equal(wallpapers.plaza,'/assets/mii-plaza-background.png');
+test('the new E7 artwork replaces saved XP/plaza wallpaper while preserving Vista',()=>{
+ assert.equal(resolveWallpaper('meadow'),'plaza');assert.equal(resolveWallpaper(undefined),'plaza');assert.equal(resolveWallpaper('vista'),'vista');assert.equal(wallpapers.plaza,'/assets/improvement6-wallpaper.png');
 });

@@ -1,0 +1,34 @@
+/* Improvement 6: quieter content, original supplied E7 art, and Frutiger.js actions. */
+.welcome-app .window-content{background:radial-gradient(ellipse at 100% 0,#c1edf384,transparent 65%),linear-gradient(#fbffff,#eef9fc)}
+.welcome-page{padding:20px 22px 18px;min-height:100%;color:#365d70;display:flex;flex-direction:column;gap:15px}
+.welcome-intro{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:12px;align-items:center}
+.welcome-copy{min-width:0}.welcome-copy .micro{font-size:9px;line-height:1.5;letter-spacing:.02em;color:#598495;display:block}
+.welcome-copy h1{font-size:clamp(30px,8cqw,43px);line-height:1.1;letter-spacing:-.025em;margin:12px 0 10px;color:#235a73;white-space:nowrap}
+.welcome-copy h1>span{color:#22a5b5}.welcome-degree{margin:0 0 6px;font-size:14px;font-weight:600;line-height:1.5;color:#315f73}.welcome-university{font-size:11px;line-height:1.6;margin:0;color:#668495}
+.welcome-description{font-size:12px;line-height:1.75;margin:12px 0 0;max-width:39em;color:#5b7988}
+.welcome-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.welcome-actions .fj-button{font-size:11px;min-height:40px;padding:8px 14px}
+.welcome-footer{border-top:1px solid #abcbd980;padding-top:12px;margin-top:auto}.welcome-footer>div:first-child{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:#618192}.welcome-footer small{font-size:9px;color:#8a9faa}
+.welcome-polaroids{display:flex;align-items:center;justify-content:center;gap:13px;padding:14px 6px 5px;overflow:hidden;min-height:107px}
+.welcome-polaroids .media-print{position:relative;inset:auto;flex:0 0 104px;width:104px;padding:5px 5px 20px;box-shadow:0 4px 8px #345b732b;animation-duration:7s}
+.welcome-polaroids .media-print img,.welcome-polaroids .media-print video,.welcome-polaroids .media-placeholder{height:56px}
+.welcome-polaroids .media-print-1{--print-angle:-5deg}.welcome-polaroids .media-print-2{--print-angle:4deg}.welcome-polaroids .media-print-3{--print-angle:-3deg}
+.welcome-polaroids figcaption{font-size:8px;bottom:5px}.media-print img{object-fit:cover}
+@keyframes media-drift{0%{transform:translate(-6px,-7px) rotate(calc(var(--print-angle) - 2deg))}50%{transform:translate(5px,4px) rotate(var(--print-angle))}100%{transform:translate(9px,-4px) rotate(calc(var(--print-angle) + 3deg))}}
+.project-media-orbit .media-print{animation-duration:8s}.project-media-orbit[data-animate=false] .media-print,.welcome-polaroids[data-animate=false] .media-print{animation-play-state:paused}
+.context-mii{position:relative;width:120px;height:180px;isolation:isolate;flex:none}.context-mii-button{position:absolute;inset:0;padding:0;border:0;background:none;border-radius:18px;overflow:hidden;cursor:pointer;color:#608494}
+.context-mii img{position:absolute;left:50%;top:46%;width:180%;height:180%;max-width:none;object-fit:contain;transform:translate(-50%,-50%);pointer-events:none}
+.context-mii-button>span{position:absolute;bottom:1px;left:0;right:0;font-size:9px;text-align:center}.context-mii-button:focus-visible{outline:2px solid #0284c7;outline-offset:3px}.context-mii-button:disabled{cursor:default}.context-mii-button:disabled>span{display:none}
+.context-mii-connect{width:170px;height:230px;overflow:hidden}.context-mii-connect img{top:50%;width:170%;height:170%}.connect-content .curious-stage{display:grid;place-items:center;overflow:hidden}
+.annotation-subtle .annotation-mark{stroke-width:1.15;opacity:.65;left:-1%;width:102%;height:1.6em;top:-.2em}
+/* Keep operating-system traffic lights, menus, Dock and iPod wheel physical. */
+.fj-button.aqua-button{border-radius:999px;font-weight:600;text-decoration:none;gap:8px;letter-spacing:0}
+.fj-button--aero.aqua-button{color:white;border-color:#38bdf8;background:linear-gradient(180deg,#ffffffb3,#ffffff1a 48%,#ffffff00 52%,#ffffff4d),linear-gradient(180deg,#38bdf8,#0284c7 50%,#0ea5e9);box-shadow:inset 0 1px #ffffffe6,inset 0 -1px #0003,0 3px 9px #0ea5e959;text-shadow:0 1px 2px #0c4a6e80}
+.fj-button--glass.aqua-button{background:#ffffffcc;color:#0f2d4a;border-color:#ffffffe6;box-shadow:inset 0 1px 1px #ffffffe6,0 2px 8px #0c4a6e26;text-shadow:none}
+.fj-button:focus-visible{outline:2px solid #0369a1;outline-offset:3px}.fj-button>svg{position:relative;flex:none}.fj-button:disabled{pointer-events:auto}
+.finder-toolbar .fj-icon-btn{padding:0;border:1px solid #a2c9dc;border-radius:8px;background:linear-gradient(#ffffffed,#d8eef7);color:#366578;min-width:32px;min-height:32px;box-shadow:inset 0 1px #fff,0 1px 3px #1d5e7c26}
+.finder-toolbar .fj-icon-btn[aria-pressed=true]{background:linear-gradient(#51c6f1,#1583b2);color:white;border-color:#349eca;box-shadow:inset 0 1px 3px #07598566}
+.finder-statusbar .fj-button{border-radius:999px;padding:4px 10px;font-size:10px}.leather-toolbar .fj-button{border-radius:999px}.leather-toolbar .fj-button--glass{background:#ffffffdd;color:#4e473e;text-shadow:none;border-color:#fff9}.leather-toolbar .fj-button--danger{background:linear-gradient(#fda4af,#e11d48 60%,#be123c);border-color:#e11d48;color:white}
+@container desktop-window (max-width:450px){.welcome-page{padding:18px 17px 14px;gap:14px}.welcome-intro{grid-template-columns:minmax(0,1fr) 96px;gap:4px}.welcome-copy h1{font-size:clamp(26px,8cqw,35px);white-space:normal}.welcome-degree{font-size:13px}.welcome-university{font-size:10px}.welcome-description{font-size:12px}.context-mii-about{width:96px;height:166px}.welcome-polaroids{gap:9px;justify-content:flex-start;overflow-x:auto;scrollbar-width:thin}.welcome-polaroids .media-print{flex-basis:94px;width:94px}.welcome-actions .fj-button{flex:1;min-height:44px;padding-inline:10px}.welcome-footer small{display:none}}
+@media(hover:none),(pointer:coarse){.finder-toolbar .fj-icon-btn{min-width:44px;min-height:44px}.fj-button--sm{min-height:44px}.context-mii-button{touch-action:manipulation}}
+@media(prefers-reduced-motion:reduce){.media-print{animation:none}.fj-button,.fj-button:before,.fj-icon-btn{transition:none!important}.fj-button:hover:not(:disabled),.fj-button:active:not(:disabled){transform:none}}
+.motion-reduced .media-print{animation:none}.motion-reduced .fj-button,.motion-reduced .fj-button:before{transition:none!important}.motion-reduced .fj-button:hover:not(:disabled),.motion-reduced .fj-button:active:not(:disabled){transform:none}

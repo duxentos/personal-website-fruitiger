@@ -1,4 +1,4 @@
-export const BOOT_CROSSINGS=1.25;
+export const BOOT_CROSSINGS=1;
 export const BOOT_ASSET_TIMEOUT_MS=3800;
 export const BOOT_FALLBACK_MS=1200;
 /** One supplied traversal clip is one crossing (175 frames, measured 7000ms). */

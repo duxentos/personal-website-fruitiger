@@ -1,5 +1,13 @@
 # Website change log
 
+## Improvement 6 — 2026-11-14
+
+- Read `improvement6.md` and `Mii.md`; added the exact supplied E7 wallpaper locally and changed startup from 1.25 traversals to one completed crossing.
+- Rebuilt Welcome with a clear introduction, projects/find-me actions and a compact floating Polaroid footer. Projects retains more visible floating Polaroid motion. Supplied E7 artwork fills one slot; unsupplied personal photos/video remain placeholders.
+- Replaced random companion animations with supplied jump → wave, music/iPod hover dancing and Find Me confused clips. Miis appear only in Welcome and Find Me; removed the standalone avatar app/menu/Dock entry and résumé Mii, with saved-session recovery.
+- Reduced annotations to selective editorial emphasis and adopted Frutiger.js Aero/glass action and Finder/Notes button styles locally with MIT attribution.
+- Updated launch layout migration for the fuller Welcome and added four reaction/session regressions. All 43 tests, TypeScript and Vite pass locally. No new package dependencies. See `IMPROVEMENTS_6_REVIEW.md`.
+
 ## Improvement #5 — 2026-11-13
 
 - Restored Mac-style monospace Terminal typography with an explicit font exception and responsive command entry/focus feedback.

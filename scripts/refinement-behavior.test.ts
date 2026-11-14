@@ -46,7 +46,7 @@ test('a maximized session retains its floating restore frame after refresh',()=>
 
 test('retired plaza sessions cannot reopen the removed app',()=>{
  const initial=initialSession({w:1280,h:720});const value={...initial,active:'mii',windows:{...initial.windows,mii:{mode:'open',layer:500}}};
- const restored=restoreSession(value,{w:1280,h:720});assert.equal('mii' in restored.windows,false);assert.equal(restored.windows.avatar.mode,'closed');assert.notEqual(restored.active,'mii');
+ const restored=restoreSession(value,{w:1280,h:720});assert.equal('mii' in restored.windows,false);assert.equal('avatar' in restored.windows,false);assert.notEqual(restored.active,'mii');
 });
 
 test('entry closes every other app and migrates the previous four-window layout once',()=>{
@@ -54,4 +54,9 @@ test('entry closes every other app and migrates the previous four-window layout 
  const migrated=launchSession(old,size);assert.deepEqual(Object.values(migrated.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','projects']);assert.ok(migrated.windows.welcome.w<600);
  const saved={...migrated,layoutRevision:LAUNCH_LAYOUT_REVISION};saved.windows.projects.x=400;saved.windows.projects.w=480;saved.windows.notes.mode='open';
  const next=launchSession(saved,size);assert.equal(next.windows.projects.x,400);assert.equal(next.windows.projects.w,480);assert.equal(next.windows.notes.mode,'closed');assert.equal(next.active,'welcome');
+});
+
+test('retired standalone avatar sessions recover to a current window',()=>{
+ const initial=initialSession({w:1280,h:720});const saved={...initial,active:'avatar',windows:{...initial.windows,avatar:{mode:'open',layer:999}}};
+ const restored=restoreSession(saved,{w:1280,h:720});assert.equal('avatar' in restored.windows,false);assert.equal(restored.active,'welcome');
 });
