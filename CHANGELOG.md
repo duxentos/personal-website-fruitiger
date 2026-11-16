@@ -1,5 +1,10 @@
 # Website change log
 
+## Visible Terminal command guide — 2026-11-16
+
+- Terminal now prints its supported commands, descriptions and history/completion hints as soon as it opens. The help command uses the same guide, and clear retains its normal behavior.
+- Validation: production build, asset preflight, TypeScript and all 69 behavior tests pass.
+
 ## About Me foreground on launch — 2026-11-16
 
 - About Me is now the active startup/restart window as well as open, so phone layouts show the introduction immediately. Mii remains open alongside it on larger screens and available from the Dock.
