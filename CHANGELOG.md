@@ -8,7 +8,7 @@
 - Cancelled iPod holds on blur, hidden tabs and lost pointer capture; restored keyboard actions after long presses and added missing-artwork fallback. Cleared stale playback timing after a failed track.
 - Added full menu arrow/Home/End navigation, modal Tab containment and focus restoration, graceful clipboard/fullscreen failures, and Terminal draft-history restoration with local scrolling.
 - Replaced project placeholders using current projects.md and the new résumé, including supplied ClinTempo/GOOSE images and NeuroSight links. Added a build-time asset preflight and search description/font preload.
-- Local lint/build pass all 68 tests. Full evidence for all ten areas and remaining browser limits are recorded in `OVERNIGHT_POLISH_REVIEW.md`.
+- Local lint/build and the first Vercel preview pass all 68 tests. Native Chrome verified the desktop, résumé, menu/Terminal focus and music/Mii flows; phone/tablet emulation found and prompted fixes for tablet signal positioning and lazy-image dimensions. The standalone photos.md repository now contains all seventeen photos and the video/descriptions. Full evidence is in `OVERNIGHT_POLISH_REVIEW.md`.
 
 ## Improvement 9 desktop refinements — 2026-11-16
 

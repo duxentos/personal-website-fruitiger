@@ -7,7 +7,7 @@ import {welcomePhotos,welcomeVideo,snapshotFramePhotos,type SnapshotPhoto} from 
 function SnapshotImage({photo}:{photo:SnapshotPhoto}){
  const[loaded,setLoaded]=useState(false),[failed,setFailed]=useState(false);
  return <div className="snapshot-image-stack" data-loaded={loaded} style={{'--photo-position':photo.position} as CSSProperties}>
-  {failed?<div className="snapshot-missing" role="img" aria-label={photo.alt}><ImageIcon size={22}/><span>photo unavailable</span></div>:<img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" onLoad={()=>setLoaded(true)} onError={()=>setFailed(true)}/>}
+  {failed?<div className="snapshot-missing" role="img" aria-label={photo.alt}><ImageIcon size={22}/><span>photo unavailable</span></div>:<img src={photo.src} width={photo.width} height={photo.height} alt={photo.alt} loading="lazy" decoding="async" onLoad={()=>setLoaded(true)} onError={()=>setFailed(true)}/>}
   <span className="snapshot-gel-highlight" aria-hidden="true"/><span className="snapshot-pop-bubbles" aria-hidden="true"><i/><i/><i/></span>
  </div>;
 }

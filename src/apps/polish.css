@@ -33,3 +33,13 @@
  .ipod-device{height:445px}.ipod-screen{height:198px}
  .ipod-app .now-playing{padding:8px 8px 5px}.ipod-progress{margin:3px 0 0}
 }
+
+/* Each signal owns its pseudo-element on tablets as well as phones. */
+.aqua-window .window-back{display:none}
+.aqua-window .lights{flex:none}
+.aqua-window .lights button{position:relative;flex:none}
+.resume-version{display:inline-block;margin-left:8px}
+@media(max-width:1023px),(pointer:coarse){
+ .aqua-window .lights button{width:44px;height:44px;min-width:44px;min-height:44px}
+ .aqua-window .lights button:before{inset:15px}
+}
