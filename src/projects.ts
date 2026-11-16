@@ -561,7 +561,8 @@ export const projects:Project[]=[
       "Embedded C",
       "STM32CubeIDE",
       "FreeRTOS",
-      "Altium Designer"
+      "Altium Designer",
+      "PCB design"
     ],
     "features": [
       "Embedded firmware development and debugging",
@@ -569,13 +570,255 @@ export const projects:Project[]=[
       "PCB soldering, wiring and hardware/software integration"
     ],
     "contributions": [
-      "Develop and debug STM32H753 firmware.",
-      "Support battery-pack and motor-control circuit concepts in Altium.",
-      "Collaborate across subteams on embedded integration and troubleshooting."
+      "Develop and debug STM32H753 firmware using Embedded C.",
+      "Work with FreeRTOS configurations and STM32CubeIDE.",
+      "Design battery-pack and motor-control circuit concepts in Altium Designer.",
+      "Support PCB assembly, soldering and electrical wiring.",
+      "Collaborate across electrical, software and mechanical subteams on integration and troubleshooting."
     ],
     "screenshots": [],
     "sources": [
+      "projects.md",
       "public/azaan-khan-resume.pdf"
+    ],
+    "date": "September 2026 – present",
+    "architecture": {
+      "nodes": [
+        {
+          "id": "firmware",
+          "title": "Embedded firmware",
+          "detail": "STM32H753 firmware in Embedded C, with FreeRTOS configurations and STM32CubeIDE debugging."
+        },
+        {
+          "id": "circuits",
+          "title": "Electrical design",
+          "detail": "Battery-pack and motor-control circuit concepts in Altium Designer."
+        },
+        {
+          "id": "assembly",
+          "title": "PCB assembly",
+          "detail": "PCB assembly, soldering and electrical wiring."
+        },
+        {
+          "id": "integration",
+          "title": "System integration",
+          "detail": "Cross-team hardware/software troubleshooting with electrical, software and mechanical subteams."
+        }
+      ],
+      "edges": [
+        {
+          "from": "firmware",
+          "to": "integration",
+          "label": "Embedded integration"
+        },
+        {
+          "from": "circuits",
+          "to": "assembly",
+          "label": "Electrical implementation"
+        },
+        {
+          "from": "assembly",
+          "to": "integration",
+          "label": "Wiring and troubleshooting"
+        }
+      ]
+    },
+    "todo": [
+      "Add actual PCB and firmware assets when supplied."
+    ]
+  },
+  {
+    "id": "washing-machine-notifier",
+    "name": "ESP32 Washing Machine Notifier",
+    "directory": "hardware",
+    "category": "IoT / embedded systems / home automation",
+    "state": "completed",
+    "status": "Completed",
+    "date": "August 2026",
+    "icon": "laundry",
+    "accent": "#529db7",
+    "note": "Motion sensing that turns the end of a wash cycle into a phone notification.",
+    "description": "An ESP32-based motion-monitoring system that detects when a washing machine finishes its cycle and sends a notification to a smartphone.",
+    "motivation": "Make the end of a washing cycle easier to notice without repeatedly checking the machine.",
+    "technologies": [
+      "ESP32",
+      "C++",
+      "Arduino IDE",
+      "Accelerometer",
+      "ntfy API"
+    ],
+    "features": [
+      "Accelerometer-based monitoring circuit",
+      "C++ firmware processes motion measurements and detects cycle completion",
+      "ntfy integration delivers a smartphone notification"
+    ],
+    "contributions": [
+      "Designed the accelerometer-based monitoring circuit.",
+      "Developed C++ firmware for motion processing and wash-cycle completion detection.",
+      "Integrated the ntfy API for smartphone notifications."
+    ],
+    "screenshots": [],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "sensor",
+          "title": "Accelerometer",
+          "detail": "Measures washing-machine motion."
+        },
+        {
+          "id": "esp32",
+          "title": "ESP32",
+          "detail": "Runs the C++ firmware developed in Arduino IDE."
+        },
+        {
+          "id": "motion",
+          "title": "Motion processing",
+          "detail": "Processes accelerometer measurements."
+        },
+        {
+          "id": "completion",
+          "title": "Cycle completion",
+          "detail": "Detects the end of the washing cycle from processed motion."
+        },
+        {
+          "id": "ntfy",
+          "title": "ntfy API",
+          "detail": "Sends the completion notification."
+        },
+        {
+          "id": "phone",
+          "title": "Smartphone",
+          "detail": "Receives the washing-cycle notification."
+        }
+      ],
+      "edges": [
+        {
+          "from": "sensor",
+          "to": "esp32",
+          "label": "Motion measurements"
+        },
+        {
+          "from": "esp32",
+          "to": "motion",
+          "label": "C++ firmware"
+        },
+        {
+          "from": "motion",
+          "to": "completion",
+          "label": "Processed motion"
+        },
+        {
+          "from": "completion",
+          "to": "ntfy",
+          "label": "Cycle finished"
+        },
+        {
+          "from": "ntfy",
+          "to": "phone",
+          "label": "Notification"
+        }
+      ]
+    },
+    "sources": [
+      "projects.md"
+    ],
+    "todo": [
+      "Add actual device or circuit photographs when supplied."
+    ]
+  },
+  {
+    "id": "vernier-calipers-holder",
+    "name": "Vernier Calipers Holder",
+    "directory": "hardware",
+    "category": "Mechanical engineering / CAD / additive manufacturing",
+    "state": "completed",
+    "status": "CAD design completed",
+    "date": "December 2025",
+    "icon": "calipers",
+    "accent": "#b68a50",
+    "note": "A custom holder, from 2D geometry to a model prepared for PLA printing.",
+    "description": "Designed a custom vernier calipers holder through a CAD and additive-manufacturing workflow, converting 2D geometry into a 3D model prepared for PLA printing.",
+    "technologies": [
+      "SolidWorks",
+      "CAD/CAM",
+      "DXF",
+      "STL",
+      "G-code",
+      "PLA"
+    ],
+    "features": [
+      "CAM template preparation and DXF geometry import",
+      "3D CAD modelling in SolidWorks",
+      "STL export and G-code generation for PLA print preparation"
+    ],
+    "contributions": [
+      "Prepared a CAM template and imported DXF geometry into SolidWorks.",
+      "Developed the 3D CAD model and exported STL files.",
+      "Generated G-code for PLA 3D-print preparation."
+    ],
+    "sections": [
+      {
+        "title": "development status",
+        "body": "The CAD design and print preparation are complete. Physical printing has not been verified."
+      }
+    ],
+    "screenshots": [],
+    "architecture": {
+      "nodes": [
+        {
+          "id": "dxf",
+          "title": "DXF geometry",
+          "detail": "2D geometry forms the starting point."
+        },
+        {
+          "id": "solidworks",
+          "title": "SolidWorks",
+          "detail": "The imported DXF is developed into the custom 3D holder model."
+        },
+        {
+          "id": "stl",
+          "title": "STL export",
+          "detail": "The CAD model is exported for manufacturing preparation."
+        },
+        {
+          "id": "gcode",
+          "title": "G-code",
+          "detail": "Toolpath instructions are prepared for PLA printing."
+        },
+        {
+          "id": "preparation",
+          "title": "Print preparation",
+          "detail": "The workflow reaches PLA 3D-print preparation. A completed physical print is not claimed."
+        }
+      ],
+      "edges": [
+        {
+          "from": "dxf",
+          "to": "solidworks",
+          "label": "Import and model"
+        },
+        {
+          "from": "solidworks",
+          "to": "stl",
+          "label": "Export"
+        },
+        {
+          "from": "stl",
+          "to": "gcode",
+          "label": "Manufacturing preparation"
+        },
+        {
+          "from": "gcode",
+          "to": "preparation",
+          "label": "PLA workflow"
+        }
+      ]
+    },
+    "sources": [
+      "projects.md"
+    ],
+    "todo": [
+      "Add the actual CAD preview or model when supplied."
     ]
   }
 ];

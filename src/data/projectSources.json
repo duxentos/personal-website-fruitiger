@@ -1,5 +1,5 @@
 {
-  "projectsBriefBlob": "faafbd96f111d2bec0bd0b84a1734281ecb9f428",
+  "projectsBriefBlob": "5b409da9048b8d551afcd342d6307d58d395a7c5",
   "aboutBriefBlob": "5ae176361ad83822f6aa816176c0544ef1efe2e7",
   "neuroSources": [
     "https://devpost.com/software/nuerosight",
@@ -10,6 +10,8 @@
     "The repository linked by Devpost returned 404 and is not exposed as a working project link.",
     "iPhone supplied images 3 and 6 contain the same photograph; both supplied references are retained.",
     "iPhone captions describe visible content; timeline stages are from the author brief, not inferred photo timestamps.",
-    "45% is the latest author-reported ClinTempo result in projects.md; the supplied PDF remains unchanged."
-  ]
+    "45% is the latest author-reported ClinTempo result in projects.md; the supplied PDF remains unchanged.",
+    "Latest main adds washer notifier and calipers holder and expands the separate Biotron entry. CAD completion is distinct from physical printing."
+  ],
+  "previousProjectsBriefBlob": "faafbd96f111d2bec0bd0b84a1734281ecb9f428"
 }

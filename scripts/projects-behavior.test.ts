@@ -3,6 +3,30 @@ import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {projects} from '../src/projects.ts';
 import {filterProjects,enterDirectory,galleryIndex} from '../src/apps/projects/projectModel.ts';
+import {projectPageTitle} from '../src/apps/projects/projectPresentation.ts';
+
+test('the latest brief adds two hardware projects while preserving all original entries',()=>{
+ assert.equal(projects.length,8);assert.equal(new Set(projects.map(project=>project.id)).size,8);
+ assert.equal(projects.filter(project=>project.directory==='hardware').length,5);
+ assert.equal(projects.filter(project=>project.directory==='software').length,3);
+ for(const id of ['neurosight','clintempo','goose-dynamic-notch','rehabilitation-device','iphone-4-restoration','biotron-exoskeleton'])assert.ok(projects.some(project=>project.id===id));
+ const washer=filterProjects(projects,{directory:'hardware',filter:'completed',query:'ntfy',sort:'name'});
+ assert.equal(washer.length,1);assert.equal(washer[0].id,'washing-machine-notifier');
+});
+test('CAD completion is explicit without claiming a completed physical print',()=>{
+ const holder=projects.find(project=>project.id==='vernier-calipers-holder')!;
+ assert.equal(holder.status,'CAD design completed');assert.equal(holder.date,'December 2025');
+ assert.match(holder.sections![0].body!,/Physical printing has not been verified/);
+ assert.equal(holder.screenshots.length,0);assert.ok(holder.todo?.length);
+ const bio=projects.find(project=>project.id==='biotron-exoskeleton')!;
+ assert.equal(bio.date,'September 2026 – present');assert.ok(bio.architecture);
+});
+test('browser titles identify project deep links and gracefully describe missing projects',()=>{
+ assert.equal(projectPageTitle('/projects/washing-machine-notifier',projects),'ESP32 Washing Machine Notifier — azaan khan');
+ assert.equal(projectPageTitle('/projects/removed',projects),'project not found — azaan khan');
+ assert.equal(projectPageTitle('/projects',projects),'project files — azaan khan');
+ assert.equal(projectPageTitle('/',projects),'azaan khan — personal desktop');
+});
 
 test('directory, status and search filters combine without mutating the project catalogue',()=>{
  const order=projects.map(project=>project.id);

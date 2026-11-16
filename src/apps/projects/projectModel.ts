@@ -3,8 +3,8 @@ export type ProjectState='completed'|'in-progress';
 export type ProjectImage={id:string;src:string;alt:string;caption:string;width:number;height:number;source:string};
 export type ArchitectureNode={id:string;title:string;detail:string;planned?:boolean};
 export type Project={
- id:string;name:string;directory:DirectoryId;category:string;state:ProjectState;status:string;
- icon:'brain'|'pulse'|'goose'|'circuit'|'phone'|'robot';accent:string;note:string;description:string;
+ id:string;name:string;directory:DirectoryId;category:string;state:ProjectState;status:string;date?:string;
+ icon:'brain'|'pulse'|'goose'|'circuit'|'phone'|'robot'|'laundry'|'calipers';accent:string;note:string;description:string;
  technologies:string[];features:string[];screenshots:ProjectImage[];motivation?:string;
  contributions?:string[];planned?:string[];lessons?:string[];
  sections?:{title:string;body?:string;points?:string[]}[];
@@ -15,7 +15,7 @@ export type Project={
 };
 export const directories=[
  {id:'software',name:'Software',description:'Health technology, machine learning and desktop companions.'},
- {id:'hardware',name:'Hardware',description:'Embedded prototypes, assistive systems and a familiar iPhone.'},
+ {id:'hardware',name:'Hardware',description:'Embedded prototypes, robotics, CAD and restoration.'},
 ] as const;
 export type ProjectFilter='all'|ProjectState;
 export function filterProjects(projects:readonly Project[],options:{directory:DirectoryId|'root';filter:ProjectFilter;query:string;sort:'name'|'category'|'status'}){

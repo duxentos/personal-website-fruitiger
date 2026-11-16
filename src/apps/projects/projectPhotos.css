@@ -6,7 +6,7 @@
 .project-photo-print-1{--photo-angle:-3deg}.project-photo-print-2{--photo-angle:3deg;animation-delay:-2s!important}.project-photo-print-3{--photo-angle:-2deg;animation-delay:-4s!important}
 .project-photo-open{display:block;position:relative;width:100%;aspect-ratio:var(--media-aspect);padding:0;overflow:hidden;border:0;border-radius:1px;background:#dcebf5;box-shadow:inset 0 0 0 1px #abc4d5}
 .project-photo-open img,.project-photo-open video{display:block;width:100%;height:100%;object-fit:contain}
-.project-photo-print figcaption{display:flex;align-items:center;justify-content:center;text-align:center;min-height:26px;padding:3px 0 0;font-size:9px;line-height:11px;color:#29485e}
+.project-photo-print figcaption{display:flex;align-items:center;justify-content:center;text-align:center;height:26px;min-height:26px;padding:2px 0 0;font-size:10px;line-height:12px;color:#29485e}
 .project-photo-expand{position:absolute;right:5px;bottom:5px;display:grid;place-items:center;padding:5px;border:1px solid #9ab8cc;border-radius:4px;background:#eff9ffed;color:#254a64}
 .project-photo-play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#fff;text-shadow:0 1px 4px #000}
 .project-photo-play>svg{box-sizing:content-box;padding:12px;border-radius:50%;background:#173f65b8;border:1px solid #ffffffb3;box-shadow:0 2px 9px #102e4c66}

@@ -1,5 +1,12 @@
 # Website change log
 
+## Release finishing pass — 2026-11-16
+
+- Included the latest main projects.md additions: washing-machine notifier, vernier calipers holder and expanded Biotron contributions/architecture. Preserved all original projects; counts now derive from eight total and five hardware entries.
+- Added project dates, a matching Aqua favicon, link-preview text, meaningful browser tab titles, clearer missing-project navigation, and desktop recovery if an app error occurs.
+- Polished photo-caption readability, phone viewer height, keyboard video access, native fullscreen Escape handling and browser-modifier arrow shortcuts. Browser Back restores the previous project card focus.
+- TypeScript, production build, all 81 behavior tests and the 79-file asset preflight pass. Release/domain evidence is tracked in RELEASE_REVIEW.md.
+
 ## Supplied project photo frames — 2026-11-16
 
 - Replaced the three scenery placeholders with both projectphotos.md portrait photos and its full 51.5-second Google Photos video, stored locally. Preserved the video and audio streams without trimming or re-encoding.
