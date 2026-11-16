@@ -33,6 +33,7 @@ import './apps/welcome/snapshots.css';
 import './apps/improvement9.css';
 import './apps/polish.css';
 import './apps/projects/projects.css';
+import './apps/projects/projectPhotos.css';
 import {useDesktopViewport} from './components/useDesktopViewport';
 function App(){const d=useDesktop();const[path,setPath]=useState(location.pathname);
  const[projectReturn,setProjectReturn]=useState<ProjectReturn>();const returnProject=useRef<()=>void>(()=>{});

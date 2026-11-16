@@ -1,6 +1,7 @@
 import {useEffect,useLayoutEffect,useRef,useState,type CSSProperties,type PointerEvent} from 'react';
 import {ArrowLeft,ArrowRight,Columns3,Folder,Grid2X2,List,Search} from 'lucide-react';
 import {useDesktop} from '../../components/Desktop';
+import {ProjectMedia} from '../../components/ProjectMedia';
 import {projects} from '../../projects';
 import {directories,enterDirectory,filterProjects,type DirectoryHistory,type DirectoryId,type Project,type ProjectFilter} from './projectModel';
 import {ProjectIcon} from './ProjectIcon';
@@ -46,6 +47,7 @@ export function ProjectExplorer({onOpen,returnTo}:{onOpen:(id:string)=>void;retu
   <div className="directory-browser" key={folder}>
    <div className="directory-introduction"><span className="micro">a few things i've been building</span><h2>{showFolders?'project files':folder==='root'?'all projects':folder}</h2><p>{showFolders?'open a folder to look around.':visible.length+' '+(visible.length===1?'project':'projects')+' · select a file to open its window'}</p></div>
    {showFolders?<div className="project-folder-grid">{directories.map(directory=>{const contents=projects.filter(project=>project.directory===directory.id);return <button key={directory.id} data-folder-id={directory.id} className={'project-folder project-folder-'+directory.id} onPointerMove={highlight} onClick={()=>navigate(directory.id)} aria-label={'open '+directory.name+' directory, '+contents.length+' projects'}><span className="directory-folder-art" aria-hidden="true"><Folder size={56}/><span>{contents.slice(0,3).map(project=><ProjectIcon key={project.id} project={project} size={18}/>)}</span></span><span className="directory-folder-thumbnails" aria-hidden="true">{contents.slice(0,2).map(project=><span key={project.id}>{project.screenshots[0]?<ProjectImage image={project.screenshots[0]}/>:<ProjectIcon project={project} size={28}/>}</span>)}</span><strong>{directory.name}</strong><span>{directory.description}</span><small>{contents.length} project files <ArrowRight size={14}/></small></button>})}</div>:<div className={'directory-results directory-view-'+desktop.layout}><ul className="directory-project-grid" aria-label={folder==='root'?'matching projects':folder+' project files'}>{visible.map(project=><li key={project.id}><ProjectCard project={project} onFocus={()=>setSelectedId(project.id)} onOpen={()=>{setSelectedId(project.id);onOpen(project.id)}}/></li>)}</ul>{!visible.length&&<p className="directory-empty">no matching projects. try a different search or filter.</p>}{desktop.layout==='columns'&&selected&&<aside className="directory-inspector"><ProjectIcon project={selected} size={35}/><h3>{selected.name}</h3><p>{selected.note}</p><small>{selected.status}</small><button className="aqua-button fj-button fj-button--md fj-button--aero" onClick={()=>onOpen(selected.id)}>open project <ArrowRight size={14}/></button></aside>}</div>}
+   <ProjectMedia placement="inline"/>
   </div>
   <footer className="directory-status"><span>{showFolders?'2 directories · '+projects.length+' projects':visible.length+' project files'}</span><span>arrow keys to browse · enter to open</span></footer>
  </div>;

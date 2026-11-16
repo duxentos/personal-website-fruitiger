@@ -1,5 +1,12 @@
 # Website change log
 
+## Supplied project photo frames — 2026-11-16
+
+- Replaced the three scenery placeholders with both projectphotos.md portrait photos and its full 51.5-second Google Photos video, stored locally. Preserved the video and audio streams without trimming or re-encoding.
+- Frames use intrinsic photo/video aspect ratios and contained media. A tested layout places all three outside Projects when space permits; phones, tablets, expanded windows and tight layouts show them inside the scrollable window.
+- Added full-photo/video viewing, native playback controls, downloads, original-source links, focus containment, Escape return, muted previews, visibility pausing and reduced-motion support.
+- TypeScript, production build, all 78 behavior tests and the 78-file asset preflight pass. Asset/duration/layout evidence is in PROJECT_PHOTOS_REVIEW.md.
+
 ## Projects and About Me briefs — 2026-11-16
 
 - Implemented the current projects.md and aboutme.md: two interactive Aqua directories, six project case studies, status/search filters, card/list/column views, history, keyboard browsing and return focus.
