@@ -1,7 +1,6 @@
 1. make the praying video frame perfectly sized and fitted and there are black borders
 2. add 3 more photo frames that allocates for different resolutions
-3. for the rick astley dance, use this:
-<img width="512" height="512" alt="image" src="https://github.com/user-attachments/assets/a3f47ce3-73a4-4bf3-a58e-e1081123c0a5" />
+3. for the rick astley dance, use the 
 4. for the photoframes, it looks like a microsoft powerpoint presentation, for the transition can you do a fruiteger glitch effect and crop it such that my face appears because it doesnt in the photo frames and just make one of them landscape and one portrait
 5. add these photos to the collection:
    <img width="6048" height="8064" alt="IMG_4334" src="https://github.com/user-attachments/assets/b8a2b803-3359-4bf2-8350-c92bb0c903b2" />
