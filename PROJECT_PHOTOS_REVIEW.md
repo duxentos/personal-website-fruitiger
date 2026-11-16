@@ -26,6 +26,9 @@ Read projectphotos.md on main (blob a9e11b1599fcfcae41dd7dbc26e82cefce98e6b2). I
 - Geometry tests cover desktop positions/sizes, viewport boundaries, non-overlap, media ratios, and phone/tablet/expanded/space-constrained fallbacks.
 - Packaged bytes/dimensions/SHA256 tests cover both photos, poster and film. MP4 checks verify duration, video dimensions, retained audio and fast-start metadata ordering.
 - FFmpeg decodes the complete packaged film without error (1541 frames, 51.52 seconds). Original and packaged encoded video/audio hashes are identical.
-- Review-deployment and browser evidence will be appended after inspection.
+- Review deployment dpl_2cHRvfVXGewRQdXtVqPV6d6jSM8s is READY for application commit 4e71d46c7e891f544253e1e2fbcc8735be505c7d. Vercel independently passed all 78 tests and its 78-file preflight.
+- Authenticated HTTP checks: /projects returned 200 HTML; both portraits, poster and full MP4 returned 200 with the correct JPEG/MP4 MIME types and exact manifest byte counts. The MP4 response is 5,098,548 bytes.
+- Recursive GitHub tree readback verified all 16 changed file paths and exact blob SHAs.
+- Native Chrome opened a separate review tab and navigated to the deployment. Screen capture first failed; subsequent capture/AX did not expose inspectable webpage content, and later actions hit the user-activity guard. The isolated browser host is unavailable. Rendered desktop/mobile placement, viewer controls and focus interactions remain unverified in a real browser for this update; geometry/media checks above are automated tests, not a substitute claim of visual QA.
 
 Changes are saved to the review branch; this task does not merge main, promote production or change DNS.
