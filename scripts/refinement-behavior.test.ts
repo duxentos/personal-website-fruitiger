@@ -19,7 +19,7 @@ test('future settings are not overwritten; restore defaults keeps notes',()=>{
  assert.deepEqual(store.read('notes',object),{items:[]});assert.deepEqual(store.read('desktop',object),{});
 });
 test('fresh launch has only About Me and one Mii app; session deserialization preserves modes before entry policy',()=>{
- const size={w:1280,h:720};let session=initialSession(size);assert.equal(session.active,'avatar');
+ const size={w:1280,h:720};let session=initialSession(size);assert.equal(session.active,'welcome');
  assert.deepEqual(Object.values(session.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','avatar']);
  session=windowReducer(session,{type:'close',id:'welcome'});session=windowReducer(session,{type:'open',id:'projects'});session=windowReducer(session,{type:'minimize',id:'projects'});
  session.windows.connect.x=9000;const restored=restoreSession(session,size);
@@ -53,13 +53,13 @@ test('entry opens the requested pair and migrates older layouts once',()=>{
  const size={w:1280,h:720};const old=initialSession(size);for(const win of Object.values(old.windows))win.mode='open';old.windows.welcome.w=900;
  const migrated=launchSession(old,size);assert.deepEqual(Object.values(migrated.windows).filter(w=>w.mode==='open').map(w=>w.id),['welcome','avatar']);assert.ok(migrated.windows.welcome.w<600);
  const saved={...migrated,layoutRevision:LAUNCH_LAYOUT_REVISION};saved.windows.projects.x=400;saved.windows.projects.w=480;saved.windows.notes.mode='open';
- const next=launchSession(saved,size);assert.equal(next.windows.projects.x,400);assert.equal(next.windows.projects.w,480);assert.equal(next.windows.notes.mode,'closed');assert.equal(next.active,'avatar');
+ const next=launchSession(saved,size);assert.equal(next.windows.projects.x,400);assert.equal(next.windows.projects.w,480);assert.equal(next.windows.notes.mode,'closed');assert.equal(next.active,'welcome');
 });
 
-test('entry opens and focuses Mii after it was closed or minimized, keeping saved geometry',()=>{
+test('entry reopens Mii while keeping About Me active and preserving saved geometry',()=>{
  const size={w:1280,h:720};
  for(const mode of ['closed','minimized'] as const){const initial=initialSession(size);initial.windows.avatar.x=300;initial.windows.avatar.mode=mode;initial.active='welcome';
- const restored=launchSession({...initial,layoutRevision:LAUNCH_LAYOUT_REVISION},size);assert.equal(restored.windows.avatar.mode,'open');assert.equal(restored.active,'avatar');assert.equal(restored.windows.avatar.x,300);assert.ok(restored.windows.avatar.layer>restored.windows.welcome.layer);}
+ const restored=launchSession({...initial,layoutRevision:LAUNCH_LAYOUT_REVISION},size);assert.equal(restored.windows.avatar.mode,'open');assert.equal(restored.active,'welcome');assert.equal(restored.windows.avatar.x,300);assert.ok(restored.windows.avatar.layer>restored.windows.welcome.layer);}
 });
 test('the Mii app stays above the app driving its reaction without stealing focus',()=>{
  const initial=initialSession({w:1280,h:720});const find=windowReducer(initial,{type:'open',id:'connect'});
@@ -71,4 +71,17 @@ test('old Find Me geometry migrates once to a compact window without reopening i
  const size={w:1280,h:720},saved=initialSession(size);saved.windows.connect={...saved.windows.connect,w:900,h:600,mode:'open'};
  const migrated=launchSession({...saved,layoutRevision:5},size);assert.equal(migrated.windows.connect.w,440);assert.equal(migrated.windows.connect.h,320);assert.equal(migrated.windows.connect.mode,'closed');
  const resized={...migrated,layoutRevision:LAUNCH_LAYOUT_REVISION};resized.windows.connect.w=500;assert.equal(launchSession(resized,size).windows.connect.w,500);
+});
+
+
+test('fresh entry and returning closed or minimized About Me sessions always foreground About Me at phone, tablet and desktop widths',()=>{
+ for(const size of [{w:375,h:517},{w:768,h:874},{w:1280,h:720}]){
+  assert.equal(initialSession(size).active,'welcome');
+  for(const mode of ['closed','minimized'] as const){
+   const saved=initialSession(size);saved.windows.welcome={...saved.windows.welcome,mode,x:12,w:300,h:240,zoom:false};saved.active='avatar';saved.windows.notes.mode='open';
+   const entry=launchSession({...saved,layoutRevision:LAUNCH_LAYOUT_REVISION},size);
+   assert.equal(entry.active,'welcome');assert.equal(entry.windows.welcome.mode,'open');assert.equal(entry.windows.welcome.x,12);assert.equal(entry.windows.welcome.w,300);
+   assert.equal(entry.windows.avatar.mode,'open');assert.equal(entry.windows.notes.mode,'closed');
+  }
+ }
 });

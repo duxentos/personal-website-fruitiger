@@ -1,5 +1,11 @@
 # Website change log
 
+## About Me foreground on launch — 2026-11-16
+
+- About Me is now the active startup/restart window as well as open, so phone layouts show the introduction immediately. Mii remains open alongside it on larger screens and available from the Dock.
+- Returning sessions reopen and foreground About Me after a previous close/minimize while preserving saved geometry. Other apps keep the existing closed-on-launch policy.
+- Regression coverage checks fresh and returning sessions at phone, tablet and desktop sizes. Validation: all 69 behavior tests, asset preflight, TypeScript and production build pass.
+
 ## Ten-area polish and current résumé — 2026-11-16
 
 - Replaced the 5 November résumé with the newest general 13 November revision, verified against local PDF metadata and connected Drive. Regenerated the complete preview and source-hash manifest without editing résumé content.
