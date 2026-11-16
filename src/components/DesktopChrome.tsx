@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import {ArrowUpRight,Wifi,Search,Menu,UserRound} from 'lucide-react';
+import {Wifi,Search,Menu,UserRound} from 'lucide-react';
 import {useDesktop,windowIds,windowTitles,type WindowId} from './Desktop';
 import {useMusic} from '../apps/ipod/MusicProvider';
 import {Play,Pause,Music2} from 'lucide-react';

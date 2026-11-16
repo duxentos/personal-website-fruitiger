@@ -1,5 +1,15 @@
 # Website change log
 
+## Improvement 9 desktop refinements — 2026-11-16
+
+- Centered all window titles with symmetric positioning and a separate title row on narrow touch windows. Compact Find Me defaults to 440×320, with one-time geometry migration.
+- Startup now opens only About Me and Mii and reads “welcome to Azaans space!”, retaining the randomized running GIFs.
+- Replaced the photo glitch with a glossy gel-pop, light reflection and small pearlescent bubbles; retained mixed aspect ratios, focal crops, silent video, navigation and motion controls.
+- Restyled Terminal as the Mac Basic profile with a white surface, black Menlo text and an inline prompt. Preserved the minimal real command allowlist, history and completion.
+- Replaced diagonal arrows with horizontal Lucide arrows and document/download icons.
+- Replaced the embedded résumé viewer with a full-page, clickable image of every supplied PDF page. Clicking opens the original PDF; a source-hash guard prevents stale previews. Added a reproducible native renderer.
+- Local lint/build and all 66 behavior tests pass. See `IMPROVEMENT_9_REVIEW.md` for details and preview verification.
+
 ## Improvement 8 framing and media catalogue — 2026-11-16
 
 - Matched the praying video frame to its exact portrait ratio, removing the contain-mode side bars. Preserved silent looping playback.

@@ -1,4 +1,4 @@
-import {ArrowUpRight,FolderOpen} from 'lucide-react';
+import {ArrowRight,FolderOpen} from 'lucide-react';
 import {useDesktop} from '../../components/Desktop';
 import {WelcomeSnapshots} from '../../components/WelcomeSnapshots';
 import {AnnotatedText} from '../../components/ui/AnnotatedText';
@@ -14,7 +14,7 @@ export function WelcomeApp(){
     <p className="welcome-description">a home for my projects, experiments, and the things i'm learning. away from the desk, my favourite hobby is cricket.</p>
    </div>
   </div>
-  <div className="welcome-actions"><button className="aqua-button fj-button fj-button--md fj-button--aero" onClick={()=>desktop.open('projects')}><FolderOpen size={16}/> explore projects</button><button className="aqua-button fj-button fj-button--md fj-button--glass" onClick={()=>desktop.open('connect')}>find me <ArrowUpRight size={15}/></button></div>
+  <div className="welcome-actions"><button className="aqua-button fj-button fj-button--md fj-button--aero" onClick={()=>desktop.open('projects')}><FolderOpen size={16}/> explore projects</button><button className="aqua-button fj-button fj-button--md fj-button--glass" onClick={()=>desktop.open('connect')}>find me <ArrowRight size={15}/></button></div>
   <footer className="welcome-footer"><div><span>little snapshots</span><small>a few moments along the way</small></div><WelcomeSnapshots/></footer>
  </div>;
 }

@@ -11,10 +11,10 @@ export function initialSession(size: WorkspaceSize): DesktopSession {
   const aboutH=Math.min(500,size.h*.85),projectH=Math.min(350,size.h*.65);
   const defaults: Record<WindowId, [number,number,number,number]> = {
     welcome:[24,24,aboutW,aboutH], stories:[65,35,660,500],
-    projects:[size.w-projectW-38,Math.min(105,size.h-projectH-24),projectW,projectH], connect:[75,55,640,420],
+    projects:[size.w-projectW-38,Math.min(105,size.h-projectH-24),projectW,projectH], connect:[75,55,440,320],
     notes:[50,30,660,520],avatar:[Math.max(0,size.w-280),Math.max(0,size.h-270),260,250],detail:[80,45,740,500],settings:[90,40,590,520],ipod:[40,25,345,610],terminal:[70,55,650,420],resume:[60,35,760,600],
   };
-  const primary = ['welcome','projects','avatar'];
+  const primary = ['welcome','avatar'];
   const windows = Object.fromEntries(windowIds.map((id,index) => {
     const [x,y,w,h] = defaults[id];
     const geometry = fitWindowFrame({x,y,w:small&&id!=='avatar'?size.w:w,h:small&&id!=='avatar'?size.h:h,zoom:small&&id!=='avatar'&&primary.includes(id)}, size, false);
@@ -34,13 +34,13 @@ export function restoreSession(value: unknown, size: WorkspaceSize): DesktopSess
   initial.active = windowIds.includes(root.active as WindowId) && initial.windows[root.active as WindowId].mode==='open' ? root.active as WindowId : topWindow(initial.windows);
   return initial;
 }
-/** Entry/reboot opens Welcome, Projects and the single reactive Mii app. */
-export const LAUNCH_LAYOUT_REVISION=5;
+/** Entry/reboot opens only About Me and the single reactive Mii app. */
+export const LAUNCH_LAYOUT_REVISION=6;
 export function launchSession(value:unknown,size:WorkspaceSize):DesktopSession{
  const session=restoreSession(value,size),root=object(value),fresh=initialSession(size);
  for(const id of windowIds){
-  if(root.layoutRevision!==LAUNCH_LAYOUT_REVISION&&(id==='welcome'||id==='projects'||id==='avatar'))session.windows[id]={...fresh.windows[id]};
-  session.windows[id].mode=id==='welcome'||id==='projects'||id==='avatar'?'open':'closed';
+  if(root.layoutRevision!==LAUNCH_LAYOUT_REVISION&&(id==='welcome'||id==='avatar'||id==='connect'))session.windows[id]={...fresh.windows[id]};
+  session.windows[id].mode=id==='welcome'||id==='avatar'?'open':'closed';
  }
  session.active='avatar';session.windows.welcome.layer=Math.max(...Object.values(session.windows).map(w=>w.layer))+1;session.windows.avatar.layer=session.windows.welcome.layer+1;
  return session;
