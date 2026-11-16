@@ -8,6 +8,7 @@
 - Switched Rick Astley from the PNG/CSS pose to the original happy GIF from `Mii.md`. Normal music and randomized running startup remain.
 - Added `photos.md` with all seventeen supplied photos, the video, source links, scene descriptions, active asset paths, and the existing Projects landscape artwork.
 - Local lint/build and all 64 behavior tests pass. Source/crop/preview evidence is recorded in `IMPROVEMENT_8_REVIEW.md`.
+- Vercel independently passes all 64 tests; all new photo/GIF/video URLs return the correct media types. Chrome visibly verified five mixed photo frames and the fitted border-free video. Concurrent native-browser changes/timeouts prevented isolated control/Rick checks; exact limits are recorded in the review.
 
 ## Improvement 7 music, photos and sound — 2026-11-15
 
