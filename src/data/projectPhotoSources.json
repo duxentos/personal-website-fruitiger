@@ -1,0 +1,52 @@
+{
+  "brief": "projectphotos.md",
+  "photos": [
+    {
+      "id": "mcmaster",
+      "source": "https://github.com/user-attachments/assets/0884cddc-b152-41dd-9e64-afe484125d32",
+      "width": 1201,
+      "height": 1602,
+      "description": "Two people holding projector boxes at a McMaster Engineering backdrop."
+    },
+    {
+      "id": "workbench",
+      "source": "https://github.com/user-attachments/assets/d22472f2-4955-4cd1-90a6-b5157c8b2e62",
+      "width": 1201,
+      "height": 1602,
+      "description": "Hands working with electronics beside an ESP32 wiring diagram."
+    }
+  ],
+  "video": {
+    "id": "campus-film",
+    "source": "https://photos.app.goo.gl/a1uhoubiH3JsiBxa6",
+    "description": "Friends outdoors wearing yellow hard hats.",
+    "width": 360,
+    "height": 640,
+    "sourceDurationSeconds": 51.508,
+    "durationSeconds": 51.533333,
+    "audio": "Original AAC audio retained; playback starts muted.",
+    "format": "Full-length public Google Photos H.264 rendition, remuxed as fast-start MP4 without trimming or re-encoding. The source shared album retains access to the higher-resolution original."
+  },
+  "files": [
+    {
+      "path": "/assets/project-photos/campus-film.mp4",
+      "bytes": 5098548,
+      "sha256": "78af1f4ba96cf79fb1faff831016297ca7558de1f2076343c74dba256384919f"
+    },
+    {
+      "path": "/assets/project-photos/mcmaster.jpg",
+      "bytes": 402211,
+      "sha256": "a5dbef90cdf38bffe0167cc36f7b342f687a81932c6d298fdcfb5906707f3993"
+    },
+    {
+      "path": "/assets/project-photos/video-poster.jpg",
+      "bytes": 21580,
+      "sha256": "e22b564da8b31f0aedfe5543cc2d55fe7041735fa23a7976130cc317bd168e9b"
+    },
+    {
+      "path": "/assets/project-photos/workbench.jpg",
+      "bytes": 305026,
+      "sha256": "57d9b3d6706db975164d9a75d008b3e7a2730d4213631dff2d0a9140868b7da4"
+    }
+  ]
+}

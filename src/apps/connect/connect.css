@@ -1,0 +1,4 @@
+/* Compact, content-sized social links with room to tap on touchscreens. */
+.connect-content .social-pills{display:flex;flex-wrap:wrap;gap:8px;max-width:280px}
+.connect-content .social-pills .aqua-button{width:auto;justify-content:center;gap:7px;padding:7px 12px;min-height:36px;white-space:nowrap}
+@media(pointer:coarse),(max-width:760px){.connect-content .social-pills .aqua-button{min-height:44px}}

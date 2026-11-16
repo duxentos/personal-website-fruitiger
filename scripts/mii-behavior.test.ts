@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {miiAnimations,selectAnimation} from '../src/data/miiAnimations.ts';
+test('animation choices avoid consecutive repeats when alternatives exist',()=>{const pool=miiAnimations.filter(a=>a.category==='locomotion');assert.notEqual(selectAnimation(pool,pool[0].id,{},10000,0)?.id,pool[0].id)});
+test('cooldowns exclude recent animations and empty pools stay empty',()=>{const clip=miiAnimations[0];assert.equal(selectAnimation([clip],undefined,{[clip.id]:10000},10500),undefined);assert.equal(selectAnimation([],undefined,{},1000),undefined);assert.equal(selectAnimation([clip],undefined,{[clip.id]:10000},18000)?.id,clip.id)});

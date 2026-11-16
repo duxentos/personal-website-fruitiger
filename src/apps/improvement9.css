@@ -1,0 +1,26 @@
+/* Symmetric title alignment takes precedence over legacy left-only offsets. */
+.aqua-window .window-bar{position:relative}
+.aqua-window .window-bar .window-name{left:50%;right:auto;top:auto;bottom:auto;transform:translateX(-50%);width:calc(100% - 160px);margin:0;padding:0;text-align:center;font-size:11px;line-height:1.2}
+.connect-app .connect-content>div:first-child{padding:22px 24px}
+.connect-app .connect-content h2{font-size:30px;margin:14px 0 12px}
+.connect-app .connect-content p{font-size:12px;line-height:1.6;margin:0 0 18px}
+.connect-app .social-pills{max-width:270px}
+/* Terminal's Basic profile: clean paper, black Menlo text and an inline zsh prompt. */
+.terminal-window .window-content{background:#fff;scrollbar-color:#b0b0b0 #fff}
+.terminal-window .terminal-app{min-height:100%;padding:7px 9px;background:#fff;color:#000;text-shadow:none;font-size:12px;line-height:1.35;text-transform:none;cursor:text}
+.terminal-window .terminal-app,.terminal-window .terminal-app *{font-family:Menlo,Monaco,'SFMono-Regular',Consolas,monospace!important;font-variant-ligatures:none;font-weight:400;letter-spacing:0}
+.terminal-window .terminal-output{white-space:pre-wrap;overflow-wrap:anywhere}
+.terminal-window .terminal-app form{display:flex;flex-wrap:nowrap;align-items:baseline;gap:1ch;margin:0}
+.terminal-window .terminal-app label{flex:none;color:#000;font-size:inherit;line-height:inherit;text-transform:none}
+.terminal-window .terminal-app input{display:block;flex:1;width:0;min-width:0;min-height:0;margin:0;padding:0;border:0;border-radius:0;outline:none;background:transparent;color:#000;caret-color:#000;font-size:inherit;line-height:inherit;box-shadow:none}
+.terminal-window .terminal-app input:focus-visible{outline:none}
+.terminal-window .terminal-app::selection,.terminal-window .terminal-app *::selection{background:#b4d5ff;color:#000}
+.resume-app{height:100%;min-height:0;display:flex;flex-direction:column;background:#dce5ec}
+.resume-app .resume-toolbar{flex:none}.resume-app .resume-pages{flex:1;min-height:0;overflow:auto;padding:18px;display:flex;flex-direction:column;align-items:center;gap:18px}
+.resume-page{display:block;flex:none;width:min(100%,820px);background:#fff;box-shadow:0 3px 12px #24415b33;text-decoration:none;cursor:zoom-in}
+.resume-page img{display:block;width:100%;height:auto;max-width:100%}
+@media(max-width:1023px),(pointer:coarse){.aqua-window .window-bar .window-name{width:calc(100% - 288px)}}
+@container desktop-window (max-width:360px){.connect-app .connect-content>div:first-child{padding:18px}.connect-app .connect-content h2{font-size:27px}.resume-app .resume-pages{padding:9px}.resume-toolbar .aqua-button{padding-inline:9px}}
+@media(pointer:coarse){.terminal-window .terminal-app{font-size:16px}.terminal-window .terminal-app input{min-height:30px}}
+
+@media(max-width:1023px),(pointer:coarse){@container desktop-window (max-width:360px){.aqua-window .window-bar{height:70px;min-height:70px;align-items:flex-start;padding-top:3px}.aqua-window .window-bar .window-name{width:calc(100% - 24px);bottom:5px;font-size:10px}}}
