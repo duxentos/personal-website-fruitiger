@@ -18,6 +18,3 @@ test('an HTML SPA fallback is rejected as an animation even with an HTTP 200 res
  assert.throws(()=>inspectGif(Buffer.from('<!doctype html><html><div id="root"></div></html>')),/Expected GIF/);
 });
 
-test('the supplied Rick Astley pose is packaged as its actual PNG format',async()=>{
- const data=await readFile(new URL('../public'+miiRick,import.meta.url));assert.equal(data.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
-});

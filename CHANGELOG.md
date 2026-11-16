@@ -1,5 +1,14 @@
 # Website change log
 
+## Improvement 8 framing and media catalogue — 2026-11-16
+
+- Matched the praying video frame to its exact portrait ratio, removing the contain-mode side bars. Preserved silent looping playback.
+- Added three photo frames for five total, with landscape, portrait, widescreen, square and tall ratios. Added all eight new photos to the fifteen-photo active collection and configured face-aware focal points. Wide group shots retain a wide frame.
+- Replaced the vertical slideshow transition with a short cyan/green scan-band glitch. Mobile uses a local scrollable filmstrip; pause, previous/next, visibility and reduced-motion behavior remain.
+- Switched Rick Astley from the PNG/CSS pose to the original happy GIF from `Mii.md`. Normal music and randomized running startup remain.
+- Added `photos.md` with all seventeen supplied photos, the video, source links, scene descriptions, active asset paths, and the existing Projects landscape artwork.
+- Local lint/build and all 64 behavior tests pass. Source/crop/preview evidence is recorded in `IMPROVEMENT_8_REVIEW.md`.
+
 ## Improvement 7 music, photos and sound — 2026-11-15
 
 - Imported the latest `Music.md` and `improvemment7.md` from main. Expanded to all eight supplied songs; Rick Astley keeps the track-three ID/title and plays last.
