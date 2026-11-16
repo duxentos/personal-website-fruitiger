@@ -30,3 +30,7 @@ Download date: 2026-11-12. Original Ogg Vorbis files are preserved without trans
 |mii/interaction.ogg|question_003.ogg|Kenney|[original audio](https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/question_003.ogg)|CC0; no attribution required|
 |notifications/notification.ogg|confirmation_002.ogg|Kenney|[original audio](https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/confirmation_002.ogg)|CC0; no attribution required|
 |notifications/success.ogg|confirmation_003.ogg|Kenney|[original audio](https://raw.githubusercontent.com/GeorgeQLe/assets-sfx-ui/760afd035e8fc3cd7fb5bc58d49a967649875e3e/assets/kenney/interface-sounds/Audio/confirmation_003.ogg)|CC0; no attribution required|
+
+## Improvement 7 window clicks
+
+`desktop/window-open-soft.ogg` reuses Kenney's `click_001.ogg`; `desktop/window-close-soft.ogg` reuses `click_002.ogg`, both from the same verified Interface Sounds (1.0), CC0 collection above. The source URLs are recorded in `scripts/sound-sources.json`. These replace the opening/closing tones with short mechanical clicks at 35% event gain, retaining the master/category volume controls. Integrated 2026-11-15.

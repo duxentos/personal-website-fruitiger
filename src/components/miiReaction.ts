@@ -12,3 +12,5 @@ export function resolveMiiAppReaction({context,playing,musicInteracted,visible,r
  if(context==='ipod'||playing&&musicInteracted)return 'dance';
  return 'jump';
 }
+
+export function isRickDance(reaction:MiiAppReaction,track:{id:string;miiDance?:'rick'}|undefined){return reaction==='dance'&&(track?.miiDance==='rick'||track?.id==='track-three')};

@@ -1,0 +1,17 @@
+.welcome-snapshot-gallery{min-width:0;margin-top:10px}
+.welcome-snapshot-strip{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:10px;align-items:center;padding:7px 5px 9px;min-width:0}
+.welcome-snapshot-strip .media-print{position:relative;inset:auto;width:auto;min-width:0;padding:5px 5px 23px;animation:none;box-shadow:0 4px 9px #345b732b;--print-angle:-3deg}
+.welcome-snapshot-strip .snapshot-photo-0{--print-angle:4deg}.welcome-snapshot-strip .snapshot-photo-1{--print-angle:-4deg}
+.snapshot-viewport{height:79px;overflow:hidden;background:#d5e9f2}
+.snapshot-video .snapshot-viewport{height:108px}
+.welcome-snapshot-strip .media-print img,.welcome-snapshot-strip .media-print video{width:100%;height:100%;object-fit:cover;object-position:center 35%;border:0;border-radius:0}
+.welcome-snapshot-strip .media-print video{object-fit:contain;background:#203c4c}
+.welcome-snapshot-strip .media-print figcaption{font-size:8px;bottom:6px;color:var(--aqua-ink-soft)}
+.welcome-snapshot-gallery[data-animate=true] .snapshot-changing-image{animation:snapshot-scroll-in .5s cubic-bezier(.2,.6,.3,1)}
+.snapshot-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--aqua-ink-soft)}
+.snapshot-controls>div{display:flex;gap:4px}.snapshot-controls button{display:inline-flex;align-items:center;justify-content:center;gap:5px;background:linear-gradient(#fff9,#d5e8f580);border:1px solid #9cb8cb;border-radius:5px;color:var(--aqua-ink);min-height:28px;min-width:28px;padding:4px 7px;font-size:9px}
+.snapshot-controls button:disabled{opacity:.65;cursor:default}
+@keyframes snapshot-scroll-in{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@container desktop-window (max-width:380px){.welcome-snapshot-strip{grid-template-columns:1.25fr 1fr;gap:9px}.snapshot-video{grid-row:span 2}.snapshot-video .snapshot-viewport{height:143px}.snapshot-photo .snapshot-viewport{height:48px}.welcome-snapshot-strip .media-print{padding-bottom:21px}}
+@media(pointer:coarse){.snapshot-controls button{min-width:44px;min-height:44px}}
+@media(prefers-reduced-motion:reduce){.snapshot-changing-image{animation:none!important}}

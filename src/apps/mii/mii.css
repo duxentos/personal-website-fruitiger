@@ -9,3 +9,7 @@
 .connect-content{grid-template-columns:minmax(0,1fr)}.connect-content>div:first-child{padding-right:25px}
 .boot-brand-only .boot-world{max-width:620px}.boot-brand-only .boot-status{margin-top:36px}
 @container desktop-window (max-width:450px){.welcome-intro{grid-template-columns:minmax(0,1fr)}}
+
+.mii-rick-dancing .mii-app-replay img{transform-origin:center 75%;animation:mii-rick-step 1.3s ease-in-out infinite}
+@keyframes mii-rick-step{0%,100%{transform:translate(-53%,-50%) rotate(-5deg)}25%{transform:translate(-50%,-52%) rotate(3deg)}50%{transform:translate(-47%,-50%) rotate(5deg)}75%{transform:translate(-50%,-52%) rotate(-3deg)}}
+@media(prefers-reduced-motion:reduce){.mii-rick-dancing .mii-app-replay img{animation:none}}

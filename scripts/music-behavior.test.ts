@@ -6,3 +6,9 @@ test('time values handle unloaded media',()=>{assert.equal(timeLabel(NaN),'0:00'
 
 import {orderMusicFiles} from './music-order.mjs';
 test('supplied tracks keep source order before naturally sorted local additions',()=>{assert.deepEqual(orderMusicFiles(['track-three.mp3','extra10.mp3','track-two.mp3','track-one.mp3','extra2.mp3'],['track-one.mp3','track-two.mp3','track-three.mp3']),['track-one.mp3','track-two.mp3','track-three.mp3','extra2.mp3','extra10.mp3'])});
+
+test('Rick Astley keeps track three identity while playing last after all added songs',()=>{
+ const sources=['track-one.mp3','track-two.mp3','track-three.mp3','track-four.mp3','track-five.mp3','track-six.mp3','track-seven.mp3','track-eight.mp3'];
+ const ordered=orderMusicFiles([...sources].reverse().concat('extra.mp3'),sources,'track-three.mp3');
+ assert.deepEqual(ordered,[...sources.filter(name=>name!=='track-three.mp3'),'extra.mp3','track-three.mp3']);
+});

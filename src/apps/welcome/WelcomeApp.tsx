@@ -1,6 +1,6 @@
 import {ArrowUpRight,FolderOpen} from 'lucide-react';
 import {useDesktop} from '../../components/Desktop';
-import {ProjectMedia} from '../../components/ProjectMedia';
+import {WelcomeSnapshots} from '../../components/WelcomeSnapshots';
 import {AnnotatedText} from '../../components/ui/AnnotatedText';
 
 export function WelcomeApp(){
@@ -15,6 +15,6 @@ export function WelcomeApp(){
    </div>
   </div>
   <div className="welcome-actions"><button className="aqua-button fj-button fj-button--md fj-button--aero" onClick={()=>desktop.open('projects')}><FolderOpen size={16}/> explore projects</button><button className="aqua-button fj-button fj-button--md fj-button--glass" onClick={()=>desktop.open('connect')}>find me <ArrowUpRight size={15}/></button></div>
-  <footer className="welcome-footer"><div><span>little snapshots</span><small>from around my desktop</small></div><ProjectMedia placement="footer"/></footer>
+  <footer className="welcome-footer"><div><span>little snapshots</span><small>a few moments along the way</small></div><WelcomeSnapshots/></footer>
  </div>;
 }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {miiClips,miiStill} from '../src/data/miiClips.ts';
+import {miiClips,miiStill,miiRick} from '../src/data/miiClips.ts';
 import {inspectGif} from './read-gif.ts';
 
 for(const [name,clip] of Object.entries(miiClips))test(`packaged ${name} clip contains its original animated GIF frames`,async()=>{
@@ -16,4 +16,8 @@ test('packaged reduced-motion fallback is a PNG',async()=>{
 });
 test('an HTML SPA fallback is rejected as an animation even with an HTTP 200 response',()=>{
  assert.throws(()=>inspectGif(Buffer.from('<!doctype html><html><div id="root"></div></html>')),/Expected GIF/);
+});
+
+test('the supplied Rick Astley pose is packaged as its actual PNG format',async()=>{
+ const data=await readFile(new URL('../public'+miiRick,import.meta.url));assert.equal(data.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
 });

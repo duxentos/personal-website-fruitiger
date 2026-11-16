@@ -24,13 +24,15 @@ export const soundManifest = {
     "cooldownMs": 160
   },
   "desktop.open": {
-    "src": "/sounds/desktop/window-open.ogg",
+    "gain": 0.35,
+    "src": "/sounds/desktop/window-open-soft.ogg",
     "category": "desktop",
     "enabled": true,
     "cooldownMs": 160
   },
   "desktop.close": {
-    "src": "/sounds/desktop/window-close.ogg",
+    "gain": 0.35,
+    "src": "/sounds/desktop/window-close-soft.ogg",
     "category": "desktop",
     "enabled": true,
     "cooldownMs": 160

@@ -2,7 +2,7 @@ import {settingsStore,object} from '../../settings/store';
 import {playSound} from '../../audio/SoundEngine';
 import {createContext,useContext,useEffect,useRef,useState,type ReactNode} from 'react';
 import {nextIndex,type RepeatMode} from './logic';
-export type Track={id:string;title:string;src:string;artist?:string;album?:string;genre?:string;cover?:string};
+export type Track={id:string;title:string;src:string;artist?:string;album?:string;genre?:string;cover?:string;miiDance?:'rick'};
 export type Library={tracks:Track[];playlists:{name:string;trackIds:string[]}[]};
 type Saved={volume:number;muted:boolean;shuffle:boolean;repeat:RepeatMode;trackId?:string;paused?:boolean;color:string};
 function saved():Saved{return settingsStore.read('music',value=>{const v=object(value);return{volume:typeof v.volume==='number'&&Number.isFinite(v.volume)?Math.max(0,Math.min(1,v.volume)):.5,muted:v.muted===true,shuffle:v.shuffle===true,repeat:['all','one','off'].includes(String(v.repeat))?v.repeat as RepeatMode:'all',trackId:typeof v.trackId==='string'?v.trackId:undefined,paused:v.paused===true,color:['white','black','silver','aqua','green','pink'].includes(String(v.color))?v.color as string:'silver'};});}

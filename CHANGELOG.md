@@ -1,5 +1,13 @@
 # Website change log
 
+## Improvement 7 music, photos and sound — 2026-11-15
+
+- Imported the latest `Music.md` and `improvemment7.md` from main. Expanded to all eight supplied songs; Rick Astley keeps the track-three ID/title and plays last.
+- Updated normal music to the supplied 100-frame dancing GIF. Rick Astley uses the supplied still PNG with CSS dance motion; Find Me thinking, arrival jump, reduced-motion stills and randomized running startup remain.
+- Added seven selected, optimized personal photos and a larger silent looping video to About Me. Two photo slots scroll through the collection, with pause/previous/next and hidden/offscreen/reduced-motion handling. Projects retains its separate landscape Polaroids.
+- Replaced open/close tones with short CC0 mechanical clicks at lower event gain.
+- Local lint/build and all 63 behavior tests pass; all eight local MP3s decode and the converted MP4 contains video only. See `IMPROVEMENT_7_REVIEW.md` for sources and verification limits.
+
 ## Randomized running Mii loader — 2026-11-14
 
 - Restored one randomly selected supplied running GIF per startup/reboot: scenic route, shortcut or little hop. Added both missing original GIFs as local assets.
