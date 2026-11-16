@@ -1,5 +1,9 @@
 # Website change log
 
+## Clean video frame — 2026-11-16
+
+- Removed the overlaid play badge and “full video · 0:52” label from the project video frame, and shortened its caption to “out and about.” The original video file, audio, aspect ratio and click-to-open playback are preserved.
+
 ## Production release — 2026-11-16
 
 - Merged the reviewed implementation in PR #1 and released commit c0a8e0a675a011d23306e5ad37a0269b06c0ee65 to production on azaan.design.
