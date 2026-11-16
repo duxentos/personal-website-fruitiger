@@ -85,3 +85,10 @@
 .motion-reduced .project-pulse polyline,.motion-reduced .project-circuit-trace path{animation:none;stroke-dasharray:none}
 .welcome-hobbies,.welcome-invitation{font-size:12px;line-height:1.75;color:var(--aqua-ink-soft);margin:13px 0}
 
+
+.project-case-quick-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px}.project-case-quick-links a{display:inline-flex;gap:5px;align-items:center;color:#245a83;font-size:11px;min-height:30px;text-underline-offset:3px}
+.project-case-study{animation:project-case-open .16s ease-out}.project-folder:active .directory-folder-art{transform:translateY(-3px);transition:transform .12s}
+@keyframes project-case-open{from{opacity:.75;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(max-width:1023px),(pointer:coarse){.project-case-quick-links a{min-height:44px}}
+@media(prefers-reduced-motion:reduce){.project-case-study{animation:none}.project-folder:active .directory-folder-art{transform:none;transition:none}}
+.motion-reduced .directory-browser,.motion-reduced .project-case-study{animation:none}.motion-reduced .project-folder,.motion-reduced .directory-project-card,.motion-reduced .directory-project-card .project-image,.motion-reduced .goose-notch{transition:none;transform:none!important}.motion-reduced .project-folder:active .directory-folder-art{transform:none;transition:none}

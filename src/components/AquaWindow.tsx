@@ -70,7 +70,7 @@ export function AquaWindow({id,children,className='',title,onClose}:Props){
  }
  if(win.mode!=='open')return null;
  const style={left:frame.x,top:frame.y,width:frame.w,height:frame.h,zIndex:win.layer,'--window-x':`${frame.x}px`,'--window-y':`${frame.y}px`,'--window-w':`${frame.w}px`,'--window-h':`${frame.h}px`,'--window-layer':win.layer} as CSSProperties;
- return <section ref={section} className={`aqua-window ${className} ${win.zoom?'window-zoomed':''} ${desktop.active===id?'is-active':''}`} style={style} aria-label={label} onPointerDown={()=>{if(desktop.active!==id)desktop.focus(id)}} onFocusCapture={()=>{if(desktop.active!==id)desktop.focus(id)}}>
+ return <section ref={section} className={`aqua-window ${className} ${win.zoom?'window-zoomed':''} ${desktop.active===id?'is-active':''}`} style={style} aria-label={label} onKeyDown={event=>{if(event.key==='Escape'&&onClose&&!event.defaultPrevented){event.preventDefault();onClose()}}} onPointerDown={()=>{if(desktop.active!==id)desktop.focus(id)}} onFocusCapture={()=>{if(desktop.active!==id)desktop.focus(id)}}>
   <div className="window-bar" tabIndex={0} aria-label={`${label}. drag to move; dragging an expanded window restores it. arrow keys move; home arranges windows.`} onPointerDown={event=>start(event,'move')} onDoubleClick={event=>{if(!(event.target as Element).closest('button')&&performance.now()-lastDrag.current>350)desktop.zoom(id)}} onKeyDown={event=>{
    if(event.target!==event.currentTarget)return;if(event.key==='Home'){event.preventDefault();desktop.arrange();return}
    if(win.zoom||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;event.preventDefault();const step=event.shiftKey?30:10;

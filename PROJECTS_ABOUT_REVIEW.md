@@ -32,6 +32,9 @@ The current author briefs drive the existing Aqua desktop rather than replacing 
 - Local TypeScript and production build pass.
 - All 74 behavior tests pass, including combined filtering, navigation history, gallery wraparound, image bytes/dimensions, architecture references and planned-state accuracy.
 - Asset preflight verifies 74 packaged files including all eight music tracks. All 13 project gallery images are checked against their actual dimensions.
-- Browser preview evidence will be appended after the review deployment is inspected.
+- Review deployment dpl_6K2VSwMC1ojB1Nsvm7WKyyJqSvYQ reached READY for application commit 9ddaf9b91f86c5e67caef720f5eb4a1ddab98011. Its Vercel build also passed all 74 tests.
+- Authenticated HTTP checks returned 200 for / and /projects/neurosight. Both newly sampled JPEGs returned image/jpeg with exact packaged byte counts (iPhone photo 4: 236613; NeuroSight screen 4: 199247).
+- Native Chrome UI attempts were stopped by the tool's user-activity guard; the isolated browser host was unavailable. No rendered desktop/mobile interaction or visual QA is claimed for this change. Earlier desktop QA in OVERNIGHT_POLISH_REVIEW.md applies to the preceding implementation only.
+- Follow-up code review scopes File → close-active handling to the project-return event. Close-all and restart keep their existing semantics; they do not automatically reopen the project directory. Escape from the project title bar also returns to its directory, while fullscreen Escape closes only the gallery.
 
 This review branch does not promote production, merge main or change DNS. Existing résumé/media/startup/session/gesture/sound tests remain passing.

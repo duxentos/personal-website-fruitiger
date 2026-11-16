@@ -35,7 +35,7 @@ import './apps/polish.css';
 import './apps/projects/projects.css';
 import {useDesktopViewport} from './components/useDesktopViewport';
 function App(){const d=useDesktop();const[path,setPath]=useState(location.pathname);
- const[projectReturn,setProjectReturn]=useState<ProjectReturn>();const detailWasOpen=useRef(false);
+ const[projectReturn,setProjectReturn]=useState<ProjectReturn>();const returnProject=useRef<()=>void>(()=>{});
  const selected=projects.find(p=>path===`/projects/${p.id}`);
  useDesktopViewport();
  useEffect(()=>{
@@ -44,10 +44,8 @@ function App(){const d=useDesktop();const[path,setPath]=useState(location.pathna
  },[]);
  function openProject(id:string){const url='/projects/'+id;history.pushState({},'',url);setPath(url);d.open('detail');if(innerWidth<600)d.change('detail',{zoom:true})}
  function closeProject(){d.close('detail');d.open('projects');if(selected)setProjectReturn({directory:selected.directory,focusId:selected.id,token:Date.now()});history.pushState({},'','/projects');setPath('/projects')}
- useEffect(()=>{
-  const wasOpen=detailWasOpen.current;detailWasOpen.current=d.windows.detail.mode==='open';
-  if(wasOpen&&d.windows.detail.mode==='closed'&&selected)closeProject();
- },[d.windows.detail.mode,path]);
+ returnProject.current=closeProject;
+ useEffect(()=>{const back=()=>returnProject.current();window.addEventListener('project-return',back);return()=>window.removeEventListener('project-return',back)},[]);
  return <div style={{'--accent':d.preferences.accent} as CSSProperties} className={`os-desktop wallpaper-${d.wallpaper} theme-${d.preferences.theme} ${d.preferences.reducedMotion?'motion-reduced':''}`}><MenuBar/><BubbleLayer/><div className="wallpaper-art" aria-hidden="true"><span/><span/><span/><span/></div><main className="desktop-workspace" aria-label="azaan's desktop"><DesktopShortcuts/><ProjectMedia/>
  <AquaWindow id="avatar" className="mii-app-window"><MiiApp/></AquaWindow>
  <AquaWindow id="welcome" className="welcome-app"><WelcomeApp/></AquaWindow>
