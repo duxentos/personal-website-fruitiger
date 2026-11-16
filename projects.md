@@ -192,6 +192,115 @@ Extract the relevant details about my ECE 198 rehabilitation device, including:
 - Mechanical or electrical integration.
 - Testing, validation, and development progress.
 
+  # projects.md — Additional Projects
+
+Add the following three projects to my existing portfolio's **Hardware** directory.
+
+Do not remove, replace, or rewrite any existing projects. Preserve the current website's Frutiger Aero, Wii U, and macOS-inspired aesthetics.
+
+## 1. Biotron — Assistive Robotic Exoskeleton
+
+**Category:** Robotics / Embedded Systems / Electrical Engineering  
+**Status:** In Progress  
+**Date:** September 2026 – Present
+
+**Tech Stack:** STM32H753, Embedded C, FreeRTOS, STM32CubeIDE, Altium Designer, PCB Design.
+
+### Description
+
+Contributing to the University of Waterloo BioMechatronics Design Team's assistive robotic exoskeleton through embedded firmware development, circuit design, and hardware–software integration.
+
+### Engineering Contributions
+
+- Developed and debugged STM32H753 firmware using Embedded C.
+- Worked with FreeRTOS configurations and STM32CubeIDE.
+- Designed battery-pack and motor-control circuit concepts using Altium Designer.
+- Supported PCB assembly, soldering, and electrical wiring.
+- Collaborated across electrical, software, and mechanical subteams.
+- Troubleshot hardware–software integration issues.
+
+### Portfolio Features
+
+Include a firmware architecture diagram, electrical subsystem overview, and PCB gallery when actual project assets are available.
+
+Keep this project separate from ECE 198.
+
+---
+
+## 2. ESP32 Washing Machine Notifier
+
+**Category:** IoT / Embedded Systems / Home Automation  
+**Status:** Completed  
+**Date:** August 2026
+
+**Tech Stack:** ESP32, C++, Arduino IDE, Accelerometer, ntfy API.
+
+### Description
+
+Designed and developed an ESP32-based motion-monitoring system that detects when a washing machine completes its cycle and automatically sends a notification to a smartphone.
+
+### Engineering Contributions
+
+- Designed an accelerometer-based monitoring circuit.
+- Developed C++ firmware to process motion measurements.
+- Implemented washing-cycle completion detection.
+- Integrated the ntfy API for smartphone notifications.
+
+### Architecture
+
+Accelerometer → ESP32 → Motion Processing → Cycle Completion Detection → ntfy → Smartphone
+
+### Portfolio Features
+
+Include an interactive architecture diagram illustrating sensor data processing and smartphone notification delivery.
+
+---
+
+## 3. Vernier Calipers Holder
+
+**Category:** Mechanical Engineering / CAD / Additive Manufacturing  
+**Status:** CAD Design Completed  
+**Date:** December 2025
+
+**Tech Stack:** SolidWorks, CAD/CAM, DXF, STL, G-code, PLA.
+
+### Description
+
+Designed a custom vernier calipers holder using CAD modelling and additive-manufacturing workflows, converting 2D geometry into a 3D model prepared for PLA printing.
+
+### Engineering Contributions
+
+- Prepared a CAM template.
+- Imported DXF geometry into SolidWorks.
+- Developed the 3D CAD model.
+- Exported STL files for manufacturing preparation.
+- Generated G-code for PLA 3D printing.
+
+### Portfolio Features
+
+Include a CAD model preview when available and an interactive manufacturing workflow:
+
+DXF → SolidWorks → STL → G-code → 3D Print Preparation
+
+Do not claim that physical printing was completed unless verified.
+
+---
+
+## Implementation Instructions
+
+1. Add these three projects to the existing Hardware directory.
+2. Preserve all original five projects.
+3. Reuse existing project cards, windows, animations, and styling.
+4. Update the Hardware directory project count from 2 to 5.
+5. Update the total project count from 5 to 8.
+6. Add technology tags and development statuses.
+7. Do not invent images, metrics, repositories, or technical achievements.
+8. Make all three projects fully responsive.
+9. Verify that the existing website continues to function.
+
+**Final instruction:** Only add these three projects. Do not redesign the existing Projects page.
+
+
 **Critical requirements:**
 
 Do not confuse this project with unrelated projects or assume that my Biotron exoskeleton team work is the same project.
