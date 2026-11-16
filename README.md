@@ -1,5 +1,7 @@
 # Azaan’s Aqua desktop
 
+Live website: [azaan.design](https://azaan.design/). Production release and verification: [RELEASE_REVIEW.md](RELEASE_REVIEW.md).
+
 An interactive React + TypeScript + Vite portfolio based on the repository’s `Improvements`, latest `Improvements 9.md` / `Music.md`, and the author’s single-Mii-app and randomized-running startup instructions. The existing desktop, music, sound effects and project routes are retained.
 
 ## Run locally

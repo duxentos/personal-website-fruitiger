@@ -1,5 +1,11 @@
 # Website change log
 
+## Production release — 2026-11-16
+
+- Merged the reviewed implementation in PR #1 and released commit c0a8e0a675a011d23306e5ad37a0269b06c0ee65 to production on azaan.design.
+- Updated only the two apex A records from Porkbun parking to Vercel; readback reports the correct addresses and misconfigured=false. Existing wildcard/TXT and deployment protection remain unchanged.
+- Production passes all 81 tests and the 79-file preflight. Public Chrome confirmed startup, About Me/Mii, the eight-project directory and supplied media frames; HTTPS asset/deep-link checks pass. Full release details and verification limits are in RELEASE_REVIEW.md.
+
 ## Release finishing pass — 2026-11-16
 
 - Included the latest main projects.md additions: washing-machine notifier, vernier calipers holder and expanded Biotron contributions/architecture. Preserved all original projects; counts now derive from eight total and five hardware entries.
