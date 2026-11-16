@@ -32,7 +32,10 @@ import './apps/mii/mii.css';
 import './apps/connect/connect.css';
 import './apps/welcome/snapshots.css';
 import './apps/improvement9.css';
+import './apps/polish.css';
+import {useDesktopViewport} from './components/useDesktopViewport';
 function App(){const d=useDesktop();const[path,setPath]=useState(location.pathname);
+ useDesktopViewport();
  useEffect(()=>{const pop=()=>{setPath(location.pathname);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')}};window.addEventListener('popstate',pop);if(location.pathname.startsWith('/projects/'))d.open('detail');else if(location.pathname==='/projects')d.open('projects');else{d.close('detail')};return()=>window.removeEventListener('popstate',pop)},[]);
  function openProject(id:string){const url='/projects/'+id;history.pushState({},'',url);setPath(url);d.open('detail')}
  const selected=projects.find(p=>path===`/projects/${p.id}`);

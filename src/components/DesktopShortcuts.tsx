@@ -5,7 +5,6 @@ import {desktopShortcuts, isTouchDesktop} from './desktopLayout';
 import {settingsStore} from '../settings/store';
 import {moveIcon, normalizeIconOrder, type ShortcutId} from './iconOrder';
 
-const storageKey = 'azaan-desktop-icon-order';
 function readOrder() {return settingsStore.read('icons',normalizeIconOrder);}
 
 type Drag = {
@@ -25,6 +24,17 @@ export function DesktopShortcuts() {
     settingsStore.write('icons',order);
   }, [order]);
 
+  useEffect(() => {
+    const cancel = () => {
+      const gesture = drag.current;if (!gesture) return;
+      drag.current = null;gesture.button.style.removeProperty('transform');setDragging(null);suppressClick.current = false;
+      try {if (gesture.button.hasPointerCapture(gesture.pointer)) gesture.button.releasePointerCapture(gesture.pointer);} catch {}
+    };
+    const visibility = () => {if (document.hidden) cancel();};
+    window.addEventListener('blur', cancel);document.addEventListener('visibilitychange', visibility);
+    return () => {window.removeEventListener('blur', cancel);document.removeEventListener('visibilitychange', visibility);drag.current?.button.style.removeProperty('transform');drag.current = null;};
+  }, []);
+
   function start(event: PointerEvent<HTMLButtonElement>, id: ShortcutId) {
     if (event.button !== 0 || drag.current) return;
     suppressClick.current = false;
@@ -38,7 +48,7 @@ export function DesktopShortcuts() {
       return {id: item.dataset.shortcut as ShortcutId, x: rect.left + rect.width / 2, y: rect.top + rect.height / 2};
     });
     drag.current = {id, pointer: event.pointerId, startX: event.clientX, startY: event.clientY, dx: 0, dy: 0, moved: false, origin, bounds, slots, button};
-    button.setPointerCapture(event.pointerId);
+    try {button.setPointerCapture(event.pointerId);} catch {drag.current = null;}
   }
 
   function move(event: PointerEvent<HTMLButtonElement>) {
@@ -56,10 +66,12 @@ export function DesktopShortcuts() {
   function finish(event: PointerEvent<HTMLButtonElement>, cancelled = false) {
     const gesture = drag.current;
     if (!gesture || gesture.pointer !== event.pointerId) return;
+    if (!cancelled) move(event);
     drag.current = null;
     gesture.button.style.removeProperty('transform');
     setDragging(null);
-    suppressClick.current = gesture.moved;
+    suppressClick.current = gesture.moved && !cancelled;
+    try {if (gesture.button.hasPointerCapture(gesture.pointer)) gesture.button.releasePointerCapture(gesture.pointer);} catch {}
     if (!gesture.moved || cancelled) return;
     const x = gesture.origin.left + gesture.origin.width / 2 + gesture.dx;
     const y = gesture.origin.top + gesture.origin.height / 2 + gesture.dy;

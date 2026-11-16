@@ -10,9 +10,9 @@
 /* A small gel-like pop and pearlescent bubbles replace the scan-band glitch. */
 .snapshot-gel-highlight{position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,#ffffffa3,#ffffff08 42%,transparent 66%);opacity:0}
 .snapshot-pop-bubbles{position:absolute;inset:0;pointer-events:none}.snapshot-pop-bubbles i{position:absolute;bottom:8%;left:7%;width:16px;aspect-ratio:1;border-radius:50%;border:1px solid #d9ffffd9;background:radial-gradient(circle at 30% 25%,#fff,#baf9ff29 35%,#6cdad83b 70%,#fff9);box-shadow:inset 0 0 4px #fff8,0 1px 4px #2699be33;opacity:0}.snapshot-pop-bubbles i:nth-child(2){left:77%;bottom:20%;width:12px}.snapshot-pop-bubbles i:nth-child(3){left:55%;bottom:5%;width:9px}
-.welcome-snapshot-gallery[data-animate=true] .snapshot-image-stack{animation:aqua-photo-pop .42s cubic-bezier(.2,.7,.2,1)}
-.welcome-snapshot-gallery[data-animate=true] .snapshot-gel-highlight{animation:aqua-photo-gloss .55s ease-out}
-.welcome-snapshot-gallery[data-animate=true] .snapshot-pop-bubbles i{animation:aqua-photo-bubble .65s ease-out}.welcome-snapshot-gallery[data-animate=true] .snapshot-pop-bubbles i:nth-child(2){animation-delay:.06s}.welcome-snapshot-gallery[data-animate=true] .snapshot-pop-bubbles i:nth-child(3){animation-delay:.1s}
+.welcome-snapshot-gallery[data-animate=true] .snapshot-image-stack[data-loaded=true]{animation:aqua-photo-pop .42s cubic-bezier(.2,.7,.2,1)}
+.welcome-snapshot-gallery[data-animate=true] .snapshot-image-stack[data-loaded=true] .snapshot-gel-highlight{animation:aqua-photo-gloss .55s ease-out}
+.welcome-snapshot-gallery[data-animate=true] .snapshot-image-stack[data-loaded=true] .snapshot-pop-bubbles i{animation:aqua-photo-bubble .65s ease-out}.welcome-snapshot-gallery[data-animate=true] .snapshot-image-stack[data-loaded=true] .snapshot-pop-bubbles i:nth-child(2){animation-delay:.06s}.welcome-snapshot-gallery[data-animate=true] .snapshot-image-stack[data-loaded=true] .snapshot-pop-bubbles i:nth-child(3){animation-delay:.1s}
 @keyframes aqua-photo-pop{0%{transform:scale(.9)}65%{transform:scale(1.025)}100%{transform:scale(1)}}
 @keyframes aqua-photo-gloss{0%{opacity:.85;transform:translateX(-15%)}100%{opacity:0;transform:translateX(25%)}}
 @keyframes aqua-photo-bubble{0%{opacity:0;transform:translateY(8px) scale(.35)}25%{opacity:.85;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-38px) scale(.75)}}

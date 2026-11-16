@@ -1,5 +1,15 @@
 # Website change log
 
+## Ten-area polish and current résumé — 2026-11-16
+
+- Replaced the 5 November résumé with the newest general 13 November revision, verified against local PDF metadata and connected Drive. Regenerated the complete preview and source-hash manifest without editing résumé content.
+- Added visual-viewport resizing for on-screen keyboards while preserving pinch zoom and saved window geometry; strengthened touch controls, focus styling and compact-menu scrolling.
+- Photo bubbles now wait for image readiness; failed photos show a framed fallback. Retained all fifteen active photos, the silent video, Mii animations and randomized loading sequence.
+- Cancelled iPod holds on blur, hidden tabs and lost pointer capture; restored keyboard actions after long presses and added missing-artwork fallback. Cleared stale playback timing after a failed track.
+- Added full menu arrow/Home/End navigation, modal Tab containment and focus restoration, graceful clipboard/fullscreen failures, and Terminal draft-history restoration with local scrolling.
+- Replaced project placeholders using current projects.md and the new résumé, including supplied ClinTempo/GOOSE images and NeuroSight links. Added a build-time asset preflight and search description/font preload.
+- Local lint/build pass all 68 tests. Full evidence for all ten areas and remaining browser limits are recorded in `OVERNIGHT_POLISH_REVIEW.md`.
+
 ## Improvement 9 desktop refinements — 2026-11-16
 
 - Centered all window titles with symmetric positioning and a separate title row on narrow touch windows. Compact Find Me defaults to 440×320, with one-time geometry migration.

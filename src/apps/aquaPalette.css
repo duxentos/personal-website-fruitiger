@@ -41,4 +41,4 @@
 .magnetic-label,.magnetic-label.touch-label{color:var(--aqua-ink);text-shadow:0 1px #ffffffd9}
 .blog-placeholder,.project-status,.technology-list li,.media-print figcaption,.finder-search input::placeholder{color:var(--aqua-ink-soft)}
 .ipod-screen{color:#20313f}
-/* Terminal retains its readable light-on-dark Mac monospace presentation. */
+/* The Mac Basic Terminal profile is defined in improvement9.css. */

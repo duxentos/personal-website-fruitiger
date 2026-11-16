@@ -1,0 +1,35 @@
+/* Consistent finishing details; retain E7 violet atmosphere and blue Aqua controls. */
+.os-desktop{height:var(--desktop-height,100dvh)!important;min-height:0}
+.menu-popover{max-height:calc(var(--desktop-height,100dvh) - 65px);overflow-y:auto;overscroll-behavior:contain}
+.menu-popover button:disabled{opacity:.5;cursor:default}
+.menu-popover button:disabled:hover{background:none;color:inherit}
+.menu-group>button:focus-visible{outline:2px solid #176ea3;outline-offset:-3px}
+.aqua-window.is-active .window-bar{box-shadow:inset 0 1px #fff,0 1px 3px #386e9730}
+.aqua-window .window-bar:focus-visible{outline:2px solid #176ea3;outline-offset:-3px}
+.window-content{scroll-padding:14px}
+.help-dialog,.spotlight-panel{max-height:calc(var(--desktop-height,100dvh) - 40px);overflow-y:auto;overscroll-behavior:contain}
+.help-dialog p,.ipod-message,.ipod-autoplay-note,.ipod-volume,.ipod-home{color:var(--aqua-ink-soft)}
+.snapshot-image-stack[data-loaded=false] .snapshot-gel-highlight,.snapshot-image-stack[data-loaded=false] .snapshot-pop-bubbles{display:none}
+.snapshot-missing{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;padding:8px;color:var(--aqua-ink-soft);font-size:10px;text-align:center;background:linear-gradient(#f5fcff,#cce5f5)}
+.project-screenshots img{display:block;width:100%;height:auto;margin:15px 0;border:1px solid #aac5da;border-radius:5px}
+.resume-version{font-size:10px;color:var(--aqua-ink-soft)}
+.resume-page:focus-visible{outline:3px solid #176ea3;outline-offset:4px}
+.ipod-app{justify-content:flex-start}
+.ipod-menu button:focus-visible{outline:2px solid #176ea3;outline-offset:-2px}
+@media(max-width:1023px),(pointer:coarse){
+ .lights svg{opacity:.8}
+ .snapshot-controls button{min-height:44px;min-width:44px}
+ .ipod-menu button{min-height:44px}
+ .ipod-volume button,.ipod-home{min-height:44px;min-width:44px}
+ .ipod-volume input,.ipod-progress{min-height:28px}
+ .click-wheel .wheel-menu,.click-wheel .wheel-play{min-height:40px}
+ .resize-e,.resize-w{width:12px}.resize-s{height:12px}
+ .resize-se,.resize-sw{width:22px;height:22px}
+ .finder-open-hint{font-size:0}.finder-open-hint:after{content:'select a file, then tap open';font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.ipod-device{animation:none}.cover-flow>button,.snapshot-image-stack{transition:none}}
+.motion-reduced .ipod-device{animation:none}.motion-reduced .cover-flow>button{transition:none}
+@media(max-width:1023px),(pointer:coarse){
+ .ipod-device{height:445px}.ipod-screen{height:198px}
+ .ipod-app .now-playing{padding:8px 8px 5px}.ipod-progress{margin:3px 0 0}
+}
