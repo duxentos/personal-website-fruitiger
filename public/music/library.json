@@ -12,32 +12,32 @@
     },
     {
       "id": "track-four",
-      "title": "track four",
+      "title": "track three",
       "src": "/music/tracks/track-four.mp3"
     },
     {
       "id": "track-five",
-      "title": "track five",
+      "title": "track four",
       "src": "/music/tracks/track-five.mp3"
     },
     {
       "id": "track-six",
-      "title": "track six",
+      "title": "track five",
       "src": "/music/tracks/track-six.mp3"
     },
     {
       "id": "track-seven",
-      "title": "track seven",
+      "title": "track six",
       "src": "/music/tracks/track-seven.mp3"
     },
     {
       "id": "track-eight",
-      "title": "track eight",
+      "title": "track seven",
       "src": "/music/tracks/track-eight.mp3"
     },
     {
       "id": "track-three",
-      "title": "track three",
+      "title": "track eight",
       "src": "/music/tracks/track-three.mp3",
       "miiDance": "rick"
     }
