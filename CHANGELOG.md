@@ -8,7 +8,7 @@
 - Restyled Terminal as the Mac Basic profile with a white surface, black Menlo text and an inline prompt. Preserved the minimal real command allowlist, history and completion.
 - Replaced diagonal arrows with horizontal Lucide arrows and document/download icons.
 - Replaced the embedded résumé viewer with a full-page, clickable image of every supplied PDF page. Clicking opens the original PDF; a source-hash guard prevents stale previews. Added a reproducible native renderer.
-- Local lint/build and all 66 behavior tests pass. See `IMPROVEMENT_9_REVIEW.md` for details and preview verification.
+- Local lint/build and Vercel pass all 66 tests. Chrome confirms two-app startup, working Terminal help and a full-page résumé link opening the original one-page PDF. Screenshot capture was blank; visual checks and other limits are recorded in `IMPROVEMENT_9_REVIEW.md`.
 
 ## Improvement 8 framing and media catalogue — 2026-11-16
 

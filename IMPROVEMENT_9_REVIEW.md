@@ -28,4 +28,15 @@ Local lint/build pass all 66 tests, TypeScript and Vite. Updated session tests e
 
 The separate photos repository request is prepared in the local `photos-collection` directory and ZIP (17 JPEGs, silent MP4/poster, README, photos.md and media.json). The connector has no repository-creation action, gh authentication/network is unavailable, and the browser’s GitHub creation page is blank. Creation is pending an empty destination repository; no repository creation is claimed. The website’s existing photos.md catalogue remains committed.
 
-Deployed/browser verification and its limits follow after preview checks.
+## Deployed verification
+
+Application commit `81dd699c054c7abcb705d8ca2d388fbf330972d5` is deployed at:
+https://personal-website-fruitiger-ooimgyeqh-azaank041208-hash.vercel.app
+
+Vercel deployment `dpl_F7g2EtEFx55Wyi3uMsgyXFnvt1rb` completed successfully and independently passed all 66 tests. The deployed résumé JPEG and original PDF both return HTTP 200 with their correct image/jpeg and application/pdf types.
+
+Chrome's accessibility tree confirmed only About Me and Mii were open on entry. Opening Terminal showed `azaan — zsh` and the inline prompt; running `help` returned the expected command list. Opening Résumé exposed a complete page-1-of-1 link plus Open PDF/Download controls, without an embedded viewer. Clicking the page opened a new tab to the original PDF; Chrome reported a one-page PDF document and Finished loading PDF.
+
+The native screenshot stream returned a solid blank image even while Chrome's accessibility tree exposed the functioning application. Consequently title centering, precise sizing/colors, the brief glossy transition and the new loader wording are implemented and statically checked, but not claimed as visually verified in this deployment. No fresh phone/Safari, console or manual reduced-motion pass is claimed. Concurrent user navigation also interrupted further GitHub repository setup; no user draft was edited. The separate photos repository still returns 404 and remains pending an empty destination.
+
+This documentation-only follow-up leaves the tested application tree unchanged. No merge, production promotion or DNS change was performed.
