@@ -14,7 +14,7 @@ const Context=createContext<DesktopAPI|null>(null);
 export function DesktopProvider({children}:{children:ReactNode}){
  const[session,dispatch]=useReducer(windowReducer,undefined,()=>settingsStore.read('session',value=>launchSession(value,size())));
  const[preferences,setPreferences]=useState(()=>settingsStore.read('desktop',validate));
- const[view,setView]=useState(()=>settingsStore.read('view',value=>{const v=object(value);return{layout:['list','grid','icons','columns'].includes(String(v.layout))?v.layout as Layout:'list',sort:['name','category','status'].includes(String(v.sort))?v.sort as 'name'|'category'|'status':'name'};}));
+ const[view,setView]=useState(()=>settingsStore.read('view',value=>{const v=object(value);return{layout:['list','grid','icons','columns'].includes(String(v.layout))?v.layout as Layout:'icons',sort:['name','category','status'].includes(String(v.sort))?v.sort as 'name'|'category'|'status':'name'};}));
  useEffect(()=>{settingsStore.write('desktop',preferences)},[preferences]);
  useEffect(()=>{settingsStore.write('session',{...session,layoutRevision:LAUNCH_LAYOUT_REVISION})},[session]);
  useEffect(()=>{settingsStore.write('view',view)},[view]);

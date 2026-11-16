@@ -5,10 +5,11 @@ import {isTouchDesktop,touchDesktopQuery} from './desktopLayout';
 import {fitWindowFrame,moveWindowFrame,resizeWindowFrame,type ResizeEdge,type WindowFrame,type WorkspaceSize} from './windowGeometry';
 import {beginWindowGesture,updateWindowGesture,localPointer,sameWindowFrame,type WindowGesture} from './windowGesture';
 
-type Props={id:WindowId;children:ReactNode;className?:string};
+type Props={id:WindowId;children:ReactNode;className?:string;title?:string;onClose?:()=>void};
 type ActiveGesture={model:WindowGesture;parent:HTMLElement;host:HTMLElement;cleanup:()=>void};
-export function AquaWindow({id,children,className=''}:Props){
+export function AquaWindow({id,children,className='',title,onClose}:Props){
  const desktop=useDesktop(),win=desktop.windows[id];
+ const label=title??win.title;
  const latestDesktop=useRef(desktop);latestDesktop.current=desktop;
  const section=useRef<HTMLElement>(null),active=useRef<ActiveGesture|null>(null),pending=useRef<WindowFrame|null>(null),lastDrag=useRef(-Infinity);
  const [workspace,setWorkspace]=useState(()=>({w:innerWidth,h:Math.max(56,innerHeight-142),touch:isTouchDesktop()}));
@@ -69,15 +70,15 @@ export function AquaWindow({id,children,className=''}:Props){
  }
  if(win.mode!=='open')return null;
  const style={left:frame.x,top:frame.y,width:frame.w,height:frame.h,zIndex:win.layer,'--window-x':`${frame.x}px`,'--window-y':`${frame.y}px`,'--window-w':`${frame.w}px`,'--window-h':`${frame.h}px`,'--window-layer':win.layer} as CSSProperties;
- return <section ref={section} className={`aqua-window ${className} ${win.zoom?'window-zoomed':''} ${desktop.active===id?'is-active':''}`} style={style} aria-label={win.title} onPointerDown={()=>{if(desktop.active!==id)desktop.focus(id)}} onFocusCapture={()=>{if(desktop.active!==id)desktop.focus(id)}}>
-  <div className="window-bar" tabIndex={0} aria-label={`${win.title}. drag to move; dragging an expanded window restores it. arrow keys move; home arranges windows.`} onPointerDown={event=>start(event,'move')} onDoubleClick={event=>{if(!(event.target as Element).closest('button')&&performance.now()-lastDrag.current>350)desktop.zoom(id)}} onKeyDown={event=>{
+ return <section ref={section} className={`aqua-window ${className} ${win.zoom?'window-zoomed':''} ${desktop.active===id?'is-active':''}`} style={style} aria-label={label} onPointerDown={()=>{if(desktop.active!==id)desktop.focus(id)}} onFocusCapture={()=>{if(desktop.active!==id)desktop.focus(id)}}>
+  <div className="window-bar" tabIndex={0} aria-label={`${label}. drag to move; dragging an expanded window restores it. arrow keys move; home arranges windows.`} onPointerDown={event=>start(event,'move')} onDoubleClick={event=>{if(!(event.target as Element).closest('button')&&performance.now()-lastDrag.current>350)desktop.zoom(id)}} onKeyDown={event=>{
    if(event.target!==event.currentTarget)return;if(event.key==='Home'){event.preventDefault();desktop.arrange();return}
    if(win.zoom||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;event.preventDefault();const step=event.shiftKey?30:10;
    desktop.change(id,moveWindowFrame(frame,event.key==='ArrowLeft'?-step:event.key==='ArrowRight'?step:0,event.key==='ArrowUp'?-step:event.key==='ArrowDown'?step:0,workspace));
   }}>
-   <button className="window-back" aria-label="back to desktop" onClick={desktop.showDesktop}>‹</button><span className="lights"><button className="close-control" aria-label={`close ${win.title}`} onClick={()=>desktop.close(id)}><X size={9}/></button><button className="minimize-control" aria-label={`minimize ${win.title}`} onClick={()=>desktop.minimize(id)}><Minus size={9}/></button><button className="zoom-control" aria-label={`${win.zoom?'restore':'expand'} ${win.title}`} onClick={()=>desktop.zoom(id)}><Plus size={9}/></button></span><span className="window-name">{id==='terminal'?'azaan — zsh':win.title}</span>
+   <button className="window-back" aria-label="back to desktop" onClick={desktop.showDesktop}>‹</button><span className="lights"><button className="close-control" aria-label={`close ${label}`} onClick={onClose??(()=>desktop.close(id))}><X size={9}/></button><button className="minimize-control" aria-label={`minimize ${label}`} onClick={()=>desktop.minimize(id)}><Minus size={9}/></button><button className="zoom-control" aria-label={`${win.zoom?'restore':'expand'} ${label}`} onClick={()=>desktop.zoom(id)}><Plus size={9}/></button></span><span className="window-name">{id==='terminal'?'azaan — zsh':label}</span>
   </div>
   <div className="window-content">{children}</div>
-  {!win.zoom&&(['n','s','e','w','ne','nw','se','sw'] as ResizeEdge[]).map(edge=><button key={edge} className={`window-resize resize-${edge}`} aria-label={`resize ${win.title} ${edge}; use arrow keys`} onPointerDown={event=>start(event,'resize',edge)} onKeyDown={event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;event.preventDefault();desktop.change(id,resizeWindowFrame(frame,event.key==='ArrowLeft'?-15:event.key==='ArrowRight'?15:0,event.key==='ArrowUp'?-15:event.key==='ArrowDown'?15:0,edge,workspace))}}/>)}
+  {!win.zoom&&(['n','s','e','w','ne','nw','se','sw'] as ResizeEdge[]).map(edge=><button key={edge} className={`window-resize resize-${edge}`} aria-label={`resize ${label} ${edge}; use arrow keys`} onPointerDown={event=>start(event,'resize',edge)} onKeyDown={event=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key))return;event.preventDefault();desktop.change(id,resizeWindowFrame(frame,event.key==='ArrowLeft'?-15:event.key==='ArrowRight'?15:0,event.key==='ArrowUp'?-15:event.key==='ArrowDown'?15:0,edge,workspace))}}/>)}
  </section>;
 }

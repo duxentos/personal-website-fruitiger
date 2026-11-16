@@ -1,5 +1,12 @@
 # Website change log
 
+## Projects and About Me briefs — 2026-11-16
+
+- Implemented the current projects.md and aboutme.md: two interactive Aqua directories, six project case studies, status/search filters, card/list/column views, history, keyboard browsing and return focus.
+- Added four verified NeuroSight screenshots and all six supplied iPhone photo references; retained ClinTempo/GOOSE media, introduced accessible fullscreen galleries, architecture inspectors, a GOOSE notch concept and restoration diary.
+- Updated About Me interests and hobbies while keeping it open by default. Preserved the selected résumé PDF, Mii, music, Notes and desktop controls.
+- Local validation: TypeScript, production build, 74 behavior tests and a 74-file asset preflight pass. See PROJECTS_ABOUT_REVIEW.md for sources and browser evidence.
+
 ## Visible Terminal command guide — 2026-11-16
 
 - Terminal now prints its supported commands, descriptions and history/completion hints as soon as it opens. The help command uses the same guide, and clear retains its normal behavior.

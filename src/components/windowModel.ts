@@ -7,8 +7,8 @@ export const windowTitles: Record<WindowId,string> = {welcome:'about me',stories
 export type DesktopSession = {windows: Record<WindowId,WindowState>; active: WindowId | null};
 export function initialSession(size: WorkspaceSize): DesktopSession {
   const small = size.w < 600;
-  const aboutW=Math.min(550,size.w*.45),projectW=Math.min(570,size.w*.48);
-  const aboutH=Math.min(500,size.h*.85),projectH=Math.min(350,size.h*.65);
+  const aboutW=Math.min(550,size.w*.45),projectW=Math.min(760,size.w*.58);
+  const aboutH=Math.min(500,size.h*.85),projectH=Math.min(570,size.h*.82);
   const defaults: Record<WindowId, [number,number,number,number]> = {
     welcome:[24,24,aboutW,aboutH], stories:[65,35,660,500],
     projects:[size.w-projectW-38,Math.min(105,size.h-projectH-24),projectW,projectH], connect:[75,55,440,320],
