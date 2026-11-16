@@ -24,4 +24,16 @@ Window open/close now use Kenney CC0 `click_001.ogg` and `click_002.ogg`, reusin
 
 Local `npm run lint` and `npm run build` pass all 63 tests, TypeScript and Vite. New coverage checks Rick-last ordering without changing IDs, Rick-only dance selection and thinking/reduced-motion priority, the original dance GIF and actual PNG signatures, quieter event gain, rotation coverage/wraparound, packaged JPEG/poster files and a real MP4 with no audio handler. All eight cached MP3s were decoded with FFmpeg; the video was decoded and showed only a video stream. React review covered effect cleanup, stable slot identities, no per-frame React updates, lazy photo loading, pause controls, live visibility handling and reduced-motion paths. No application dependencies were added; FFmpeg was used only as a temporary local media conversion/validation tool.
 
-Deployed/browser results are recorded after verification. These local checks do not claim a physical-device, Safari, listening-quality, or complete UI pass.
+Deployed/browser results and their limits follow.
+
+## Deployed verification — 2026-11-16
+
+Application commit `a6f7f4866dd93508ce6ab93a9aee1ca7e380c2d6` is READY as `dpl_8x68wdnkwYMWTYPbJdUTHpDiiz8P`:
+https://personal-website-fruitiger-3jyk1sz15-azaank041208-hash.vercel.app
+
+Vercel's clean build prepared all eight local music tracks and independently passed all 63 tests, TypeScript and Vite. The deployed library returned HTTP 200 with IDs in order: one, two, four, five, six, seven, eight, three. All five newly added MP3 URLs and Rick Astley's track-three URL returned HTTP 200 / audio/mpeg. The normal dance GIF, Rick PNG, personal JPEG, silent MP4 and both quiet-click OGGs returned HTTP 200 with their correct media types.
+
+Native Chrome visibly showed the enlarged video Polaroid playing, two personal photos changing across captures, the gallery pause/previous/next controls in the accessibility tree, and the unchanged landscape orbit around Projects. Opening iPod changed the Mii app to the new dancing state. The player showed 1 of 8 and playback elapsed time advanced from 0:00 through 0:24, confirming real playback. The iPod main menu also opened.
+
+User activity then changed Chrome and invalidated the Songs-menu action. Subsequent state queries and fresh Google Chrome access returned `cgWindowNotFound`. Therefore a final manual selection of Rick Astley, isolated gallery-button interactions, listening-quality comparison, phone/Safari, reduced-motion UI and console passes are not claimed. Rick-last order, the distinct Rick asset/state, lower click gain and gallery behavior have the automated/asset coverage above; actual Rick and new-song deployment URLs are reachable. The subsequent documentation-only commit does not change tested application code.
+

@@ -7,6 +7,7 @@
 - Added seven selected, optimized personal photos and a larger silent looping video to About Me. Two photo slots scroll through the collection, with pause/previous/next and hidden/offscreen/reduced-motion handling. Projects retains its separate landscape Polaroids.
 - Replaced open/close tones with short CC0 mechanical clicks at lower event gain.
 - Local lint/build and all 63 behavior tests pass; all eight local MP3s decode and the converted MP4 contains video only. See `IMPROVEMENT_7_REVIEW.md` for sources and verification limits.
+- Vercel independently passes all 63 tests and serves the ordered eight-track library and new media. Chrome verified rotating personal photos, a playing video, the new normal dance, and real iPod playback; subsequent Chrome unavailability prevented the final manual Rick selection. Deployed evidence is in the review.
 
 ## Randomized running Mii loader — 2026-11-14
 
