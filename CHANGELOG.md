@@ -1,3 +1,7 @@
+## Latest résumé — 2026-11-17
+
+- Replaced the downloadable résumé with the newest one-page PDF downloaded on 16 November, including the current Biotron role and updated project details. Regenerated the 1440px preview and SHA-256 manifest from the supplied PDF without changing its content.
+
 # Website change log
 
 ## Clean video frame — 2026-11-16
